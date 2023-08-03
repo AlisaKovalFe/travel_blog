@@ -1,0 +1,180 @@
+
+/* App */
+
+.App {
+  height: max-content;
+}
+
+/* Main */
+
+.main_container {
+  height: max-content;
+}
+
+/* Header */
+
+.menu {
+  display: flex;
+  justify-content:end;
+  margin-right: 2rem;
+  padding-top: 0.5rem;
+  border:none;
+  background: #f8f1ea;
+  color: #646462;
+  font-size: 1rem
+}
+
+li::after {
+  border-color: #646462!important
+}
+
+.header {
+  height: 5rem;
+  margin-bottom: 5rem;
+  background: #f8f1ea;
+}
+
+/* Footer */
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  background-color: rgba(253,249,236,1);
+  font-size: 0.8rem;
+  line-height: 2.5rem;
+}
+
+/* About */
+
+.about {
+  height:max-content;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+}
+
+.about_greeting {
+  display: flex;
+  flex-direction: column;
+  align-items:flex-start;
+  justify-content: center;
+  height: 45rem;
+  margin-bottom: 5rem;
+  width: 100%;
+  /* background-image: url('https://permesso.ru/wp-content/uploads/2020/09/2italy-gettyimages-908413712-1080x675.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.5; */
+
+  /* https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/pastel-colored-houses-and-boats-on-canal-burano-venice-veneto-italy-lost-horizon-images.jpg */
+
+  /* https://www.viaggiando-italia.it/wp-content/uploads/2023/01/Turisti-raccontano.-LIsola-di-Burano-e-i-suoi-Colori-pastello-meravigliosi.jpg */
+
+  /* https://cdn.contexttravel.com/image/upload/c_fill,q_60,w_2400/v1678208100/production/product_image/image__1678208099.jpg */
+
+  background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)),url('https://stampsonthepassport.com/wp-content/uploads/2020/04/IMG_9408photo.jpg');
+  background-size:cover;
+  background-repeat: no-repeat;
+}
+
+.about_greeting_heading {
+  margin-left: 3rem;
+  color: rgb(244, 250, 250);
+}
+
+.mainHeader {
+  margin: 0;
+}
+
+.about_description {
+  display: flex;
+  justify-content: space-between;
+  width: 70rem;
+  margin-bottom: 5rem;
+}
+
+.about_description_text {
+  width: 60%;
+  padding: 1rem;
+  background: #f9f6f3;
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: justify
+}
+
+.about_description_text {
+  margin: 0;
+}
+
+.about_description_image {
+  width: 35%;
+  /* object-fit:cover; */
+}
+
+
+/* PhotoGallery */
+
+.photoGallery {
+  display: flex;
+  flex-direction: column;
+  width: 40rem;
+  margin-bottom: 5rem;
+}
+
+.photoGallery_heading{
+  align-self: center;
+  margin-bottom: 2rem;
+  color: '#fff';
+  line-height: '160px';
+}
+
+.photoGallery_country_heading {
+  border-bottom: 1px solid #f8f1ea;
+  text-align: center;
+  color: #646462!important
+}
+
+.photoGallery_photo {
+  /* width: 100rem; */
+  height: 40rem;
+}
+
+
+
+/* Video */
+
+.video_information {
+  height:max-content;
+  margin-bottom: 5rem;
+  padding: 0 4rem 0;
+}
+
+.video_styles {
+  width: 100%; 
+  /* height: 24rem; */
+  border-radius: 1rem;
+}
+
+/* VideoCardList */
+.videoCardList_container {
+  display:flex;
+  justify-content: space-between;
+}
+
+.video_information_heading {
+  margin-bottom: 4rem;
+}
+
+.video_information_text {
+  margin-bottom: 2rem;
+}
+
+.videoCover {
+  width: 25rem;
+}
+
+.videoCover_image {
+  height: 15rem;
+}
