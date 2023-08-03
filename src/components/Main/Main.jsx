@@ -1,15 +1,17 @@
 import React from 'react';
 import About from './About/About'
 import Video from './Video/Video'
-import PageThree from './PageThree/PageThree'
-
+import Destinations from './Destinations/Destinations'
+import Greeting from './About/Greeting/Greeting';
 
 function Main(props) {
     return (
         <div className='main_container'>
-            {/* <About/> */}
-            <Video />
-            {/* <PageThree /> */}
+            {/* <Greeting /> */}
+            <About/>
+            {/* <Video /> */}
+            {/* <Destinations /> */}
+            
 
         </div>
     );

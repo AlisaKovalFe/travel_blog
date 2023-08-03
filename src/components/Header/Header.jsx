@@ -14,8 +14,8 @@ function Header(props) {
 		},
 
 		{
-			label: "Мои рекомендации",
-			key: "recommendations",
+			label: "Путешествия",
+			key: "destinations",
 
 			children: [
 				{

@@ -46,16 +46,16 @@ li::after {
   line-height: 2.5rem;
 }
 
-/* About */
+/* Greeting */
 
-.about {
-  height:max-content;
+.greeting {
   display: flex;
   flex-direction: column;
   align-items:center;
+  height:max-content;
 }
 
-.about_greeting {
+.greeting_cover {
   display: flex;
   flex-direction: column;
   align-items:flex-start;
@@ -63,56 +63,154 @@ li::after {
   height: 45rem;
   margin-bottom: 5rem;
   width: 100%;
-  /* background-image: url('https://permesso.ru/wp-content/uploads/2020/09/2italy-gettyimages-908413712-1080x675.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  opacity: 0.5; */
-
-  /* https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/pastel-colored-houses-and-boats-on-canal-burano-venice-veneto-italy-lost-horizon-images.jpg */
-
-  /* https://www.viaggiando-italia.it/wp-content/uploads/2023/01/Turisti-raccontano.-LIsola-di-Burano-e-i-suoi-Colori-pastello-meravigliosi.jpg */
-
-  /* https://cdn.contexttravel.com/image/upload/c_fill,q_60,w_2400/v1678208100/production/product_image/image__1678208099.jpg */
 
   background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)),url('https://stampsonthepassport.com/wp-content/uploads/2020/04/IMG_9408photo.jpg');
   background-size:cover;
   background-repeat: no-repeat;
 }
 
-.about_greeting_heading {
+.greeting_heading {
   margin-left: 3rem;
   color: rgb(244, 250, 250);
 }
 
-.mainHeader {
-  margin: 0;
-}
 
-.about_description {
+.greeting_description {
   display: flex;
   justify-content: space-between;
   width: 70rem;
   margin-bottom: 5rem;
 }
 
-.about_description_text {
+.greeting_description_text {
   width: 60%;
   padding: 1rem;
   background: #f9f6f3;
   font-size: 1rem;
   line-height: 1.5;
-  text-align: justify
+  text-align: justify;
+  border-radius: 1rem;
 }
 
-.about_description_text {
+.greeting_description_text {
   margin: 0;
 }
 
-.about_description_image {
+.greeting_description_image {
   width: 35%;
+  border-radius: 1rem;
   /* object-fit:cover; */
 }
 
+/* https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/pastel-colored-houses-and-boats-on-canal-burano-venice-veneto-italy-lost-horizon-images.jpg */ */
+
+  /* https://www.viaggiando-italia.it/wp-content/uploads/2023/01/Turisti-raccontano.-LIsola-di-Burano-e-i-suoi-Colori-pastello-meravigliosi.jpg */
+
+  /* https://cdn.contexttravel.com/image/upload/c_fill,q_60,w_2400/v1678208100/production/product_image/image__1678208099.jpg */
+
+
+/* button_detailed */
+
+.button_detailed {
+  font-size: 1rem;
+  color: #4a4a49;
+  padding-left: 0;
+}
+
+.button_detailed:hover {
+  color: #a291a0!important;
+}
+
+/* About */
+
+.about {
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+  margin: 0rem 5rem 5rem;
+}
+
+.about_previous,
+.about_start,
+.about_success,
+.about_inspiration {
+  display: flex;
+  margin: 3rem 0rem 3rem;
+  background: #f9f6f3;
+  border-radius: 1rem;
+}
+
+.about_start_text_previous,
+.about_start_text_firstTrips,
+.about_success_text,
+.about_inspiration_text {
+  padding: 2rem 3rem 2rem;
+  width: 45%;
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: justify;
+}
+
+.about_start {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 35rem;
+}
+
+.about_start_part {
+  display: flex;
+}
+
+.about_start_text_firstTrips {
+  margin-left: 43rem;
+  width: 30%
+}
+
+.about_start_image_mountains {
+  position: absolute;
+  top: -3rem;
+  left: 42rem;
+  width: 35%;
+}
+
+.about_start_image_lavender{
+  position: absolute;
+  left: -1rem;
+  top: 17rem;
+  width: 30%;
+  transform: rotate(-10deg);
+  z-index: 1;
+}
+
+.about_start_image_meadow {
+  position: absolute;
+  left: 9rem;
+  top: 23rem;
+  width: 30%;
+  transform: rotate(-13deg);
+}
+
+.about_success,
+.about_inspiration {
+  display: flex;
+  align-items: center;
+  height: 20rem;
+}
+
+.about_success_image_ricefields {
+  width: 45%;
+  height: 110%;
+  transform: rotate(5deg);
+}
+
+.about_inspiration_image_girl {
+  z-index: 1;
+  width: 70%;
+  margin-left: 5rem;
+  position: relative;
+  top: -3rem
+}
 
 /* PhotoGallery */
 
@@ -131,7 +229,6 @@ li::after {
 }
 
 .photoGallery_country_heading {
-  border-bottom: 1px solid #f8f1ea;
   text-align: center;
   color: #646462!important
 }
