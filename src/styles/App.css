@@ -288,8 +288,15 @@ li::after {
 /* World Regions */
 
 .world_regions {
+  display: flex;
+  flex-direction: column;
+  padding: 4rem;
+}
+
+.world_regions_content {
   display:flex;
   justify-content: space-around;
+  margin-bottom: 5rem;
 }
 
 .world_regions::after {

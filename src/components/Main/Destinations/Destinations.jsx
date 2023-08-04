@@ -8,10 +8,10 @@ function Destinations(props) {
     return (
         // здесь при клике на регион будет переходят на станицу со карточками стран, об компанента (регионы и страны тут, но может по-другому стоит их расположить)
         <div className='destinations'>
-            {/* <WorldRegions/>    */}
+            <WorldRegions/>   
             <Selection/>
             <Countries/> 
-            {/* <Italy/> */}
+            <Italy/>
         </div>
     );
 }

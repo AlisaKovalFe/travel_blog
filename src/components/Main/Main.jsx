@@ -7,9 +7,9 @@ import Destinations from './Destinations/Destinations'
 function Main(props) {
     return (
         <div className='main_container'>
-            {/* <Greeting />
+            <Greeting />
             <About/>
-            <Video /> */}
+            <Video /> 
             <Destinations />
             
 
