@@ -1,6 +1,6 @@
 import React from 'react';
-import ButtonOpenDetailes from '../../ButtonOpenDetails/ButtonOpenDetailes'
-import PhotoGallery from '../../PhotoGallery/PhotoGallery';
+import ButtonOpenDetailes from '../ButtonOpenDetails/ButtonOpenDetailes'
+import PhotoGallery from '../PhotoGallery/PhotoGallery';
 
 function Greeting(props) {
     return (
@@ -10,7 +10,7 @@ function Greeting(props) {
                     <h1>Привет! Я Нина!</h1>
                     <h2>Это мой мир путешествий и открытий!</h2>
                 </div>
-                <img className="greeting_image" alt="girl" />
+                <img className="greeting_image" alt="girl" src="../../../../images/girl1.jpg"/>
             </div>
             
 

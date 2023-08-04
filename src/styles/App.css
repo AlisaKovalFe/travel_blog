@@ -74,7 +74,6 @@ li::after {
   color: rgb(244, 250, 250);
 }
 
-
 .greeting_description {
   display: flex;
   justify-content: space-between;
@@ -274,4 +273,70 @@ li::after {
 
 .videoCover_image {
   height: 15rem;
+}
+
+
+/* Destinations */
+
+.destinations {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5rem;
+}
+
+
+/* World Regions */
+
+.world_regions {
+  display:flex;
+  justify-content: space-around;
+}
+
+.world_regions::after {
+  padding: 0!important
+}
+
+.world_regions_region {
+  width: 30rem;
+}
+
+
+/* Countries */
+
+.countries {
+  display:flex;
+  justify-content: space-between;
+  padding: 4rem;
+}
+
+.countries_country {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.countries_country_card {
+  width: 30%;
+  margin-bottom: 3rem;
+}
+
+.countries_country_image {
+  height: 30vh;
+}
+
+.country {
+  padding: 3rem;
+}
+
+
+/* Selection */
+
+.selection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  width: 60%;
+  margin-bottom: 5rem;
 }
