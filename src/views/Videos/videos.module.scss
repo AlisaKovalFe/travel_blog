@@ -1,0 +1,32 @@
+.wrapper {
+    height:max-content;
+    margin-bottom: 5rem;
+    padding: 0 4rem 0;
+}
+
+.heading {
+    margin-bottom: 4rem;
+}
+
+.description {
+    margin-bottom: 2rem;
+}
+
+.videoList {
+    display:flex;
+    justify-content: space-between;
+}
+
+.styles {
+    width: 100%; 
+    height: 24rem; 
+    border-radius: 1rem;
+}
+
+.videoCard {
+    width: 25rem;  
+
+    &__cover {
+        height: 15rem;
+    }
+}

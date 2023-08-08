@@ -1,4 +1,4 @@
-export const worldRegionsData = [
+export const worldRegions = [
     {
         id: 1,
         title: 'Европа',

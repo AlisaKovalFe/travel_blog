@@ -1,0 +1,80 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    height:max-content;
+    margin-bottom: 5rem;
+}
+
+.cover {
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    justify-content:flex-start;
+    height: 45rem;
+    margin-bottom: 5rem;
+    width: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)),url('https://stampsonthepassport.com/wp-content/uploads/2020/04/IMG_9408photo.jpg');
+    background-size:cover;
+    background-repeat: no-repeat;
+}
+
+.cover__heading {
+    margin: 2rem 3rem ;
+    color: rgb(244, 250, 250);
+}
+
+.cover__image {
+    width: 18%;
+    margin-left: 3rem;
+}
+
+.description {
+    display: flex;
+    justify-content: space-between;
+    width: 72rem;
+    margin-bottom: 5rem;
+
+    &__text {
+        width: 55%;
+        padding: 3rem;
+        background: #f9f6f3;
+        font-size: 1rem;
+        text-align: justify;
+        border-radius: 1rem;
+        margin: 0;
+    }
+
+    &__image {
+        width: 35%;
+        border-radius: 1rem;
+    }
+}
+
+.photoGallery {
+    display: flex;
+    flex-direction: column;
+    width: 40rem;
+    margin-bottom: 5rem;
+
+    &__heading {
+        align-self: center;
+    margin-bottom: 2rem;
+    color: '#fff';
+    line-height: '160px';
+
+    }
+}
+
+  
+
+  
+  
+
+  /* https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/pastel-colored-houses-and-boats-on-canal-burano-venice-veneto-italy-lost-horizon-images.jpg */ 
+  
+    /* https://www.viaggiando-italia.it/wp-content/uploads/2023/01/Turisti-raccontano.-LIsola-di-Burano-e-i-suoi-Colori-pastello-meravigliosi.jpg */
+  
+    /* https://cdn.contexttravel.com/image/upload/c_fill,q_60,w_2400/v1678208100/production/product_image/image__1678208099.jpg */
+  
+  

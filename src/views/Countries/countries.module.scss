@@ -1,0 +1,23 @@
+.wrapper {
+    display:flex;
+    justify-content: space-between;
+    padding: 4rem;
+}
+
+.countries {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.country {
+    width: 30%;
+    margin-bottom: 3rem;
+}
+
+//тут с вложенность траблы, стили ехали, разобраться
+.county__image {
+    height: 30vh;
+}
+
