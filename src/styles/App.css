@@ -1,22 +1,10 @@
-
 /* App */
-
 .App {
   height: max-content;
 }
 
-/* Main */
-
-.main_container {
-  display: flex;
-  flex-direction: column;
-  height: max-content;
-}
 
 /* Header */
-
-
-
 .ant-menu-light.ant-menu-horizontal .ant-menu-submenu::after,
 .ant-menu-light.ant-menu-horizontal .ant-menu-item::after {
   inset-inline:unset;
@@ -28,32 +16,7 @@
   color: rgb(105, 45, 2);
 }
 
-
-/* Footer */
-
-
-
-/* Greeting */
-
-
-/* button_detailed */
-
-/* About */
-
-
-
-
-
-/* PhotoGallery */
-
-
-
-/* Video */
-
-/* 
-
 /* World Regions */
-
 .ant-tabs-tab-btn {
   font-size: 1.1rem;
   font-weight:400;
@@ -66,10 +29,16 @@
 .ant-tabs .ant-tabs-tab .ant-tabs-tab-btn:hover {
   color: rgb(77, 100, 147)
 }
-/* Countries */
 
 
+/* Result */
 
+.ant-result .ant-result-title {
+  font-size: 1.2rem;
+}
 
-/* Selection */
+/* Loader */
 
+.ant-spin {
+  color: #ffa39e
+}

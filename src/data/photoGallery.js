@@ -24,7 +24,7 @@ export const photoGallery = [
         }
     },
     {
-        id: 3,
+        id: 4,
         title: 'Чехия',
         cover: {
             src: 'https://polis812.ru/blog/wp-content/uploads/2020/04/pexels-rachel-claire-6126485.jpg',

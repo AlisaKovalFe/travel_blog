@@ -4,7 +4,7 @@ import styles from './about.module.scss'
 function About(props) {
     return (
         <div className={styles.wrapper}>
-            <div className={`${styles.about} ${styles.about_positionColumn}`}>
+            <div className={`${styles.about} ${styles.about_positioned}`}>
                 <div className={styles.about__segment}>
                     <p className={styles.about__text}>
                         Я начала менять свою жизнь в 2018 году. До этого у меня была жизнь обычной девочнки. Как и многих людей, меня учили, что нужно получить образование, устровиться на работу, выйти замуж, завести детей и жить долго и счастливо. <br/>
@@ -22,14 +22,14 @@ function About(props) {
                 </div>
             </div>
 
-            <div className={`${styles.about} ${styles.about_positionRow}`}>
+            <div className={`${styles.about} ${styles.about_default}`}>
                 <p className={styles.about__text}>
                     Несмотря, на все обстоятельства этого мира я смогла за эти неполные 5 лет посетить более 20 стран! Сейчас я уже побывала Индонезии, Индии, Китае, Таиланде, Америке и других странах, и я не собираюсь останавливаться!     
                 </p>
                 <img className={`${styles.about__image} ${styles.about__image_ricefields}`} src="https://c4.wallpaperflare.com/wallpaper/893/815/708/landscape-field-rice-paddy-wallpaper-preview.jpg" alt="ricefields" />   
             </div>
             
-            <div className={`${styles.about} ${styles.about_positionRow}`}>
+            <div className={`${styles.about} ${styles.about_default}`}>
                 <p className={styles.about__text}>
                     Если бы кто-то еще тогда в начале 2018 года сказал мне, что я осмелюсь так рискнуть и поехать в большое одиночное путешествие, я бы не поверила. Однако я смогла и теперь с удовольствием делюсь информацией о путешествиях на этом веб-сайте!     
                 </p>

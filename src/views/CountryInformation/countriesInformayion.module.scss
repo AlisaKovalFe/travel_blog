@@ -8,12 +8,12 @@
     background-color: #efecec;
     border-radius: 1rem;
     padding: 2rem;
+    text-align: justify;
 
 
     &_position {
         display: flex;
         justify-content: space-between;
-        text-align: justify;
     }
 
     &__heading {
@@ -23,13 +23,12 @@
     &__image {
         width: 40%;
         
-        &_facts {
+        &_rotate {
             width: 25%;
             height: 12rem;
             transform: rotate(-30deg);
         }
     }
-
 }
 
 .intro {
@@ -43,10 +42,27 @@
     }
 }
 
-.recomendations{
-
+.recomendations {
     &__heading {
         text-decoration: underline;
+    }
+
+    &__heading_position {
+        margin-top: 4rem;
+    }
+
+    &_position {
+        display: flex;
+    }
+
+    &__text {
+        width: 90%;
+    }
+
+    &__destination {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 }
 
@@ -68,17 +84,7 @@
     }
 }
 
-.destinations__destination {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.destinations__intro {
-    width: 35rem;
-}
-
-.destinations__image {
+.images__image {
     width: 30rem;
 
     &_small {

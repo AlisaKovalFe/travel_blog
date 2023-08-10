@@ -17,16 +17,17 @@
     background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)),url('https://stampsonthepassport.com/wp-content/uploads/2020/04/IMG_9408photo.jpg');
     background-size:cover;
     background-repeat: no-repeat;
-}
+    
 
-.cover__heading {
-    margin: 2rem 3rem ;
-    color: rgb(244, 250, 250);
-}
+    &__heading {
+        margin: 2rem 3rem ;
+        color: rgb(244, 250, 250);
+    }
 
-.cover__image {
-    width: 18%;
-    margin-left: 3rem;
+    &__image {
+        width: 18%;
+        margin-left: 3rem;
+    }
 }
 
 .description {
@@ -66,15 +67,5 @@
     }
 }
 
-  
 
-  
-  
 
-  /* https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/pastel-colored-houses-and-boats-on-canal-burano-venice-veneto-italy-lost-horizon-images.jpg */ 
-  
-    /* https://www.viaggiando-italia.it/wp-content/uploads/2023/01/Turisti-raccontano.-LIsola-di-Burano-e-i-suoi-Colori-pastello-meravigliosi.jpg */
-  
-    /* https://cdn.contexttravel.com/image/upload/c_fill,q_60,w_2400/v1678208100/production/product_image/image__1678208099.jpg */
-  
-  

@@ -1,29 +1,17 @@
 import React from 'react';
-import { Alert, Space, Spin } from 'antd';
+import styles from './loader.module.scss'
+import { Space, Spin } from 'antd';
 
+
+// при выборе страны в компоненте selection будет имитироваться задержка в 5 секунд, в это время на экране будет показан Loader, после окончания паузы на экран будет выводиться инфо о выбранной стране
+
+// пыталсь поменять цвет этого лоадера, никак не получается
 function Loader(props) {
     return (
-        <div>
-            <Space
-                direction="vertical"
-                style={{
-                width: '100%',
-                }}
-            >
-                <Space>
-                
-                    <Spin tip="Loading" size="large">
-                        <div className="content" />
-                    </Spin>
-                </Space>
-
-                <Spin tip="Loading...">
-                <Alert
-                    message="Alert message title"
-                    description="Further details about the context of this alert."
-                    type="info"
+        <div className={styles.wrapper}>
+            <Space size="middle">
+                <Spin size="large"
                 />
-                </Spin>
             </Space>
         </div>
     );

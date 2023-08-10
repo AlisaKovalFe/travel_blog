@@ -6,6 +6,10 @@ import { Tabs } from 'antd';
 const { Meta } = Card;
 
 function Countries(props) {
+    const onChange = (key) => {
+        console.log(key);
+    };
+
     return (
         <div className={styles.wrapper}>
             <div className={styles.countries}>
@@ -14,8 +18,8 @@ function Countries(props) {
                         el.map((county) => (
                             <Card
                                 hoverable
-                                className={styles.country} //по идее country - это часть countries, но при этом image часть county, значит country - это элемент countries, и при этом блок, у которого есть эл-т image. Но как мне тут прописать правильно? если писать styles.countries country - так ошибку выдает
-                                cover={<img className={styles.county__image} alt={county.cover.alt} src={county.cover.src} />}
+                                className={styles.country}  // если делаю страну эл-м блока страны, то со стиля траблы
+                                cover={<img className={styles.country__image} alt={county.cover.alt} src={county.cover.src} />}
                                 key={county.id}
                         >
                             <Meta description={county.description} />
@@ -28,14 +32,17 @@ function Countries(props) {
             <div className="countries_tabs">
                 <Tabs
                     centered
+                    onChange={onChange}
                     tabPosition="left"
                     size='small'
-                    items={counties[0].map((el) => {
-                                return {
-                                    label: el.title,
-                                    key: el.id,
-                                };
-                    })}
+                    items={counties.map((item) => {
+                            return item.map((el) => {
+                                    return {
+                                        label: el.title,
+                                        key: el.id,
+                                    };
+                                })
+                    }).flat()}
                     />
             </div>
         </div>

@@ -14,10 +14,9 @@
 .country {
     width: 30%;
     margin-bottom: 3rem;
-}
 
-//тут с вложенность траблы, стили ехали, разобраться
-.county__image {
-    height: 30vh;
+    &__image {
+        height: 30vh;
+    }
 }
 

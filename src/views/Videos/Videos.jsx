@@ -6,6 +6,8 @@ import { videoOfRegions } from '../../data/videoOfRegions'
 import { Collapse } from 'antd';
 const { Meta } = Card;
 
+
+//какая-то проблемА с ключомами в консоли, не разобралась
 function Videos(props) {
     const onChange = (key) => {
         console.log(key);
@@ -18,34 +20,30 @@ function Videos(props) {
                 Здесь я собрала видео из моих любимых регионов Европы, чтобы воспоминания были всегда рядом.
             </p>     
 
-            <div className={styles.videoList}>
+            <div className={styles.videos}>
                 {videoCovers.map((el, index) => (
                     <Card
-                        hoverable
-                        className={styles.videoCard}                 
-                        cover={<img alt={el.cover.alt} src={el.cover.src} className={styles.videoCard.cover}
                         key={el.id}
-                        />
-                    }
+                        hoverable
+                        className={styles.video}                 
+                        cover={<img alt={el.cover.alt} src={el.cover.src} className={styles.video__image}/>}
                     >
                         <Meta title={el.title} description={el.description} />
-                        {
-                            videoOfRegions.map((el, i) => (
-                                index === i && (
-                                    <Collapse 
-                                        key={el.id}  //какая-то проблемс с ключом в консоли
-                                        items={el} 
-                                        onChange={onChange} 
-                                    />
-                                )    
-                            ))
-                        }
+                            {
+                                videoOfRegions.map((el, i) => (
+                                    index === i && (
+                                        <Collapse 
+                                            key={el.id}  
+                                            items={el} 
+                                            onChange={onChange} 
+                                        />
+                                    )    
+                                ))
+                            }
                     </Card>
                     )
                 )}           
             </div>
-
-            
         </div>
     );
 }

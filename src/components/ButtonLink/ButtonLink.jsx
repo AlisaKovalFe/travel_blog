@@ -8,7 +8,7 @@ function ButtonLink(props) {
             <Space>
                 <Button 
                     type="link"
-                    className={styles.buttonLink}
+                    className={styles.button}
                     href='#About'
                     >
                         Подробнее

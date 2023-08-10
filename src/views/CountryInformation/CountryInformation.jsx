@@ -2,6 +2,8 @@ import React from 'react';
 import styles from './countriesInformayion.module.scss'
 import { countriesInfo } from '../../data/countriesInfo'
 
+
+//пробросила в компонент данные по ключу Италия, так как не знаю пока как корректно выводить одну страну на конкретный запрос (данные по всем странам в data)
 function CountryInformation(props) {
     return (
         <article className={styles.wrapper}>
@@ -16,13 +18,14 @@ function CountryInformation(props) {
             </section>
 
             <section className={`${styles.segment} ${styles.segment_position}`}>
-                <img className={`${styles.segment__image} ${styles.segment__image_facts}`} src={countriesInfo.italy.facts.image.src} alt={countriesInfo.italy.facts.image.src} />
+                <img className={`${styles.segment__image} ${styles.segment__image_rotate}`} src={countriesInfo.italy.facts.image.src} alt={countriesInfo.italy.facts.image.src} />
+
                 <div>
                     <h3 className={styles.segment__heading}>Факты о стране</h3>
                     <ul>
                         {
                             countriesInfo.italy.facts.items.map((el) => (
-                                <li >{el}</li>
+                                <li key={el.id}>{el.item}</li>
                             ))
                         }
                     </ul>
@@ -35,7 +38,7 @@ function CountryInformation(props) {
                     countriesInfo.italy.accomodation.items.map((el) => (
                         <div key={el.id} className={`${styles.segment__recomendations} ${styles.recomendations}`}>
                             <h4 className={styles.recomendations__heading}>{el.title}</h4>
-                            <p>{el.text}</p>
+                            <p className={styles.recomendations__text}>{el.text}</p>
                         </div>
                     ))
                 }                
@@ -46,7 +49,8 @@ function CountryInformation(props) {
                 <p>{countriesInfo.italy.eating.text}</p>
 
                 <div className={`${styles.segment__recomendations} ${styles.recomendations}`}>
-                    <h4>{countriesInfo.italy.eating.recomendations.title}</h4>
+                    <h4 className={`${styles.recomendations__heading} ${styles.recomendations__heading_position}`}>{countriesInfo.italy.eating.recomendations.title}</h4>
+
                     {
                         countriesInfo.italy.eating.recomendations.items.map((el) => (
                             <div className={`${styles.recomendations__recomendation} ${styles.recomendation}`} key={el.id}>
@@ -62,37 +66,31 @@ function CountryInformation(props) {
             </section>
 
             <section className={styles.segment}>
-                <h3 className={styles.segment__heading}>{countriesInfo.italy.visits.title}</h3>
+                <h3 className={styles.segment__heading}>{countriesInfo.italy.visits.title}</h3> 
+                                    
+                {
+                    countriesInfo.italy.visits.recomendations.map((el, index) => (
+                        <div key={el.id} className={`${styles.segment__recomendations} ${styles.recomendations} ${styles.recomendations_position}`}>
+                                <div className={styles.recomendations__destination}>
+                                    <h4 className={styles.recomendations__heading}>{el.destination}</h4>
+                                    <p className={styles.recomendations__text}>{el.description}</p>
+                                </div>     
 
-                <div className={`${styles.segment__destinations} ${styles.destinations}`}>
-                    <ul>
-                        {
-                            countriesInfo.italy.visits.recomendations.map((el, index) => (
-                                <li className={styles.destinations__destination}>
-                                        <div className={styles.destinations__intro}>
-                                            <h4>{el.destination}</h4>
-                                            <p>{el.description}</p>
-                                        </div>     
-
-                                        <div>
-                                            {
-                                                index === countriesInfo.italy.visits.recomendations.length - 1 ? 
-                                                    (
-                                                    <img className={`${styles.destinations__image} ${styles.destinations__image_big}`} src={el.image.src} alt={el.image.alt} />
-                                                    ) : index === countriesInfo.italy.visits.recomendations.length - 2 ? (
-                                                        <img className={`${styles.destinations__image} ${styles.destinations__image_normal}`} src={el.image.src} alt={el.image.alt} />
-                                                    ) : (
-                                                        <img className={`${styles.destinations__image} ${styles.destinations__image_small}`} src={el.image.src} alt={el.image.alt} />
-                                                    )
-                                            }     
-                                        </div>                
-                                </li>
-                            ))
-                        }
-                    </ul>
-
-                </div>
-                
+                                <div className={`${styles.recomendations__images} ${styles.images}`}>
+                                    {
+                                        index === countriesInfo.italy.visits.recomendations.length - 1 ? 
+                                            (
+                                            <img className={`${styles.images__image} ${styles.images__image_big}`} src={el.image.src} alt={el.image.alt} />
+                                            ) : index === countriesInfo.italy.visits.recomendations.length - 2 ? (
+                                                <img className={`${styles.images__image} ${styles.images__image_normal}`} src={el.image.src} alt={el.image.alt} />
+                                            ) : (
+                                                <img className={`${styles.images__image} ${styles.images__image_small}`} src={el.image.src} alt={el.image.alt} />
+                                            )
+                                    }     
+                                </div>                
+                        </div>
+                    ))
+                }               
             </section>
         </article>
     );
