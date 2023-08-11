@@ -8,11 +8,10 @@ function App() {
   return (
     <div className="App">
       <Helmet>
-                <meta charSet="utf-8" />
-                <title>My Title</title>
-                <link rel="canonical" href="http://mysite.com/example" />
-                <meta name="description" content="Test" />
-            </Helmet>
+        <meta charSet="utf-8" />
+        <title>Travel blog</title>
+        <meta name="description" content="Travel blog" />
+      </Helmet>
       <Header />
       <Main />
       <Footer />
