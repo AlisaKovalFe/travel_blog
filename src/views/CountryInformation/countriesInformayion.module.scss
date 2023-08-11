@@ -19,16 +19,6 @@
     &__heading {
         color: #474546;;
     }
-
-    &__imageCover {
-        width: 40%;
-    }
-
-    &__imageFacts {
-        width: 25%;
-        height: 12rem;
-        transform: rotate(-30deg);
-    }
 }
 
 .intro {
@@ -40,6 +30,16 @@
         width: 90%;
         line-height: 2rem;
     }
+}
+
+.imageCover {
+    width: 40%;
+}
+
+.imageFacts {
+    width: 25%;
+    height: 12rem;
+    transform: rotate(-30deg);
 }
 
 .recomendations {
