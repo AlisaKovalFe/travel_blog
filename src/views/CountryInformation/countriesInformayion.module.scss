@@ -20,14 +20,14 @@
         color: #474546;;
     }
 
-    &__image {
+    &__imageCover {
         width: 40%;
-        
-        &_rotate {
-            width: 25%;
-            height: 12rem;
-            transform: rotate(-30deg);
-        }
+    }
+
+    &__imageFacts {
+        width: 25%;
+        height: 12rem;
+        transform: rotate(-30deg);
     }
 }
 

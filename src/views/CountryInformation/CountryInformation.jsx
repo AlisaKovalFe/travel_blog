@@ -13,11 +13,11 @@ function CountryInformation(props) {
                     <h2 className={styles.intro__heading}>{countriesInfo.italy.title}</h2>
                     <p className={styles.intro__text}>{countriesInfo.italy.description}</p>
                 </div>                
-                <img className={styles.segment__image} src={countriesInfo.italy.image.src} alt={countriesInfo.italy.image.alt}  />
+                <img className={styles.segment__imageCover} src={countriesInfo.italy.image.src} alt={countriesInfo.italy.image.alt}  />
             </section>
 
             <section className={`${styles.segment} ${styles.segment_position}`}>
-                <img className={`${styles.segment__image} ${styles.segment__image_rotate}`} src={countriesInfo.italy.facts.image.src} alt={countriesInfo.italy.facts.image.src} />
+                <img className={styles.segment__imageFacts} src={countriesInfo.italy.facts.image.src} alt={countriesInfo.italy.facts.image.src} />
 
                 <div>
                     <h3 className={styles.segment__heading}>Факты о стране</h3>
