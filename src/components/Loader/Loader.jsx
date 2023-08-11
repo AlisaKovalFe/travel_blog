@@ -11,7 +11,7 @@ function Loader(props) {
         <div className={styles.wrapper}>
             <Space size="middle">
                 <Spin size="large"
-                />
+            />
             </Space>
         </div>
     );

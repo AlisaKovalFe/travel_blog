@@ -7,7 +7,7 @@ const { Meta } = Card;
 
 function WorldRegions(props) {
     return (
-        <div className={styles.wrapper}>
+        <section className={styles.wrapper}>
             <h2 className={styles.heading}>Выбери регион для путешествия</h2>
             <div className={styles.worldRegions}>
                 {
@@ -34,7 +34,7 @@ function WorldRegions(props) {
                     })}
                 />
             </div>  
-        </div>
+        </section>
     );
 }
 

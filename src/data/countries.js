@@ -1,5 +1,4 @@
 export const counties = [
-    [
         {
             id: 1,
             title: 'Италия',
@@ -54,9 +53,6 @@ export const counties = [
             }, 
             description: 'Германия'      
         },    
-    ],
-
-    [
         {
             id: 7,
             title: 'Китай',
@@ -111,6 +107,5 @@ export const counties = [
             }, 
             description: 'Вьетнам'      
         },
-    ]
     
 ]

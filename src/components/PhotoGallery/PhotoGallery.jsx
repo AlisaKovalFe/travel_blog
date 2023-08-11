@@ -11,10 +11,10 @@ function PhotoGallery(props) {
         <Carousel afterChange={onChange}>
             {
                 photoGallery.map((el) => (
-                    <div key={el.id} className={styles.photoCard}>
+                    <section key={el.id} className={styles.photoCard}>
                         <h3 className={styles.photoCard__heading}>{el.title}</h3>
                         <img className={styles.photoCard__image} src={el.cover.src} alt={el.cover.alt} />
-                    </div>
+                    </section>
                 ))
             }
         </Carousel>

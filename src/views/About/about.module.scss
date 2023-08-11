@@ -39,44 +39,42 @@
         &__text_position {
             width: 50%
         }
+}
 
-        &__image {
-            &_mountains {
-                position: relative;
-                top: -2rem;
-                left: 5rem;
-                width: 35%;
-            }
-    
-            &_lavender {
-                position: relative;
-                top: 2rem;
-                width: 40%;
-                height: 80%;
-                transform: rotate(-10deg);
-                z-index: 1;
-            }
-    
-            &_meadow {
-                position: relative;
-                left: -6rem;
-                top: 4rem;
-                width: 25%;
-                height: 65%;
-                transform: rotate(-13deg);
-            }
-            
-            &_ricefields {
-                width: 45%;
-                height: 110%;
-                transform: rotate(5deg);
-            }
-    
-            &_girl {
-                position: relative;
-                top: -3rem;
-                width: 70%;
-                z-index: 1;
-            }
-        }
+.imageMountains {
+    position: relative;
+    top: -2rem;
+    left: 5rem;
+    width: 35%;
+}
+
+.imageLavender {
+    position: relative;
+    top: 2rem;
+    width: 40%;
+    height: 80%;
+    transform: rotate(-10deg);
+    z-index: 1;
+}
+
+.imageMeadow {
+    position: relative;
+    left: -6rem;
+    top: 4rem;
+    width: 25%;
+    height: 65%;
+    transform: rotate(-13deg);
+}
+
+.imageRiceFields {
+    width: 45%;
+    height: 110%;
+    transform: rotate(5deg);
+}
+
+.imageGirl {
+    position: relative;
+    top: -3rem;
+    width: 70%;
+    z-index: 1;
 }

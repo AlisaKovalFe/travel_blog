@@ -12,8 +12,7 @@ function CountryInformation(props) {
                 <div className={styles.intro}>
                     <h2 className={styles.intro__heading}>{countriesInfo.italy.title}</h2>
                     <p className={styles.intro__text}>{countriesInfo.italy.description}</p>
-                </div>
-                
+                </div>                
                 <img className={styles.segment__image} src={countriesInfo.italy.image.src} alt={countriesInfo.italy.image.alt}  />
             </section>
 
@@ -48,7 +47,7 @@ function CountryInformation(props) {
                 <h3 className={styles.segment__heading}>{countriesInfo.italy.eating.title}</h3>
                 <p>{countriesInfo.italy.eating.text}</p>
 
-                <div className={`${styles.segment__recomendations} ${styles.recomendations}`}>
+                <section className={`${styles.segment__recomendations} ${styles.recomendations}`}>
                     <h4 className={`${styles.recomendations__heading} ${styles.recomendations__heading_position}`}>{countriesInfo.italy.eating.recomendations.title}</h4>
 
                     {
@@ -62,7 +61,7 @@ function CountryInformation(props) {
                             </div>
                         ))
                     }
-                </div>
+                </section>
             </section>
 
             <section className={styles.segment}>

@@ -60,7 +60,6 @@ export const countriesInfo = {
                     id: '3',
                 },
             ]
-            
         },
 
         eating: {

@@ -11,41 +11,36 @@ function Countries(props) {
     };
 
     return (
-        <div className={styles.wrapper}>
+        <section className={styles.wrapper}>
             <div className={styles.countries}>
                 {
-                    counties.map((el) => (
-                        el.map((county) => (
-                            <Card
-                                hoverable
-                                className={styles.country}  // если делаю страну эл-м блока страны, то со стиля траблы
-                                cover={<img className={styles.country__image} alt={county.cover.alt} src={county.cover.src} />}
-                                key={county.id}
+                    counties.map((el) => (    
+                        <Card
+                            hoverable
+                            className={styles.country}  
+                            cover={<img className={styles.country__image} alt={el.cover.alt} src={el.cover.src} />}
+                            key={el.id}
                         >
-                            <Meta description={county.description} />
-                        </Card>
-                        ))
-                        
+                            <Meta description={el.description} />
+                        </Card>    
                     ))
                 }   
             </div>
-            <div className="countries_tabs">
+            <div >
                 <Tabs
                     centered
                     onChange={onChange}
                     tabPosition="left"
                     size='small'
-                    items={counties.map((item) => {
-                            return item.map((el) => {
-                                    return {
-                                        label: el.title,
-                                        key: el.id,
-                                    };
-                                })
-                    }).flat()}
+                    items={counties.map((el) => {                           
+                            return {
+                                label: el.title,
+                                key: el.id,
+                            };                               
+                    })}
                     />
             </div>
-        </div>
+        </section>
     );
 }
 

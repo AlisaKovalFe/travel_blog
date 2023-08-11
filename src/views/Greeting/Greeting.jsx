@@ -5,17 +5,16 @@ import PhotoGallery from '../../components/PhotoGallery/PhotoGallery';
 
 function Greeting(props) {
     return (
-        <div className={styles.wrapper}>
-            <div className={styles.cover}>
-                <div className={styles.cover__heading}>
-                    <h1>Привет! Я Нина!</h1>
-                    <h2>Это мой мир путешествий и открытий!</h2>
+        <section className={styles.wrapper}>
+            <section className={styles.cover}>
+                <div className={styles.cover__title}>
+                    <h1 className={styles.cover__heading}>Привет! Я Нина!</h1>
+                    <h2 >Это мой мир путешествий и открытий!</h2>
                 </div>
                 <img className={styles.cover__image} alt="girl" src="/images/girl.png"/>
-            </div>
-            
+            </section>            
 
-            <div className={styles.description}>
+            <section className={styles.description}>
                 <div className={styles.description__text}>
                     <h2>Обо мне</h2>
                     <p>
@@ -24,13 +23,13 @@ function Greeting(props) {
                     <ButtonLink/>
                 </div>
                 <img className={styles.description__image} src="https://i.etsystatic.com/23325853/r/il/d8332c/2595241673/il_340x270.2595241673_31lr.jpg" alt="myPhoto" />               
-            </div>
+            </section>
 
-            <div className={styles.photoGallery}>
+            <section className={styles.photoGallery}>
                 <h2 className={styles.photoGallery__heading}>Мои последние поездки</h2>
                 <PhotoGallery />
-            </div> 
-        </div>
+            </section> 
+        </section>
     );
 }
 
