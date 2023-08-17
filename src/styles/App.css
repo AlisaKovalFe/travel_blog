@@ -58,3 +58,8 @@ code {
 .ant-spin {
   color: #ffa39e
 }
+
+/* Tabs */
+.ant-tabs-tab-btn {
+  font-size: 1rem;
+}
