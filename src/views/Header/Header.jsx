@@ -18,8 +18,13 @@ function Header(props) {
 		},
 	
 		{
-			label: <Link to='video/'>Видео</Link>,
+			label: <Link to='/video'>Видео</Link>,
 			key: 'video',
+		},
+
+		{
+			label: <Link to='/tomap'>На карту</Link>,
+			key: 'map',
 		},
 	
 	]

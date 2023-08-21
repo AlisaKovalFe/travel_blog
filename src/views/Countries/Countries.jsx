@@ -29,7 +29,7 @@ function Countries(props) {
                     {
                         currentCountries.countries.map((el) => (   
                             <Link key={el.id} to={`/world-regions/countries/${id}/country-information/${el.id}`}>
-                                {console.log(el.id)}
+                                {/* {console.log(el.id)} */}
                                 <Card
                                     hoverable
                                     className={styles.country}  

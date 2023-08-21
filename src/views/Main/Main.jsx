@@ -7,6 +7,7 @@ import Videos from '../Videos/Videos'
 import WorldRegions from '../WorldRegions/WorldRegions';
 import Countries from '../Countries/Countries';
 import CountryInformation from '../CountryInformation/CountryInformation'
+import ToMap from '../ToMap/ToMap';
 
 function Main(props) {
     return (
@@ -15,6 +16,7 @@ function Main(props) {
                 <Route path='/' element={<Greeting />}></Route>
                 <Route path='/about' element={<About/>}></Route>
                 <Route path='/video' element={<Videos />}></Route>
+                <Route path='/tomap' element={<ToMap />}></Route>
                 <Route path='/world-regions' element={<WorldRegions />}></Route>
                 <Route path='/world-regions/countries/:id' element={<Countries />}></Route>
                 <Route path='/world-regions/countries/:id/country-information/:id' element={<CountryInformation />}></Route>

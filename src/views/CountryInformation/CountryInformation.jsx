@@ -6,10 +6,9 @@ import { useParams } from 'react-router-dom';
 function CountryInformation(props) {
 
     const { id } = useParams()
-    console.log(id)
-    const currentCountries = destinations.find((countries) => countries.countries.find((country) => country.id === +id))
-    const currentCountry = currentCountries.countries.find((el) => el.id === +id)
-      
+    const currentWorldRegion = destinations.find((item) => item.countries.find((el) => el.id === +id))
+    const currentCountry = currentWorldRegion.countries.find((el) => el.id === +id)
+
     return (
             <article className={styles.wrapper}>
                 <section className={`${styles.segment} ${styles.segment_position}`}>
