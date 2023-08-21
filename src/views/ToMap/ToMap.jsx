@@ -1,24 +1,68 @@
 import React from 'react';
 import styles from './tomap.module.scss'
+import { destinations } from '../../data/destinations'
 import { placesOnMap } from '../../data/placesOnMap'
-import { YMaps, Map, ObjectManager, GeolocationControl, SearchControl, RouteButton} from '@pbe/react-yandex-maps';
+import { YMaps, Map, ObjectManager, GeolocationControl} from '@pbe/react-yandex-maps';
 import { Typography } from 'antd';
 const { Title } = Typography;
 
+
 function ToMap(props) {
+
+let features = []
+let copy = [...destinations]
+
+copy.map((el) => {
+    el.countries.map((item) => {
+        item.info.visits.recomendations.map((elem) => {
+            
+            features.fill({
+                type: "Feature",
+                id: Date.now(),               
+                geometry: {
+                    type: "Point",
+                    coordinates: elem.coordinates
+                },
+                properties: {
+                    balloonContentHeader: elem.destination,         
+                    balloonContentBody: `
+                                        <div > 
+                                            <img class="map-image" src=${elem.image.src} alt=${elem.image.alt} />
+                                        </div>
+                                    </div>`,    
+                    hintContent: elem.destination,  
+                },
+                options: {
+                    preset: 'islands#yellowIcon'
+                },
+            })
+            return elem
+        })
+        return item
+    })
+    return el
+})
+
+    console.log(placesOnMap)
+
+    
 
     return (
         <section className={styles.wrapper}>
-            <Title level={2}>Рестораны на карте</Title>
+            <Title level={2}>Мои любимые места на карте</Title>
             <YMaps>
                 <Map
                     className={styles.map}
                     defaultState={{
-                    center: [55.755246, 37.617779],
-                    zoom: 12,
+                    center: [25.755246, 37.617779],
+                    zoom: 2,
                     controls: ["zoomControl", "fullscreenControl"],
+                    behaviors: ["drag", "dblClickZoom"]
                     }}
                     modules={["control.ZoomControl", "control.FullscreenControl"]}
+                    options={{
+                        maxZoom: 15
+                    }}
                 >
                     <ObjectManager
                         options={{
@@ -39,10 +83,9 @@ function ToMap(props) {
                         ]}
                     />
                     <GeolocationControl 
-                            options={{ float: "left" }}
-                            data={{title: 'это ты'}}
+                        options={{ float: "left" }}
+                        data={{title: 'это ты'}}
                     />
-                    <RouteButton options={{ float: "right"}}/>
                 </Map>
             </YMaps>
         </section>

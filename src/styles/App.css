@@ -6,7 +6,7 @@ body {
   background: #fbfaf9;
   color: #646462;
   line-height: 1.7rem;
-  letter-spacing:0.03rem;
+  letter-spacing:0.05rem;
 }
 
 code {
@@ -62,4 +62,16 @@ code {
 /* Tabs */
 .ant-tabs-tab-btn {
   font-size: 1rem;
+}
+
+/* ToMap */
+
+[class*="copyrights-pane"] {
+  display: none;
+}
+
+.map-image {
+    object-fit: cover;
+    width: 6rem;
+    height: 6rem;
 }

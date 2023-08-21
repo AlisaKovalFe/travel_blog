@@ -5,11 +5,9 @@ import { counties } from '../../data/countries'
 
 function Selection(props) {
     return (
-        <section className={styles.wrapper}>
-            <h2>Выбери страну</h2>
             <Select
                 showSearch
-                className={styles.selection}
+                className={styles.wrapper}
                 placeholder="Поиск страны"
                 optionFilterProp="children"
                 filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())}
@@ -23,7 +21,6 @@ function Selection(props) {
                         }
                 })}
             />
-        </section>
     );
 }
 

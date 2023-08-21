@@ -126,7 +126,8 @@ export const destinations = [
                                     src: 'https://cdn.britannica.com/78/150178-050-32C89734/Mount-Etna-Bronte-Italy.jpg',
                                     alt: 'Etna'
                                 },
-                                id: '1',
+                                id: 'Etna',
+                                coordinates: [37.751512, 14.994005]
                             },
                             {
                                 destination: 'Пизанская башня',
@@ -135,7 +136,8 @@ export const destinations = [
                                     src: 'https://tourismmedia.italia.it/is/image/mitur/20210310164211-pisa-2?wid=1600&hei=900&fit=constrain,1&fmt=webp',
                                     alt: 'Pisa'
                                 },
-                                id: '2',
+                                id: 'Pisa',
+                                coordinates: [43.722919, 10.396454]
                             },
                             {
                                 destination: 'Романья ',
@@ -144,7 +146,8 @@ export const destinations = [
                                     src: 'https://www.wine-searcher.com/images/region/emilia-romagna-3835-1-2.jpg?width=734',
                                     alt: 'Romagna'
                                 },
-                                id: '3',
+                                id: 'Romagna',
+                                coordinates: [44.504866, 11.345111]
                             }
                         ]
                     }
@@ -265,7 +268,8 @@ export const destinations = [
                                     src: 'https://lifeglobe.net/x/entry/9658/1.jpg',
                                     alt: 'Marcel'
                                 },
-                                id: '1',
+                                id: 'Marcel',
+                                coordinates: [43.303068, 5.378492],
                             },
                             {
                                 destination: 'Лувр',
@@ -274,16 +278,18 @@ export const destinations = [
                                     src: 'https://www.tripzaza.com/ru/destinations/wp-content/uploads/2017/04/France-2-The-Louvre-e1492754751417.jpg',
                                     alt: 'Louvre'
                                 },
-                                id: '2',
+                                id: 'Louvre',
+                                coordinates: [48.860640, 2.337618],
                             },
                             {
-                                destination: `Город, где была сожжена Жанна д'Арк`,
+                                destination: `Руан`,
                                 description: `Жанна д'Арк родилась и была казнена в маленьком городке Руан, расположенном в 135 км от Парижа.`,
                                 image: {
                                     src: 'https://francetravelplanner.com/assets/alsace/domremy/joan_church5042-400.jpg',
                                     alt: 'Ruan'
                                 },
-                                id: '3',
+                                id: 'Ruan',
+                                coordinates: [49.442500, 1.084967],
                             }
                         ]
                     }
@@ -399,13 +405,14 @@ export const destinations = [
                         title: 'Стоит посетить',
                         recomendations: [
                             {
-                                destination: 'Творения Гауди',
-                                description: 'Вы не можете посетить Барселону, не познакомившись с некоторыми из ее самых интересных архитектурных решений, спроектированными знаменитым архитектором Антонио Гауди.',
+                                destination: 'Храм Святого Семейства',
+                                description: 'Вы не можете посетить Барселону, не познакомившись с одним из самых интересных архитектурных решений, спроектированным знаменитым архитектором Антонио Гауди.',
                                 image: {
                                     src: 'https://cdn.britannica.com/15/194815-050-08B5E7D1/Nativity-facade-Sagrada-Familia-cathedral-Barcelona-Spain.jpg',
                                     alt: 'Gaudi'
                                 },
-                                id: '1',
+                                id: 'Gaudi',
+                                coordinates: [41.403591, 2.174307],
                             },
                             {
                                 destination: 'Санта-Мария-де-Риполь',
@@ -414,7 +421,8 @@ export const destinations = [
                                     src: 'https://ispaniagid.ru/wp-content/uploads/2011/12/Ripoll2.jpg',
                                     alt: 'Santa Maria in Ripoll'
                                 },
-                                id: '2',
+                                id: 'Santa Maria in Ripoll',
+                                coordinates: [42.200395, 2.191620],
                             },
                             {
                                 destination: 'Камино де Сантьяго',
@@ -423,7 +431,8 @@ export const destinations = [
                                     src: 'https://cdn.getyourguide.com/img/tour/5e6606c78db7f.jpeg/132.jpg',
                                     alt: 'Camino de Santiago'
                                 },
-                                id: '3',
+                                id: 'Camino de Santiago',
+                                coordinates: [42.333020, -3.561980],
                             }
                         ]
                     }
@@ -544,7 +553,8 @@ export const destinations = [
                                     src: 'https://bnnvara-3opreis.cdn.prepr.io/w_1250,q_100/s3-3opreis-bnnvara/7af2875e-324d-4118-a128-d79e4148d3a8.jpg',
                                     alt: 'Nazare'
                                 },
-                                id: '1',
+                                id: 'Nazare',
+                                coordinates: [39.604793, -9.066759],
                             },
                             {
                                 destination: 'Обидуш',
@@ -553,7 +563,8 @@ export const destinations = [
                                     src: 'https://immigrantinvest.com/wp-content/uploads/2022/09/all-about-obidos_376550973.jpeg',
                                     alt: 'Obidos'
                                 },
-                                id: '2',
+                                id: 'Obidos',
+                                coordinates: [39.359703, -9.155611],
                             },
                             {
                                 destination: 'Лиссабон',
@@ -562,7 +573,8 @@ export const destinations = [
                                     src: 'https://fullsuitcase.com/wp-content/uploads/2021/06/Yellow-tram-and-colorful-buildings-in-Lisbon-Portugal.jpg',
                                     alt: 'Lisbon'
                                 },
-                                id: '3',
+                                id: 'Lisbon',
+                                coordinates: [38.707890, -9.136594],
                             }
                         ]
                     }
@@ -683,7 +695,8 @@ export const destinations = [
                                     src: 'https://image.arrivalguides.com/1230x800/05/90230aa1e71a891095c0364eab70674a.jpg',
                                     alt: 'Karlov Bridge'
                                 },
-                                id: '1',
+                                id: 'Karlov Bridge',
+                                coordinates: [50.086477, 14.411525],
                             },
                             {
                                 destination: 'Башня Петин',
@@ -692,7 +705,8 @@ export const destinations = [
                                     src: 'https://www.amazingczechia.com/wp-content/uploads/2017/05/petrin-tower-prague-01.jpg',
                                     alt: 'Petin Tower'
                                 },
-                                id: '2',
+                                id: 'Petin Tower',
+                                coordinates: [50.086209, 14.413576],
                             },
                             {
                                 destination: 'Пражский Град',
@@ -701,7 +715,8 @@ export const destinations = [
                                     src: 'https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1200,h_630/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/zvgtdvhrwrshx6awtpy4/Prague%20Castle%20Walking%20Tour%2C%20Prague%2C%20Czech%20Republic.jpg',
                                     alt: 'Prague Castle'
                                 },
-                                id: '3',
+                                id: 'Prague Castle',
+                                coordinates: [50.090880, 14.401455],
                             }
                         ]
                     }
@@ -822,7 +837,8 @@ export const destinations = [
                                     src: 'https://www.goway.com/media/uploads/europe/germany/bavaria/rothenburg_ob_der_tauber,_franconia,_bavaria,_germany_551877808.jpg',
                                     alt: 'Bavaria'
                                 },
-                                id: '1',
+                                id: 'Bavaria',
+                                coordinates: [48.137192, 11.575694],
                             },
                             {
                                 destination: 'Замок Нойшванштайн',
@@ -831,7 +847,8 @@ export const destinations = [
                                     src: 'https://www.travelandleisure.com/thmb/umcoSMJygYyG5OIYDdBPgnrJGLc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/01-neuschwanstein-castle-bavaria-NEUSCHWANSTEIN0417-273a040698f24fc1ac22e717bb3f1f0c.jpg',
                                     alt: 'Castle Neuschwanstein'
                                 },
-                                id: '2',
+                                id: 'Castle Neuschwanstei',
+                                coordinates: [47.558094, 10.748695],
                             },
                             {
                                 destination: 'Берлин',
@@ -840,7 +857,8 @@ export const destinations = [
                                     src: 'https://a.cdn-hotels.com/gdcs/production50/d44/571ba00b-11cd-4a54-9f2a-5b38da2bc89e.jpg?impolicy=fcrop&w=800&h=533&q=medium',
                                     alt: 'Berlin'
                                 },
-                                id: '3',
+                                id: 'Berlin',
+                                coordinates: [52.518621, 13.375142],
                             }
                         ]
                     }
@@ -973,7 +991,8 @@ export const destinations = [
                                     src: 'https://images.chinahighlights.com/allpicture/2022/04/7866833d4ad140e9bf53cc40_cut_800x500_9.jpg',
                                     alt: 'Chinese Wall'
                                 },
-                                id: '1',
+                                id: 'Chinese Wall',
+                                coordinates: [40.676735, 117.232209],
                             },
                             {
                                 destination: 'Площадь Тяньаньмэнь',
@@ -982,7 +1001,8 @@ export const destinations = [
                                     src: 'https://freedomhouse.org/sites/default/files/styles/wysiwyg_full_width/public/Tiananmen_Square.jpg?itok=B3WBD8nA',
                                     alt: 'Tiananmen square'
                                 },
-                                id: '2',
+                                id: 'Tiananmen square',
+                                coordinates: [39.902383, 116.391441],
                             },
                             {
                                 destination: 'Река Ли',
@@ -991,7 +1011,8 @@ export const destinations = [
                                     src: 'https://media.istockphoto.com/id/526705622/photo/karst-mountains-and-river-li-in-guilin-guangxi-region-of-china.jpg?s=612x612&w=0&k=20&c=pt48WaDHyDZ0RGusTknmXv4cUSblvLocaR6Mzc6J25k=',
                                     alt: 'Li river'
                                 },
-                                id: '3',
+                                id: 'Li river',
+                                coordinates: [25.260833, 110.282583],
                             }
                         ]
                     }
@@ -1112,7 +1133,8 @@ export const destinations = [
                                     src: 'https://www.travelandleisure.com/thmb/RQ3JmT8V2y2fhwr7NY0cgUumcCE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/phuket-thailand-karst-formation-phuket0327-92bd3ce9266148dba74cba5e36c711e2.jpg',
                                     alt: 'Phuket'
                                 },
-                                id: '1',
+                                id: 'Phuket',
+                                coordinates: [7.877035, 98.396866]
                             },
                             {
                                 destination: 'Бангкок',
@@ -1121,7 +1143,8 @@ export const destinations = [
                                     src: 'https://media.nomadicmatt.com/2020/bangkoksafe.jpg',
                                     alt: 'Bangkok'
                                 },
-                                id: '2',
+                                id: 'Bangkok',
+                                coordinates: [13.771370, 100.513782]
                             },
                             {
                                 destination: 'Чиангмай',
@@ -1130,7 +1153,8 @@ export const destinations = [
                                     src: 'https://media.cntraveler.com/photos/612456257dfe5dff926c7688/4:3/w_5331,h_3998,c_limit/LICENSE_Achariyar%20Rojanapirom-Chiang%20Mai_(c)%20Getty%20Images_CNT%20UK_Sophie.jpeg',
                                     alt: 'Chiang Mai'
                                 },
-                                id: '3',
+                                id: 'Chiang Mai',
+                                coordinates: [18.790246, 98.9956653]
                             }
                         ]
                     }
@@ -1251,7 +1275,8 @@ export const destinations = [
                                     src: 'https://s9.travelask.ru/system/images/files/001/319/138/wysiwyg_jpg/mount-k-3.jpg?1559331219',
                                     alt: 'Mount Kinabalu'
                                 },
-                                id: '1',
+                                id: 'Mount Kinabalu',
+                                coordinates: [6.083380, 116.549937]
                             },
                             {
                                 destination: 'Деревня Саравак',
@@ -1260,7 +1285,8 @@ export const destinations = [
                                     src: 'https://d27k8xmh3cuzik.cloudfront.net/wp-content/uploads/2018/09/Sarawak-Cultural-Village-cover-Copy.jpg',
                                     alt: 'Sarawak village'
                                 },
-                                id: '2',
+                                id: 'Sarawak village',
+                                coordinates: [2.131423, 111.522184]
                             },
                             {
                                 destination: 'Куала-Лумпур',
@@ -1269,7 +1295,8 @@ export const destinations = [
                                     src: 'https://upload.wikimedia.org/wikipedia/commons/f/fc/Moonrise_over_kuala_lumpur.jpg',
                                     alt: 'Kuala Lumpur'
                                 },
-                                id: '3',
+                                id: 'Kuala Lumpur',
+                                coordinates: [3.140285, 101.706700]
                             }
                         ]
                     }
@@ -1390,16 +1417,18 @@ export const destinations = [
                                     src: 'https://media-whichmedia.s3.ap-southeast-1.amazonaws.com/media/large/9/3/9371d97a9a34.jpeg',
                                     alt: 'Bukit Timah'
                                 },
-                                id: '1',
+                                id: 'Bukit Timah',
+                                coordinates: [1.329971, 103.791680]
                             },
                             {
                                 destination: 'Национальный музей Сингапура',
                                 description: 'Будучи старейшим музеем Сингапура, он является центром истории и богатой культуры народа.',
                                 image: {
                                     src: 'https://upload.wikimedia.org/wikipedia/commons/6/6f/2016_Singapur%2C_Museum_Planning_Area%2C_Narodowe_Muzeum_Singapuru_%2802%29.jpg',
-                                    alt: 'national museum'
+                                    alt: 'National museum'
                                 },
-                                id: '2',
+                                id: 'National museum',
+                                coordinates: [1.286298, 103.859297]
                             },
                             {
                                 destination: 'Сады у залива',
@@ -1408,7 +1437,8 @@ export const destinations = [
                                     src: 'https://img.veenaworld.com/wp-content/uploads/2021/09/Gardens-by-the-Bay-Singapore-Tickets-Location-and-Attractions-scaled.jpg',
                                     alt: 'Gardens by the Bay'
                                 },
-                                id: '3',
+                                id: 'Gardens by the Bay',
+                                coordinates: [1.281474, 103.863757]
                             }
                         ]
                     }
@@ -1529,7 +1559,8 @@ export const destinations = [
                                     src: 'https://www.theknot.com/tk-media/images/0108e30b-f23f-4d5b-bacb-c13df8215c94~rs_768.h',
                                     alt: 'Bali'
                                 },
-                                id: '1',
+                                id: 'Bali',
+                                coordinates: [-8.682311, 115.219275]
                             },
                             {
                                 destination: 'Ява',
@@ -1538,7 +1569,8 @@ export const destinations = [
                                     src: 'https://planetofhotels.com/guide/sites/default/files/styles/paragraph__live_banner__lb_image__1880bp/public/live_banner/East-Java%20.jpg',
                                     alt: 'Java'
                                 },
-                                id: '2',
+                                id: 'Java',
+                                coordinates: [-7.298939, 109.942481]
                             },
                             {
                                 destination: 'Джакарта',
@@ -1547,7 +1579,8 @@ export const destinations = [
                                     src: 'https://content.r9cdn.net/rimg/dimg/1b/61/ad879e55-city-22380-17ea1cf2107.jpg?width=1200&height=630&xhint=1472&yhint=1268&crop=true',
                                     alt: 'Jakarta'
                                 },
-                                id: '3',
+                                id: 'Jakarta',
+                                coordinates: [-6.175391, 106.826252]
                             }
                         ]
                     }
@@ -1668,7 +1701,8 @@ export const destinations = [
                                     src: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0a/8b/e8/53/external.jpg?w=1200&h=-1&s=1',
                                     alt: 'Tay Ninh'
                                 },
-                                id: '1',
+                                id: 'Tay Ninh',
+                                coordinates: [22.997766, 120.200837]
                             },
                             {
                                 destination: 'Халонг',
@@ -1677,7 +1711,8 @@ export const destinations = [
                                     src: 'https://lp-cms-production.imgix.net/features/2019/04/HalongBay-aa0f7e71a1db.jpg?auto=compress&fit=crop&format=auto&q=50&w=1200&h=800',
                                     alt: 'Halong Bay'
                                 },
-                                id: '2',
+                                id: 'Halong Bay',
+                                coordinates: [20.965133, 107.047408]
                             },
                             {
                                 destination: 'Каттьен',
@@ -1686,7 +1721,8 @@ export const destinations = [
                                     src: 'https://www.vietvisiontravel.com/wp-content/uploads/2018/10/Cat-Tien-National-Park-in-Vietnam.jpg',
                                     alt: 'Kat Tien'
                                 },
-                                id: '3',
+                                id: 'Kat Tien',
+                                coordinates: [11.445056, 107.285040]
                             }
                         ]
                     }

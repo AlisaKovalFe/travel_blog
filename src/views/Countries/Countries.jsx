@@ -8,6 +8,8 @@ import { destinations } from '../../data/destinations'
 import { Card } from 'antd';
 import { Tabs } from 'antd';
 import { useParams } from 'react-router-dom';
+import { Typography } from 'antd';
+const { Title } = Typography;
 const { Meta } = Card;
 
 function Countries(props) {
@@ -20,7 +22,11 @@ function Countries(props) {
 
     return (
         <section className={styles.wrapper}>
-            <Selection/>
+            <div className={styles.selection}>
+                <Title level={2}>Выбери страну</Title>
+                <Selection/>
+            </div>
+            
             <Loader/>
             <ResultOfSearch/>
 
