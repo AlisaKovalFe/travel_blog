@@ -42,7 +42,7 @@ function Countries(props) {
                                     cover={<img className={styles.country__image} alt={el.cover.alt} src={el.cover.src} />}
                                     key={el.id}
                                 >
-                                    <Meta description={el.description} />
+                                    <Meta className={styles.link} description={el.description} />
                                 </Card>    
                             </Link> 
                         ))

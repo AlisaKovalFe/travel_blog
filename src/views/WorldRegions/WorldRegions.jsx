@@ -21,7 +21,7 @@ function WorldRegions(props) {
                                     className={styles.worldRegions__region}
                                     cover={<img alt={el.cover.alt} src={el.cover.src} />}
                                 >
-                                    <Meta description={el.description} />
+                                    <Meta className={styles.link} description={el.description} />
                                 </Card>
                             </Link>
                     ))

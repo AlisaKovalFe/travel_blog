@@ -21,11 +21,6 @@
 
     &__title {
         margin: 2rem 3rem ;   
-        color:rgb(249, 246, 243)
-    }
-
-    &__heading {
-        font-size: 2rem;
     }
 
     &__image {
@@ -40,7 +35,7 @@
     width: 72rem;
     margin-bottom: 5rem;
 
-    &__text {
+    &__about {
         width: 55%;
         padding: 3rem;
         background: #f9f6f3;
@@ -48,6 +43,11 @@
         text-align: justify;
         border-radius: 1rem;
         margin: 0;
+    }
+
+    &__text {
+        font-size: 1.1rem;
+        line-height: 1.9rem;
     }
 
     &__image {

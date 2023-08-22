@@ -33,6 +33,20 @@ code {
   color: rgb(105, 45, 2);
 }
 
+a {
+  color: #646462;
+}
+
+a:hover,
+.ant-menu-light .ant-menu-item a:hover {
+  color: rgb(139, 50, 108);
+}
+
+a:visited,
+.ant-menu-light .ant-menu-item a:visited {
+  color: rgb(83, 6, 24);
+}
+
 /* World Regions */
 .ant-tabs-tab-btn {
   font-size: 1.1rem;
@@ -47,6 +61,14 @@ code {
   color: rgb(77, 100, 147)
 }
 
+/* World Regions, Countries */
+.ant-card .ant-card-meta-description {
+  text-decoration: none!important; 
+}
+
+.ant-card .ant-card-meta-description:hover {
+  color: #8b326c;
+}
 
 /* Result */
 .ant-result .ant-result-title {

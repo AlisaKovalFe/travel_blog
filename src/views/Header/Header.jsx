@@ -2,10 +2,16 @@ import React, { useState } from "react";
 import styles from './header.module.scss'
 import { Menu } from "antd";
 import { Link } from 'react-router-dom'
+import { HomeOutlined } from '@ant-design/icons';
 import { menuCountries } from '../../data/menuCountries'
 
-function Header(props) {
+function Header() {
 	const menu = [
+		{
+			label: <Link to='/'><HomeOutlined/></Link>,
+			key: "logo",
+		},
+
 		{
 			label: <Link to='/about'>Обо мне</Link>,
 			key: "about",
