@@ -1,16 +1,13 @@
 import React from 'react';
 import styles from './photoGallery.module.scss'
-import { photoGallery } from '../../data/photoGallery'
 import { Carousel } from 'antd';
 import { Typography } from 'antd';
 const { Title } = Typography;
 
-function PhotoGallery(props) {
-    const onChange = (currentSlide) => {
-    console.log(currentSlide);
-    };
+function PhotoGallery({ photoGallery }) {
+
     return (
-        <Carousel afterChange={onChange}>
+        <Carousel>
             {
                 photoGallery.map((el) => (
                     <section key={el.id} className={styles.photoCard}>

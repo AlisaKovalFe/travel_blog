@@ -16,10 +16,6 @@ function Countries(props) {
     const { id } = useParams()
     const currentCountries = destinations.find((el) => el.id === +id)
 
-    const onChange = (key) => {
-        console.log(key);
-    };
-
     return (
         <section className={styles.wrapper}>
             <div className={styles.selection}>
@@ -35,7 +31,6 @@ function Countries(props) {
                     {
                         currentCountries.countries.map((el) => (   
                             <Link key={el.id} to={`/world-regions/countries/${id}/country-information/${el.id}`}>
-                                {/* {console.log(el.id)} */}
                                 <Card
                                     hoverable
                                     className={styles.country}  
@@ -51,11 +46,13 @@ function Countries(props) {
                 <div className={styles.countries__tabs}>
                     <Tabs
                         centered
-                        onChange={onChange}
                         tabPosition="left"
                         size='small'
                         items={currentCountries.countries.map((el) => {                           
-                                return {label: el.title, key: el.id}                               
+                                return {
+                                    label: <Link key={el.id} to={`/world-regions/countries/${id}/country-information/${el.id}`}>{el.title}</Link>, 
+                                    key: el.id
+                                }                               
                         })}
                         />
                 </div>

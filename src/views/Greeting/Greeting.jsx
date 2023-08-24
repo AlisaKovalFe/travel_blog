@@ -3,6 +3,7 @@ import styles from './greeting.module.scss'
 import { Link } from 'react-router-dom'
 import ButtonLink from '../../components/ButtonLink/ButtonLink'
 import PhotoGallery from '../../components/PhotoGallery/PhotoGallery';
+import { photoGallery } from '../../data/photoGallery'
 import { Typography } from 'antd';
 const { Title, Paragraph } = Typography;
 
@@ -24,7 +25,7 @@ function Greeting(props) {
                         Я обычная девушка из Сибири, которая жила свою обычную жизнь. Но мне всегда хотелось узнавать этот мир и наполнить свою жизню путешествиями и приключениями. Поэтому несколько лет назад я решилась на кардинальные изменения и поехала в свое первое одиночное путешествие! В настоящее время я уже побывала более, чем в 20 странах! И теперь хочу делиться своими открытиями и советами из путешествий!
                     </Paragraph>
                     <Link to='/about'>
-                        <ButtonLink/>
+                        <ButtonLink text='Подробнее'/>
                     </Link>
                     
                 </div>
@@ -33,7 +34,7 @@ function Greeting(props) {
 
             <section className={styles.photoGallery}>
                 <Title level={2} className={styles.photoGallery__heading}>Мои последние поездки</Title>
-                <PhotoGallery />
+                <PhotoGallery photoGallery={photoGallery}/>
             </section> 
         </section>
     );

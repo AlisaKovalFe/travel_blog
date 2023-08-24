@@ -32,7 +32,7 @@ function WorldRegions(props) {
                     size='small'
                     items={destinations.map((el) => {
                         return {
-                            label: el.title,
+                            label: <Link key={el.id} to={`/world-regions/countries/${el.id}`}>{el.title}</Link>,
                             key: el.id,
                         };
                     })}
