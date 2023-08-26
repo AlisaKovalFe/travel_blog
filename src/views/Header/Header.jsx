@@ -3,7 +3,7 @@ import styles from './header.module.scss'
 import { Menu } from "antd";
 import { Link } from 'react-router-dom'
 import { HomeOutlined } from '@ant-design/icons';
-import { menuCountries } from '../../data/menuCountries'
+import { destinations } from '../../data/destinations'
 
 function Header() {
 	const menu = [
@@ -20,7 +20,18 @@ function Header() {
 		{
 			label: <Link to='/world-regions'>Путешествия</Link>,
 			key: "destinations",
-			children: [menuCountries.europe, menuCountries.asia],
+			children: destinations.map((el) => {
+				return {
+					type: "group",
+					label: el.title,
+					children: el.countries.map((item) => {
+						return {
+							label: <Link key={item.id} to={`/world-regions/countries/${el.id}/country-information/${item.id}`}>{item.title}</Link>,
+							key: item.title,
+						}
+					})
+				}
+			}),
 		},
 	
 		{
@@ -32,8 +43,24 @@ function Header() {
 			label: <Link to='/tomap'>На карту</Link>,
 			key: 'map',
 		},
-	
 	]
+
+	// let arr = []
+	let arr = destinations.map((el) => {
+			return {
+				type: "group",
+				label: el.title,
+				children: el.countries.map((item) => {
+					return {
+						label: item.title,
+						key: item.title,
+					}
+				})
+			}
+		})
+
+	console.log(arr)
+
 	const [current, setCurrent] = useState("mail");
 	const onClick = (e) => {
 		console.log("click ", e);

@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './tomap.module.scss'
+import Helper from '../../components/Helper/Helper'
 import { destinations } from '../../data/destinations'
 import { placesOnMap } from '../../data/placesOnMap'
 import { YMaps, Map, ObjectManager, GeolocationControl} from '@pbe/react-yandex-maps';
@@ -43,12 +44,9 @@ copy.map((el) => {
     return el
 })
 
-    console.log(placesOnMap)
-
-    
-
     return (
         <section className={styles.wrapper}>
+            <Helper src='/images/girl-with-red-tails.svg' text='тут еще больще мест на карте, ' link='https://www.youtube.com/playlist?list=PL3l-shLZkbojBldu9iHqyIl8TLNK65N8Phttps://geo.koltyrin.ru/map_user_visit.php'/>
             <Title level={2}>Мои любимые места на карте</Title>
             <YMaps>
                 <Map

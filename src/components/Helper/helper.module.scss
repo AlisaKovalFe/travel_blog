@@ -1,0 +1,17 @@
+.wrapper {
+    display: flex;
+    margin: 3rem 0rem;
+}
+
+.image {
+    align-self: center;
+    width: 8rem;
+    margin-right: 1rem;
+}
+
+.button {
+    align-self:flex-start;
+    border-radius: 4rem;
+    height: 4rem;
+    word-break:break-all;
+}

@@ -1,8 +1,9 @@
 import React from 'react';
 import styles from './countriesInformayion.module.scss'
+import Helper from '../../components/Helper/Helper'
 import { destinations } from '../../data/destinations'
 import { useParams } from 'react-router-dom';
-import { Typography } from 'antd';
+import { Typography, Tabs } from 'antd';
 const { Paragraph, Title } = Typography;
 
 function CountryInformation(props) {
@@ -13,6 +14,7 @@ function CountryInformation(props) {
 
     return (
             <article className={styles.wrapper}>
+                <Helper src='/images/girl-with-brown-tales.svg' text='хочешь улететь сюда?' link='https://www.aviasales.ru/'/>
                 <section className={`${styles.segment} ${styles.segment_position}`}>
                     <div className={styles.intro}>
                         <Title level={2} className={styles.intro__heading}>{currentCountry.title}</Title>
@@ -41,14 +43,27 @@ function CountryInformation(props) {
 
                 <section className={styles.segment}>
                     <Title level={3} className={styles.segment__heading}>{currentCountry.info.accomodation.title}</Title>
-                    {
+                    <div className={`${styles.segment__recomendations} ${styles.recomendations}`}>
+                        <Tabs 
+                            defaultActiveKey="1" 
+                            items={currentCountry.info.accomodation.items.map((el) => {
+                                return {
+                                    label: <Title level={4} className={styles.recomendations__heading}>{el.title}</Title>,
+                                    key: el.id,
+                                    children: <Paragraph type="secondary" className={styles.recomendations__text}>{el.text}</Paragraph>,
+                                }; 
+                            })} 
+                            />
+                    </div>                   
+                    {/* {
                         currentCountry.info.accomodation.items.map((el) => (
+                            
                             <div key={el.id} className={`${styles.segment__recomendations} ${styles.recomendations}`}>
                                 <Title level={4} className={styles.recomendations__heading}>{el.title}</Title>
                                 <Paragraph type="secondary" className={styles.recomendations__text}>{el.text}</Paragraph>
                             </div>
                         ))
-                    }                
+                    }                 */}
                 </section>
 
                 <section className={styles.segment}>
@@ -76,25 +91,16 @@ function CountryInformation(props) {
                     <Title level={3} className={styles.segment__heading}>{currentCountry.info.visits.title}</Title> 
                                         
                     {
-                        currentCountry.info.visits.recomendations.map((el, index) => (
+                        currentCountry.info.visits.recomendations.map((el) => (
                             <div key={el.id} className={`${styles.segment__recomendations} ${styles.recomendations} ${styles.recomendations_position}`}>
-                                    <div className={styles.recomendations__destination}>
-                                        <Title level={4} className={styles.recomendations__heading}>{el.destination}</Title>
-                                        <Paragraph type="secondary" className={styles.recomendations__text}>{el.description}</Paragraph>
-                                    </div>     
+                                <div className={styles.recomendations__destination} >
+                                    <Title level={4} className={styles.recomendations__heading}>{el.destination}</Title>
+                                    <Paragraph type="secondary" className={styles.recomendations__text}>{el.description}</Paragraph>
+                                </div>     
 
-                                    <div className={styles.images}>
-                                        {
-                                            index === currentCountry.info.visits.recomendations.length - 1 ? 
-                                                (
-                                                <img className={`${styles.images__image} ${styles.images__image_big}`} src={el.image.src} alt={el.image.alt} />
-                                                ) : index === currentCountry.info.visits.recomendations.length - 2 ? (
-                                                    <img className={`${styles.images__image} ${styles.images__image_normal}`} src={el.image.src} alt={el.image.alt} />
-                                                ) : (
-                                                    <img className={`${styles.images__image} ${styles.images__image_small}`} src={el.image.src} alt={el.image.alt} />
-                                                )
-                                        }     
-                                    </div>                
+                                <div className={styles.images}>                                        
+                                    <img className={styles.images__image} src={el.image.src} alt={el.image.alt} /> 
+                                </div>                
                             </div>
                         ))
                     }               

@@ -49,16 +49,14 @@
 }
 
 .recomendations {
-    &__heading {
-        text-decoration: underline;
-    }
-
     &__heading_position {
         margin-top: 4rem;
     }
 
     &_position {
         display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     &__text {
@@ -96,17 +94,5 @@
 
 .images__image {
     width: 30rem;
-
-    &_small {
-        width: 20rem;
-    }
-
-    &_normal {
-        width: 30rem;
-    }
-
-    &_big {
-        width: 40rem;
-    }
 }
 

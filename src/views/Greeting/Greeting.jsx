@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './greeting.module.scss'
 import { Link } from 'react-router-dom'
 import ButtonLink from '../../components/ButtonLink/ButtonLink'
+import Helper from '../../components/Helper/Helper'
 import PhotoGallery from '../../components/PhotoGallery/PhotoGallery';
 import { photoGallery } from '../../data/photoGallery'
 import { Typography } from 'antd';
@@ -27,10 +28,11 @@ function Greeting(props) {
                     <Link to='/about'>
                         <ButtonLink text='Подробнее'/>
                     </Link>
-                    
                 </div>
-                <img className={styles.description__image} src="https://i.etsystatic.com/23325853/r/il/d8332c/2595241673/il_340x270.2595241673_31lr.jpg" alt="myPhoto" />               
+                <img className={styles.description__image} src="https://i.etsystatic.com/23325853/r/il/d8332c/2595241673/il_340x270.2595241673_31lr.jpg" alt="myPhoto"/>               
             </section>
+            
+            <Helper src='/images/girl-with-red-hair.svg' text='хочешь больше классных фото?' link='https://ru.pinterest.com/onechelofanadv/travel-photo-inspo/'/>
 
             <section className={styles.photoGallery}>
                 <Title level={2} className={styles.photoGallery__heading}>Мои последние поездки</Title>

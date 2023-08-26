@@ -1,8 +1,9 @@
 import React from 'react';
 import styles from './countries.module.scss'
+import Helper from '../../components/Helper/Helper'
 import Selection from '../../components/Selection/Selection'
 import Loader from '../../components/Loader/Loader'
-import ResultOfSearch from '../ResultOfSearch/ResultOfSearch'
+import ResultOfSearch from '../../components/ResultOfSearch/ResultOfSearch'
 import { Link } from 'react-router-dom'
 import { destinations } from '../../data/destinations'
 import { Card } from 'antd';
@@ -18,13 +19,14 @@ function Countries(props) {
 
     return (
         <section className={styles.wrapper}>
+            <Helper src='/images/girl-with-earings.svg' text='хочешь больше знать о странах?' link='https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%B3%D0%BE%D1%81%D1%83%D0%B4%D0%B0%D1%80%D1%81%D1%82%D0%B2'/>
             <div className={styles.selection}>
                 <Title level={2}>Выбери страну</Title>
                 <Selection/>
             </div>
             
             <Loader/>
-            <ResultOfSearch/>
+            <ResultOfSearch title="в такой стране я еще не была"/>
 
             <div  className={styles.countries}>
                 <div className={styles.countries__cards}>
