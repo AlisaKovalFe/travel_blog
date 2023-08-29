@@ -4,10 +4,10 @@ import Helper from '../../components/Helper/Helper'
 import { Typography } from 'antd';
 const { Paragraph } = Typography;
 
-function About(props) {
+function About() {
     return (     
         <section className={styles.wrapper}>
-            <Helper src='/images/girl-with-blond-hair.svg' text='а тут еще больше обо мне, ' link='https://vk.com/'/>
+            <Helper src='/images/girl-with-blond-hair.svg' text='еще больше обо мне' link='https://vk.com/'/>
 
             <div className={`${styles.about} ${styles.about_positioned}`}>
                 <div className={styles.about__segment}>

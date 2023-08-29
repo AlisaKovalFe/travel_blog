@@ -32,7 +32,7 @@ function Greeting(props) {
                 <img className={styles.description__image} src="https://i.etsystatic.com/23325853/r/il/d8332c/2595241673/il_340x270.2595241673_31lr.jpg" alt="myPhoto"/>               
             </section>
             
-            <Helper src='/images/girl-with-red-hair.svg' text='хочешь больше классных фото?' link='https://ru.pinterest.com/onechelofanadv/travel-photo-inspo/'/>
+            <Helper src='/images/girl-with-red-hair.svg' text='больше классных фото' link='https://ru.pinterest.com/onechelofanadv/travel-photo-inspo/'/>
 
             <section className={styles.photoGallery}>
                 <Title level={2} className={styles.photoGallery__heading}>Мои последние поездки</Title>

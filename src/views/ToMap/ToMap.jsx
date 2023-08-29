@@ -8,45 +8,45 @@ import { Typography } from 'antd';
 const { Title } = Typography;
 
 
-function ToMap(props) {
+function ToMap() {
 
-let features = []
-let copy = [...destinations]
+    let features = []
+    let copy = [...destinations]
 
-copy.map((el) => {
-    el.countries.map((item) => {
-        item.info.visits.recomendations.map((elem) => {
-            
-            features.fill({
-                type: "Feature",
-                id: Date.now(),               
-                geometry: {
-                    type: "Point",
-                    coordinates: elem.coordinates
-                },
-                properties: {
-                    balloonContentHeader: elem.destination,         
-                    balloonContentBody: `
-                                        <div > 
-                                            <img class="map-image" src=${elem.image.src} alt=${elem.image.alt} />
-                                        </div>
-                                    </div>`,    
-                    hintContent: elem.destination,  
-                },
-                options: {
-                    preset: 'islands#yellowIcon'
-                },
+    copy.map((el) => {
+        el.countries.map((item) => {
+            item.info.visits.recomendations.map((elem) => {
+                
+                features.fill({
+                    type: "Feature",
+                    id: Date.now(),               
+                    geometry: {
+                        type: "Point",
+                        coordinates: elem.coordinates
+                    },
+                    properties: {
+                        balloonContentHeader: elem.destination,         
+                        balloonContentBody: `
+                                            <div > 
+                                                <img class="map-image" src=${elem.image.src} alt=${elem.image.alt} />
+                                            </div>
+                                        </div>`,    
+                        hintContent: elem.destination,  
+                    },
+                    options: {
+                        preset: 'islands#yellowIcon'
+                    },
+                })
+                return elem
             })
-            return elem
+            return item
         })
-        return item
+        return el
     })
-    return el
-})
 
     return (
         <section className={styles.wrapper}>
-            <Helper src='/images/girl-with-red-tails.svg' text='тут еще больще мест на карте, ' link='https://www.youtube.com/playlist?list=PL3l-shLZkbojBldu9iHqyIl8TLNK65N8Phttps://geo.koltyrin.ru/map_user_visit.php'/>
+            <Helper src='/images/girl-with-red-tails.svg' text='еще больще любимых мест на карте' link='https://www.youtube.com/playlist?list=PL3l-shLZkbojBldu9iHqyIl8TLNK65N8Phttps://geo.koltyrin.ru/map_user_visit.php'/>
             <Title level={2}>Мои любимые места на карте</Title>
             <YMaps>
                 <Map

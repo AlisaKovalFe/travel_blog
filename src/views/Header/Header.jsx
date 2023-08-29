@@ -44,26 +44,8 @@ function Header() {
 			key: 'map',
 		},
 	]
-
-	// let arr = []
-	let arr = destinations.map((el) => {
-			return {
-				type: "group",
-				label: el.title,
-				children: el.countries.map((item) => {
-					return {
-						label: item.title,
-						key: item.title,
-					}
-				})
-			}
-		})
-
-	console.log(arr)
-
 	const [current, setCurrent] = useState("mail");
 	const onClick = (e) => {
-		console.log("click ", e);
 		setCurrent(e.key);
 	};
 

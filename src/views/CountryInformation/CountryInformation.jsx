@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { Typography, Tabs } from 'antd';
 const { Paragraph, Title } = Typography;
 
-function CountryInformation(props) {
+function CountryInformation() {
 
     const { id } = useParams()
     const currentWorldRegion = destinations.find((item) => item.countries.find((el) => el.id === +id))
@@ -14,7 +14,7 @@ function CountryInformation(props) {
 
     return (
             <article className={styles.wrapper}>
-                <Helper src='/images/girl-with-brown-tales.svg' text='хочешь улететь сюда?' link='https://www.aviasales.ru/'/>
+                <Helper src='/images/girl-with-brown-tales.svg' text='билеты в страну' link='https://www.aviasales.ru/'/>
                 <section className={`${styles.segment} ${styles.segment_position}`}>
                     <div className={styles.intro}>
                         <Title level={2} className={styles.intro__heading}>{currentCountry.title}</Title>
@@ -53,17 +53,8 @@ function CountryInformation(props) {
                                     children: <Paragraph type="secondary" className={styles.recomendations__text}>{el.text}</Paragraph>,
                                 }; 
                             })} 
-                            />
+                        />
                     </div>                   
-                    {/* {
-                        currentCountry.info.accomodation.items.map((el) => (
-                            
-                            <div key={el.id} className={`${styles.segment__recomendations} ${styles.recomendations}`}>
-                                <Title level={4} className={styles.recomendations__heading}>{el.title}</Title>
-                                <Paragraph type="secondary" className={styles.recomendations__text}>{el.text}</Paragraph>
-                            </div>
-                        ))
-                    }                 */}
                 </section>
 
                 <section className={styles.segment}>
@@ -93,7 +84,7 @@ function CountryInformation(props) {
                     {
                         currentCountry.info.visits.recomendations.map((el) => (
                             <div key={el.id} className={`${styles.segment__recomendations} ${styles.recomendations} ${styles.recomendations_position}`}>
-                                <div className={styles.recomendations__destination} >
+                                <div className={styles.recomendations__destination}>
                                     <Title level={4} className={styles.recomendations__heading}>{el.destination}</Title>
                                     <Paragraph type="secondary" className={styles.recomendations__text}>{el.description}</Paragraph>
                                 </div>     
