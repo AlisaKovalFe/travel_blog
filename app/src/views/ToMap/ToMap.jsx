@@ -1,25 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './tomap.module.scss'
 import Helper from '../../components/Helper/Helper'
-import { destinations } from '../../data/destinations'
-import { placesOnMap } from '../../data/placesOnMap'
 import { YMaps, Map, ObjectManager, GeolocationControl} from '@pbe/react-yandex-maps';
 import { Typography } from 'antd';
+import { useSelector, useDispatch } from 'react-redux';
+import { addDestinationsThunk } from '../../store/actions/mainActions'
+import { addHelpersThunk } from '../../store/actions/helpersActions'
 const { Title } = Typography;
 
-
 function ToMap() {
+    const dispatch = useDispatch();
+    const { destinations } = useSelector((store) => store.mainStore);
+    const { helpers } = useSelector((store) => store.helpersStore);
+
+    useEffect(() => {   
+        dispatch(addDestinationsThunk())
+        dispatch(addHelpersThunk())
+    }, [])
+
 
     let features = []
-    let copy = [...destinations]
 
-    copy.map((el) => {
+    destinations.map((el) => {
         el.countries.map((item) => {
-            item.info.visits.recomendations.map((elem) => {
-                
-                features.fill({
+            item.info.visits.recomendations.map((elem) => {    
+                features.push({
                     type: "Feature",
-                    id: Date.now(),               
+                    id: elem.id,               
                     geometry: {
                         type: "Point",
                         coordinates: elem.coordinates
@@ -28,9 +35,8 @@ function ToMap() {
                         balloonContentHeader: elem.destination,         
                         balloonContentBody: `
                                             <div > 
-                                                <img class="map-image" src=${elem.image.src} alt=${elem.image.alt} />
-                                            </div>
-                                        </div>`,    
+                                                <img class="map-image" src=${elem.image.src} alt=${elem.image.alt} />    
+                                            </div>`,    
                         hintContent: elem.destination,  
                     },
                     options: {
@@ -44,9 +50,13 @@ function ToMap() {
         return el
     })
 
+    const placesOnMap = {
+        "type": "FeatureCollection",
+        "features": features
+    }
+
     return (
         <section className={styles.wrapper}>
-            <Helper src='/images/girl-with-red-tails.svg' text='еще больще любимых мест на карте' link='https://www.youtube.com/playlist?list=PL3l-shLZkbojBldu9iHqyIl8TLNK65N8Phttps://geo.koltyrin.ru/map_user_visit.php'/>
             <Title level={2}>Мои любимые места на карте</Title>
             <YMaps>
                 <Map
@@ -86,6 +96,10 @@ function ToMap() {
                     />
                 </Map>
             </YMaps>
+
+            <div className={styles.helper}>
+                <Helper src={helpers.toMap?.src} text={helpers.toMap?.text} link={helpers.toMap?.link}/>
+            </div>
         </section>
     );
 }

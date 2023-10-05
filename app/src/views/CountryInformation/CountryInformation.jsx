@@ -1,37 +1,47 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './countriesInformayion.module.scss'
 import Helper from '../../components/Helper/Helper'
-import { destinations } from '../../data/destinations'
 import { useParams } from 'react-router-dom';
 import { Typography, Tabs } from 'antd';
+import { useSelector, useDispatch } from 'react-redux';
+import { addDestinationsThunk } from '../../store/actions/mainActions'
+import { addHelpersThunk } from '../../store/actions/helpersActions'
 const { Paragraph, Title } = Typography;
 
 function CountryInformation() {
-
     const { id } = useParams()
-    const currentWorldRegion = destinations.find((item) => item.countries.find((el) => el.id === +id))
-    const currentCountry = currentWorldRegion.countries.find((el) => el.id === +id)
+
+    const dispatch = useDispatch();
+    const { destinations } = useSelector((store) => store.mainStore);
+    const { helpers } = useSelector((store) => store.helpersStore);
+
+    useEffect(() => {   
+        dispatch(addDestinationsThunk())
+        dispatch(addHelpersThunk())
+    }, [])
+
+    const currentWorldRegion = destinations?.find((item) => item.countries?.find((el) => el.id === +id))
+    const currentCountry = currentWorldRegion?.countries?.find((el) => el.id === +id)   
 
     return (
             <article className={styles.wrapper}>
-                <Helper src='/images/girl-with-brown-tales.svg' text='билеты в страну' link='https://www.aviasales.ru/'/>
                 <section className={`${styles.segment} ${styles.segment_position}`}>
                     <div className={styles.intro}>
-                        <Title level={2} className={styles.intro__heading}>{currentCountry.title}</Title>
-                        <Paragraph type="secondary" className={styles.intro__text}>{currentCountry.info.description}</Paragraph>
+                        <Title level={2} className={styles.intro__heading}>{currentCountry?.title}</Title>
+                        <Paragraph type="secondary" className={styles.intro__text}>{currentCountry?.info?.description}</Paragraph>
                     </div>                
-                    <img className={styles.imageCover} src={currentCountry.info.image.src} alt={currentCountry.info.image.alt}  />
+                    <img className={styles.imageCover} src={currentCountry?.info?.image?.src} alt={currentCountry?.info?.image?.alt}  />
                 </section>
 
                 <section className={`${styles.segment} ${styles.segment_position}`}>
-                    <img className={styles.imageFacts} src={currentCountry.info.facts.image.src} alt={currentCountry.info.facts.image.src} />
+                    <img className={styles.imageFacts} src={currentCountry?.info?.facts?.image?.src} alt={currentCountry?.info?.facts?.image?.src} />
 
                     <div>
                         <Title level={3} className={styles.segment__heading}>Факты о стране</Title>
                         <Paragraph type="secondary">
                             <ul>
                                 {
-                                    currentCountry.info.facts.items.map((el) => (
+                                    currentCountry?.info.facts?.items.map((el) => (
                                         <li key={el.id}>{el.item}</li>
                                     ))
                                 }
@@ -42,11 +52,11 @@ function CountryInformation() {
                 </section>
 
                 <section className={styles.segment}>
-                    <Title level={3} className={styles.segment__heading}>{currentCountry.info.accomodation.title}</Title>
+                    <Title level={3} className={styles.segment__heading}>{currentCountry?.info?.accomodation?.title}</Title>
                     <div className={`${styles.segment__recomendations} ${styles.recomendations}`}>
                         <Tabs 
                             defaultActiveKey="1" 
-                            items={currentCountry.info.accomodation.items.map((el) => {
+                            items={currentCountry?.info?.accomodation?.items.map((el) => {
                                 return {
                                     label: <Title level={4} className={styles.recomendations__heading}>{el.title}</Title>,
                                     key: el.id,
@@ -58,14 +68,14 @@ function CountryInformation() {
                 </section>
 
                 <section className={styles.segment}>
-                    <Title level={3} className={styles.segment__heading}>{currentCountry.info.eating.title}</Title>
-                    <Paragraph className={styles.segment__text} type="secondary" >{currentCountry.info.eating.text}</Paragraph>
+                    <Title level={3} className={styles.segment__heading}>{currentCountry?.info?.eating?.title}</Title>
+                    <Paragraph className={styles.segment__text} type="secondary" >{currentCountry?.info?.eating?.text}</Paragraph>
 
                     <section className={`${styles.segment__recomendations} ${styles.recomendations}`}>
-                        <Title level={4} className={`${styles.recomendations__heading} ${styles.recomendations__heading_position}`}>{currentCountry.info.eating.recomendations.title}</Title>
+                        <Title level={4} className={`${styles.recomendations__heading} ${styles.recomendations__heading_position}`}>{currentCountry?.info?.eating?.recomendations?.title}</Title>
 
                         {
-                            currentCountry.info.eating.recomendations.items.map((el) => (
+                            currentCountry?.info?.eating?.recomendations?.items.map((el) => (
                                 <div className={`${styles.recomendations__recomendation} ${styles.recomendation}`} key={el.id}>
                                     <div>
                                         <Title level={4}>{el.name}</Title>
@@ -79,10 +89,10 @@ function CountryInformation() {
                 </section>
 
                 <section className={styles.segment}>
-                    <Title level={3} className={styles.segment__heading}>{currentCountry.info.visits.title}</Title> 
+                    <Title level={3} className={styles.segment__heading}>{currentCountry?.info?.visits?.title}</Title> 
                                         
                     {
-                        currentCountry.info.visits.recomendations.map((el) => (
+                        currentCountry?.info?.visits?.recomendations.map((el) => (
                             <div key={el.id} className={`${styles.segment__recomendations} ${styles.recomendations} ${styles.recomendations_position}`}>
                                 <div className={styles.recomendations__destination}>
                                     <Title level={4} className={styles.recomendations__heading}>{el.destination}</Title>
@@ -96,6 +106,10 @@ function CountryInformation() {
                         ))
                     }               
                 </section>
+
+                <div className={styles.helper}>
+                    <Helper src={helpers.contryInformation?.src} text={helpers.contryInformation?.text} link={helpers.contryInformation?.link}/>
+                </div>
             </article>
                 
     );

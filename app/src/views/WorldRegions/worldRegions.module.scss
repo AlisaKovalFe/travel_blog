@@ -17,11 +17,15 @@
 
 .worldRegions {
     display:flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: 4rem;
     margin-bottom: 5rem;
 
     &__region {
         width: 30rem;
     }
+}
+
+.helper {
+    align-self: end;
 }

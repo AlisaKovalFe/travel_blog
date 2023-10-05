@@ -5,10 +5,10 @@ import { ArrowRightOutlined } from '@ant-design/icons';
 
 
 
-function Helper({src, text, link}) {
+function Helper({src, text, link, alt}) {
     return (
         <div className={styles.wrapper}>
-                <img src={src} alt='girl' className={styles.image}></img>   
+                <img src={src} alt={alt} className={styles.image}></img>   
                 <div className={styles.bubble}>
                     <div className={styles.bubble__text}>
                         {text}

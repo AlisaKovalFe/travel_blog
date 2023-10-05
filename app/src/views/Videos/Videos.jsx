@@ -1,34 +1,46 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { addVideosThunk } from '../../store/actions/videosActions'
 import styles from './videos.module.scss'
 import Helper from '../../components/Helper/Helper'
-import { videos } from '../../data/videos'
 import { Card } from 'antd';
 import { Collapse } from 'antd';
+import { addHelpersThunk } from '../../store/actions/helpersActions'
+
 const { Meta } = Card;
 
 function Videos() {
+    const dispatch = useDispatch();
+    const { videos } = useSelector((store) => store.videosStore);
+    const { helpers } = useSelector((store) => store.helpersStore);
+
+    useEffect(() => {   
+        dispatch(addVideosThunk())
+        dispatch(addHelpersThunk())
+    }, [])    
 
     return (
         <section className={styles.wrapper}>
-            <Helper src='/images/girl-with-brown-hair.svg' text='классные видео' link='https://www.youtube.com/playlist?list=PL3l-shLZkbojBldu9iHqyIl8TLNK65N8P'/>
-            <h2 className={styles.heading}>Видео из моих любимых мест</h2>
-            <p className={styles.description}>
-                Здесь я собрала видео из моих любимых регионов Европы, чтобы воспоминания были всегда рядом.
-            </p>     
+            <h2 className={styles.heading}>{videos.heading}</h2>
+            <p className={styles.description}>{videos.description}</p>     
 
             <div className={styles.videos}>
-                {videos.map((el, index) => (
+                {videos.videosInfo?.map((el) => (
                     <Card
                         key={el.id}
                         hoverable
                         className={styles.video}                 
-                        cover={<img alt={el.cover.alt} src={el.cover.src} className={styles.video__image}/>}
+                        cover={<img alt={el.cover?.alt} src={el.cover?.src} className={styles.video__image}/>}
                     >
                         <Meta title={el.title} description={el.description} />
                         <Collapse items={el.records} />
                     </Card>
                     )
                 )}           
+            </div>
+
+            <div className={styles.helper}>
+                <Helper src={helpers.videos?.src} text={helpers.videos?.text} link={helpers.videos?.link}/>
             </div>
         </section>
     );

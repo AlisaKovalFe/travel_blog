@@ -9,7 +9,7 @@ import Countries from '../Countries/Countries';
 import CountryInformation from '../CountryInformation/CountryInformation'
 import ToMap from '../ToMap/ToMap';
 
-function Main(props) {
+function Main() {
     return (
         <div className={styles.wrapper}>
             <Routes>

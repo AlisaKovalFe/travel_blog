@@ -1,37 +1,48 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Typography } from 'antd';
+import { useSelector, useDispatch } from 'react-redux';
+import { addDestinationsThunk } from '../../store/actions/mainActions'
 import styles from './countries.module.scss'
 import Helper from '../../components/Helper/Helper'
 import Selection from '../../components/Selection/Selection'
 import Loader from '../../components/Loader/Loader'
 import ResultOfSearch from '../../components/ResultOfSearch/ResultOfSearch'
 import { Link } from 'react-router-dom'
-import { destinations } from '../../data/destinations'
 import { Card } from 'antd';
 import { Tabs } from 'antd';
 import { useParams } from 'react-router-dom';
-import { Typography } from 'antd';
+import { addHelpersThunk } from '../../store/actions/helpersActions'
 const { Title } = Typography;
 const { Meta } = Card;
 
-function Countries(props) {
+function Countries() {
     const { id } = useParams()
+    const dispatch = useDispatch();
+    const { destinations } = useSelector((store) => store.mainStore);
+    const { helpers } = useSelector((store) => store.helpersStore);
+
+    useEffect(() => {   
+        dispatch(addDestinationsThunk())
+        dispatch(addHelpersThunk())
+    }, [])
+
+    const countries = destinations.map((el) => [...el.countries]).flat() // 'это легче, чем пуш?
     const currentCountries = destinations.find((el) => el.id === +id)
 
     return (
         <section className={styles.wrapper}>
-            <Helper src='/images/girl-with-earings.svg' text='узнать больше о странах' link='https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%B3%D0%BE%D1%81%D1%83%D0%B4%D0%B0%D1%80%D1%81%D1%82%D0%B2'/>
-            <div className={styles.selection}>
+            {/* <div className={styles.selection}>
                 <Title level={2}>Выбери страну</Title>
-                <Selection/>
-            </div>
+                <Selection countries={countries}/>
+            </div> */}
             
-            <Loader/>
-            <ResultOfSearch title="в такой стране я еще не была"/>
+            {/* <Loader/> */}
+            {/* <ResultOfSearch title="в такой стране я еще не была"/> */}
 
             <div  className={styles.countries}>
                 <div className={styles.countries__cards}>
                     {
-                        currentCountries.countries.map((el) => (   
+                        currentCountries?.countries.map((el) => (   
                             <Link key={el.id} to={`/world-regions/countries/${id}/country-information/${el.id}`}>
                                 <Card
                                     hoverable
@@ -50,17 +61,21 @@ function Countries(props) {
                         centered
                         tabPosition="left"
                         size='small'
-                        items={currentCountries.countries.map((el) => {                           
-                                return {
-                                    label: <Link key={el.id} to={`/world-regions/countries/${id}/country-information/${el.id}`}>{el.title}</Link>, 
-                                    key: el.id
-                                }                               
+                        items={destinations?.map((el) => {
+                            return {
+                                label: <Link key={el.id} to={`/world-regions/countries/${el.id}`}>{el.title}</Link>,
+                                key: el.id,
+                            };
                         })}
                         />
                 </div>
             </div>
+
+            <div className={styles.helper}>
+                <Helper src={helpers.countries?.src} text={helpers.countries?.text} link={helpers.countries?.link}/>
+            </div>
         </section>
-    );
+    )
 }
 
 export default Countries;

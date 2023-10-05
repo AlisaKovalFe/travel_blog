@@ -1,9 +1,8 @@
 import React from 'react';
 import styles from './selection.module.scss'
 import { Select } from 'antd';
-import { counties } from '../../data/countries'
 
-function Selection(props) {
+function Selection({countries}) {
     return (
             <Select
                 showSearch
@@ -14,7 +13,7 @@ function Selection(props) {
                 filterSort={(optionA, optionB) =>
                     (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
                 }
-                options={counties.map((el) => {
+                options={countries.map((el) => {
                         return {
                             value: el.title,
                             label: el.title
