@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const greeting = require('../db/greeting')
+const countriesForSelect = require('../db/countriesForSelect')
 
-/* GET home page. */
 router.get('/', (req, res) => {
-  res.send(JSON.stringify(greeting));
+  res.send(JSON.stringify(countriesForSelect));
 });
 
 module.exports = router;

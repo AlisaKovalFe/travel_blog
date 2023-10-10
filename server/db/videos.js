@@ -13,17 +13,20 @@ module.exports = {
                 {
                     key: 'Пьемонт',
                     label: 'Пьемонт',
-                    children: `<iframe className="video_styles" src="https://www.youtube.com/embed/Muz720S9uVw" title="Пьемонт, горы, фиат и нутелла. Италия" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
+                    src: "https://youtu.be/Muz720S9uVw",
+                    title: "Пьемонт, горы, фиат и нутелла. Италия"
                 },
                 {
                     key: 'Тоскана',
                     label: 'Тоскана',
-                    children: `<iframe className="video_styles" src="https://www.youtube.com/embed/ChgwxHJTqXc" title="Топ самых красивых мест в Тоскане" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
+                    src: "https://youtu.be/Muz720S9uVw",
+                    title: "Топ самых красивых мест в Тоскане",
                 },
                 {
                     key: 'Венето',
                     label: 'Венето',
-                    children: `<iframe className="video_styles" src="https://www.youtube.com/embed/X90w67ZYvCk" title="Veneto - Northern Italy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
+                    src: "https://youtu.be/Muz720S9uVw",
+                    title: "Veneto - Northern Italy",
                 }
             ]
         },
@@ -38,17 +41,20 @@ module.exports = {
                 {
                     key: 'Бретань',
                     label: 'Бретань',
-                    children: `<iframe className="video_styles" src="https://www.youtube.com/embed/2IEuDbhq0Gw" title="Бретань с высоты птичьего полета | Видео с дрона | Франция, Бретань с воздуха" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
+                    src: "https://youtu.be/Muz720S9uVw",
+                    title: "Бретань с высоты птичьего полета | Видео с дрона | Франция, Бретань с воздуха"
                 },
                 {
                     key: 'Нормандия',
                     label: 'Нормандия',
-                    children: `<iframe className="video_styles" src="https://www.youtube.com/embed/w40C8G97sdA" title="Берега Нормандии в регионе Этрета" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
+                    src: "https://youtu.be/Muz720S9uVw",
+                    title: "Берега Нормандии в регионе Этрета"
                 },
                 {
                     key: 'О-де-Франс',
                     label: 'О-де-Франс',
-                    children: `<iframe className="video_styles" src="https://www.youtube.com/embed/qt-bAXVcSlA" title="О-де-Франс с высоты птичьего полета | Видео с дрона в 4к | Франция, О-де-Франс с воздуха" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
+                    src: "https://youtu.be/Muz720S9uVw",
+                    title: "О-де-Франс с высоты птичьего полета | Видео с дрона в 4к | Франция, О-де-Франс с воздуха"
                 }
             ]   
         },
@@ -63,17 +69,20 @@ module.exports = {
                 {
                     key: 'Фландрия',
                     label: 'Фландрия',
-                    children: `<iframe className="video_styles"src="https://www.youtube.com/embed/j9_GsJfsXPk" title="Провинция Восточная Фландрия с высоты | Видео с дрона в 4к | Бельгия с воздуха" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
+                    src: "https://youtu.be/Muz720S9uVw",
+                    title: "Провинция Восточная Фландрия с высоты | Видео с дрона в 4к | Бельгия с воздуха"
                 },
                 {
                     key: 'Валлония',
                     label: 'Валлония',
-                    children: `<iframe className="video_styles" src="https://www.youtube.com/embed/X0SgVUPvGaM" title="Бельгия. Часть 2. Валлония" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
+                    src: "https://youtu.be/Muz720S9uVw",
+                    title: "Бельгия. Часть 2. Валлония"
                 },
                 {
                     key: 'Брюссельский столичный регион',
                     label: 'Брюссельский столичный регион',
-                    children: `<iframe className="video_styles" src="https://www.youtube.com/embed/vjT7c-GK3yw" title="Brussels in 2 minutes | Брюссель за 2 минуты | Бельгия" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
+                    src: "https://youtu.be/Muz720S9uVw",
+                    title: "Brussels in 2 minutes | Брюссель за 2 минуты | Бельгия"
                 }
             ]
         },

@@ -1,8 +1,3 @@
-const facts = {
-    src: 'https://charityvillage.com/wp-content/uploads/2019/12/facts_feature.png',
-    alt: 'facts'
-}
-
 module.exports = [
     {
         id: 1,

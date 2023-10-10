@@ -12,6 +12,7 @@ const videosRouter = require('./routes/videos');
 const destinationsRouter = require('./routes/destinations');
 const helpersRouter = require('./routes/helpers');
 const photoGalleryRouter = require('./routes/photoGallery');
+const countriesForSelectRouter = require('./routes/countiesForSelect')
 
 const app = express();
 const server = http.createServer(app);
@@ -29,6 +30,7 @@ app.use('/video', videosRouter);
 app.use('/destinations', destinationsRouter);
 app.use('/helpers', helpersRouter);
 app.use('/photoGallery', photoGalleryRouter);
+app.use('/countiesForSelect', countriesForSelectRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
