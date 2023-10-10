@@ -6,7 +6,7 @@ const initialState = {
 
 export function greetingReducer(state = initialState, action) {
     switch (action.type) {
-        case mainTypes.ADD_GREETING: {
+        case mainTypes.GET_GREETING: {
           return { ...state, greeting: action.payload };
         }
         

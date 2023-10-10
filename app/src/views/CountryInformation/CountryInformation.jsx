@@ -4,8 +4,8 @@ import Helper from '../../components/Helper/Helper'
 import { useParams } from 'react-router-dom';
 import { Typography, Tabs } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import { addDestinationsThunk } from '../../store/actions/mainActions'
-import { addHelpersThunk } from '../../store/actions/helpersActions'
+import { getDestinationsThunk } from '../../store/actions/mainActions'
+import { getHelpersThunk } from '../../store/actions/helpersActions'
 const { Paragraph, Title } = Typography;
 
 function CountryInformation() {
@@ -16,12 +16,14 @@ function CountryInformation() {
     const { helpers } = useSelector((store) => store.helpersStore);
 
     useEffect(() => {   
-        dispatch(addDestinationsThunk())
-        dispatch(addHelpersThunk())
+        dispatch(getDestinationsThunk())
+        dispatch(getHelpersThunk())
     }, [])
 
     const currentWorldRegion = destinations?.find((item) => item.countries?.find((el) => el.id === +id))
+    console.log(currentWorldRegion)
     const currentCountry = currentWorldRegion?.countries?.find((el) => el.id === +id)   
+    console.log(currentCountry)
 
     return (
             <article className={styles.wrapper}>

@@ -4,8 +4,8 @@ import Helper from '../../components/Helper/Helper'
 import { YMaps, Map, ObjectManager, GeolocationControl} from '@pbe/react-yandex-maps';
 import { Typography } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import { addDestinationsThunk } from '../../store/actions/mainActions'
-import { addHelpersThunk } from '../../store/actions/helpersActions'
+import { getDestinationsThunk } from '../../store/actions/mainActions'
+import { getHelpersThunk } from '../../store/actions/helpersActions'
 const { Title } = Typography;
 
 function ToMap() {
@@ -14,8 +14,8 @@ function ToMap() {
     const { helpers } = useSelector((store) => store.helpersStore);
 
     useEffect(() => {   
-        dispatch(addDestinationsThunk())
-        dispatch(addHelpersThunk())
+        dispatch(getDestinationsThunk())
+        dispatch(getHelpersThunk())
     }, [])
 
 

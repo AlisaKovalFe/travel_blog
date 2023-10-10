@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import './styles/App.css';
 import Header from './views/Header/Header';
 import Footer from './views/Footer/Footer';

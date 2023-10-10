@@ -4,14 +4,14 @@ import { Menu } from "antd";
 import { Link } from 'react-router-dom'
 import { HomeOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
-import { addDestinationsThunk } from '../../store/actions/mainActions'
+import { getDestinationsThunk } from '../../store/actions/mainActions'
 
 function Header() {
 	const dispatch = useDispatch();
 	const { destinations } = useSelector((store) => store.mainStore);
 
     useEffect(() => {   
-        dispatch(addDestinationsThunk())
+        dispatch(getDestinationsThunk())
     }, [])
 	const menu = [
 		{

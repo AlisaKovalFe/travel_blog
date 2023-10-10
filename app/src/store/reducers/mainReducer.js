@@ -6,7 +6,7 @@ const initialState = {
 
 export function mainReducer(state = initialState, action) {
     switch (action.type) {
-        case mainTypes.ADD_DESTINATIONS: {
+        case mainTypes.GET_DESTINATIONS: {
           return { ...state, destinations: action.payload };
         }
         

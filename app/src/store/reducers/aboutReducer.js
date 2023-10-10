@@ -6,7 +6,7 @@ const initialState = {
 
 export function aboutReducer(state = initialState, action) {
     switch (action.type) {
-        case mainTypes.ADD_ABOUT: {
+        case mainTypes.GET_ABOUT: {
           return { ...state, about: action.payload };
         }
         

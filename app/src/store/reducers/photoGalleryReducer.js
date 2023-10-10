@@ -6,7 +6,7 @@ const initialState = {
 
 export function photoGalleryReducer(state = initialState, action) {
     switch (action.type) {
-        case mainTypes.ADD_PHOTO_GALLERY: {
+        case mainTypes.GET_PHOTO_GALLERY: {
           return { ...state, photoGallery: action.payload };
         }
         

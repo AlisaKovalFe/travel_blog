@@ -2,15 +2,16 @@ import React from 'react';
 import styles from './buttonLink.module.scss'
 import { Button, Space } from 'antd';
 
-function ButtonLink( {text} ) {
+function ButtonLink({ text, type, onClick } ) {
     return (
         <div>
             <Space>
                 <Button 
-                    type="link"
+                    type={type}
                     className={styles.button}
-                    >
-                        {text}
+                    onClick={onClick}
+                >
+                    {text}
                 </Button>
             </Space>
         </div>

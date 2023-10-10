@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import styles from './about.module.scss'
 import Helper from '../../components/Helper/Helper'
 import { useSelector, useDispatch } from 'react-redux';
-import { addAboutThunk } from '../../store/actions/aboutActions'
+import { getAboutThunk } from '../../store/actions/aboutActions'
 import Gallery from '../../components/Gallery/Gallery';
-import { addHelpersThunk } from '../../store/actions/helpersActions'
+import { getHelpersThunk } from '../../store/actions/helpersActions'
 
 function About() {
     const dispatch = useDispatch();
@@ -12,8 +12,8 @@ function About() {
     const { helpers } = useSelector((store) => store.helpersStore);
 
     useEffect(() => {   
-        dispatch(addAboutThunk())
-        dispatch(addHelpersThunk())
+        dispatch(getAboutThunk())
+        dispatch(getHelpersThunk())
     }, [])
 
     return (     

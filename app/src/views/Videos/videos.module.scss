@@ -4,12 +4,25 @@
     margin: 0rem 5rem 5rem;
 }
 
+.button {
+    align-self: flex-end;
+}
+
 .heading {
     margin-bottom: 4rem;
 }
 
 .description {
     margin-bottom: 2rem;
+}
+
+.popover {
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    width: 10rem;
+    height: 5rem;
+    justify-content:space-between;
 }
 
 .videos {
@@ -20,16 +33,17 @@
 
 .video {
     width: 24rem;  
-    transition: box-shadow 0.2s,border-color 0.2s;
-    cursor:default;
 
     &__image {
         height: 15rem;
     }
-}
 
-.video:hover{
-    box-shadow:none
+    &__heading {
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
 }
 
 .helper {

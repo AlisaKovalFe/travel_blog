@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom'
 import { Card } from 'antd';
 import { Typography } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import { addDestinationsThunk } from '../../store/actions/mainActions'
-import { addHelpersThunk } from '../../store/actions/helpersActions'
+import { getDestinationsThunk } from '../../store/actions/mainActions'
+import { getHelpersThunk } from '../../store/actions/helpersActions'
 
 const { Title } = Typography;
 const { Meta } = Card;
@@ -17,8 +17,8 @@ function WorldRegions() {
     const { helpers } = useSelector((store) => store.helpersStore);
 
     useEffect(() => {   
-        dispatch(addDestinationsThunk())
-        dispatch(addHelpersThunk())
+        dispatch(getDestinationsThunk())
+        dispatch(getHelpersThunk())
     }, [])
 
     return (

@@ -6,9 +6,9 @@ import Helper from '../../components/Helper/Helper'
 import Gallery from '../../components/Gallery/Gallery';
 import { Typography } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import { addGreetingThunk } from '../../store/actions/greeingActions'
-import { addPhotoGalleryThunk } from '../../store/actions/photoGalleryActions'
-import { addHelpersThunk } from '../../store/actions/helpersActions'
+import { getGreetingThunk } from '../../store/actions/greeingActions'
+import { getPhotoGalleryThunk } from '../../store/actions/photoGalleryActions'
+import { getHelpersThunk } from '../../store/actions/helpersActions'
 
 const { Title, Paragraph } = Typography;
 
@@ -19,9 +19,9 @@ function Greeting() {
     const { photoGallery } = useSelector((store) => store.photoGalleryStore);
 
     useEffect(() => {   
-        dispatch(addGreetingThunk())
-        dispatch(addPhotoGalleryThunk())
-        dispatch(addHelpersThunk())
+        dispatch(getGreetingThunk())
+        dispatch(getPhotoGalleryThunk())
+        dispatch(getHelpersThunk())
     }, [])
 
     return (
@@ -39,7 +39,7 @@ function Greeting() {
                     <Title level={2}>{greeting.descriptionTitle}</Title>
                     <Paragraph className={styles.description__text} type="secondary">{greeting.description}</Paragraph>
                     <Link to='/about'>
-                        <ButtonLink text='Подробнее'/>
+                        <ButtonLink text='Подробнее' type="link"/>
                     </Link>
                 </div>
                 <img className={styles.description__image} src={greeting.descriptionImage?.src} alt={greeting.descriptionImage?.alt}/>               

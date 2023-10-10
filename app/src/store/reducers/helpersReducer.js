@@ -6,7 +6,7 @@ const initialState = {
 
 export function helpersReducer(state = initialState, action) {
     switch (action.type) {
-        case mainTypes.ADD_HELPERS: {
+        case mainTypes.GET_HELPERS: {
           return { ...state, helpers: action.payload };
         }
         

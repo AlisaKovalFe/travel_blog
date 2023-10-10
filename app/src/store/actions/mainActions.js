@@ -1,14 +1,14 @@
 import { mainTypes } from './actionTypes';
 import axios from 'axios'
 
-export const addDestinationsAC = (data) => ({
-    type: mainTypes.ADD_DESTINATIONS,
+export const getDestinationsAC = (data) => ({
+    type: mainTypes.GET_DESTINATIONS,
     payload: data
   })
 
-export const addDestinationsThunk = () => (dispatch) => {
+export const getDestinationsThunk = () => (dispatch) => {
     axios.get('http://localhost:4000/destinations')
       .then((res) => {
-        dispatch(addDestinationsAC((res.data)));
+        dispatch(getDestinationsAC((res.data)));
       })
   };

@@ -1,14 +1,14 @@
 import { mainTypes } from './actionTypes';
 import axios from 'axios'
 
-export const addPhotoGalleryAC = (data) => ({
-    type: mainTypes.ADD_PHOTO_GALLERY,
+export const getPhotoGalleryAC = (data) => ({
+    type: mainTypes.GET_PHOTO_GALLERY,
     payload: data
   })
 
-export const addPhotoGalleryThunk = () => (dispatch) => {
+export const getPhotoGalleryThunk = () => (dispatch) => {
     axios.get('http://localhost:4000/photoGallery')
       .then((res) => {
-        dispatch(addPhotoGalleryAC((res.data)));
+        dispatch(getPhotoGalleryAC((res.data)));
       })
   };

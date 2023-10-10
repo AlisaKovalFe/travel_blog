@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Typography } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import { addDestinationsThunk } from '../../store/actions/mainActions'
+import { getDestinationsThunk } from '../../store/actions/mainActions'
 import styles from './countries.module.scss'
 import Helper from '../../components/Helper/Helper'
 import Selection from '../../components/Selection/Selection'
@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom'
 import { Card } from 'antd';
 import { Tabs } from 'antd';
 import { useParams } from 'react-router-dom';
-import { addHelpersThunk } from '../../store/actions/helpersActions'
+import { getHelpersThunk } from '../../store/actions/helpersActions'
 const { Title } = Typography;
 const { Meta } = Card;
 
@@ -22,8 +22,8 @@ function Countries() {
     const { helpers } = useSelector((store) => store.helpersStore);
 
     useEffect(() => {   
-        dispatch(addDestinationsThunk())
-        dispatch(addHelpersThunk())
+        dispatch(getDestinationsThunk())
+        dispatch(getHelpersThunk())
     }, [])
 
     const countries = destinations.map((el) => [...el.countries]).flat() // 'это легче, чем пуш?

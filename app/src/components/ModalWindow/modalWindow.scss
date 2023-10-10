@@ -1,0 +1,18 @@
+.wrapper {
+    // width: 80rem
+}
+
+.modal {
+    // width: 80rem;
+    // background-color: green;
+}
+
+.form{
+    background-color: green;
+
+    &__block {
+        // display:flex;
+        // justify-content:space-between;
+        background-color: red;
+    }
+}
