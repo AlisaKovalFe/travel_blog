@@ -6,4 +6,10 @@ router.get('/', (req, res) => {
   res.send(JSON.stringify(videos));
 });
 
+router.post('/', async (req, res) => {
+  console.log(req.body)
+
+  res.status(200).end()
+});
+
 module.exports = router;
