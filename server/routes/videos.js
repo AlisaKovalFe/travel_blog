@@ -8,6 +8,8 @@ router.get('/', (req, res) => {
 
 router.post('/', async (req, res) => {
   console.log(req.body)
+  videos.videosInfo.push(req.body)
+  console.log(videos)
 
   res.status(200).end()
 });
