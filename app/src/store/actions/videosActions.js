@@ -21,8 +21,8 @@ export const addVideoAC = (data) => ({
 
 //так ок писать?
 export const addVideosThunk = (data) => async (dispatch) => {
-    const response = await axios.post('http://localhost:4000/video', data)
-    dispatch(addVideoAC(response))              
+    const response = await axios.post('http://localhost:4000/video', {data: data})
+    dispatch(addVideoAC(response.data))              
 }
 
 export const deleteVideoAC = (id) => ({
