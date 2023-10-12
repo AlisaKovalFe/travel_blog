@@ -7,8 +7,9 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  console.log(req.body)
-  videos.videosInfo.push(req.body)
+  const {data} = req.body
+  console.log(data)
+  videos.videosInfo.push(data)
   console.log(videos)
 
   res.status(200).end()
