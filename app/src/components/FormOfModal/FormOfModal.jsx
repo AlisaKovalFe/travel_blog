@@ -3,13 +3,13 @@ import { Button, Form, Input } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import Selection from '../Selection/Selection'
 import ButtonLink from '../ButtonLink/ButtonLink'
-import { deleteVideoRecordAC } from '../../store/actions/formVideoRecordsActions'
-import { addVideoRecordAC } from '../../store/actions/formVideoRecordsActions'
+import { deleteVideoRecordAC } from '../../store/actions/formVideoActions'
+import { addVideoInputAC, addEmptyVideoInputAC, addVideoRecordsInputAC } from '../../store/actions/formVideoActions'
 
-function FormOfModal({setCountry, image, setImage, description, setDescription, city, setCity, videoUrl, setVideoUrl, records, setRecords}) {
+function FormOfModal() {
     const [ form ] = Form.useForm();
-    console.log(records)
     const { countries } = useSelector((store) => store.countriesForSelectStore);
+    const { videoCard } = useSelector((store) => store.formVideoStore);
     const dispatch = useDispatch();
 
     const validateMessages = {
@@ -18,26 +18,39 @@ function FormOfModal({setCountry, image, setImage, description, setDescription, 
     const regExp = /^[?!,.а-яА-ЯёЁ0-9\S\w]/
     const regExpForUrl = /^(http|https|ftp):\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)/i
 
-    function deleteVideoBlock(id) {
-        setRecords(records.filter((el) => el.id !== id))
-        // dispatch(deleteVideoRecordAC(id))
+    const handleInput = (value, params) => {    
+        // videoCard[params] = value   
+        dispatch(addVideoInputAC({
+            value, 
+            params
+        }))
     }
 
-    // думала отдельно сделать добавление блока и хранить в сторе их, но получаются каки-то излишние добавления видеоблоков
-    // function addVideoBlock(id) {
-    //     dispatch(addVideoRecordAC({
-    //         city: city,
-    //         videoUrl: videoUrl,
-    //         id: id
-    //     }))
-    // }
+    const handleInputRecords = (value, index, params) => {
+        dispatch(addVideoRecordsInputAC({
+            value, 
+            params,
+            index
+        }))
+    }
 
+    function handleEmptyAddVideoBlock() {
+        dispatch(addEmptyVideoInputAC({
+            value: '',
+        }))
+    }
+
+    function deleteVideoBlock(id) {
+        dispatch(deleteVideoRecordAC({
+            id
+        }))
+    }
+
+    console.log(videoCard.records)
 
     return (
         <Form 
             form={form}                   
-            // wrapClassName={styles.form} //не видит??
-            // style={styles.form}  //не видит??
             wrapperCol={{span: 23}}
             style={{display: 'flex', flexDirection: 'column'}}
             initialValues={{
@@ -56,7 +69,7 @@ function FormOfModal({setCountry, image, setImage, description, setDescription, 
                     },
                 ]}
                 >
-                <Selection countries={countries} onChange={(e) => setCountry(e)}/>
+                <Selection countries={countries} onChange={(e) => handleInput(e, 'country')}/>
             </Form.Item>
 
             <div >
@@ -69,7 +82,6 @@ function FormOfModal({setCountry, image, setImage, description, setDescription, 
                         {
                             required: true,
                             message: validateMessages.required,
-                            pattern: image.trim() ? null : regExpForUrl
                         },
                         {
                             type: 'url',
@@ -87,8 +99,8 @@ function FormOfModal({setCountry, image, setImage, description, setDescription, 
                     <Input 
                         addonAfter='*'
                         placeholder="url фото" 
-                        onChange={(e) => setImage(e.target.value)}
-                        value={image}
+                        onChange={(e) => handleInput(e.target.value, 'image')}
+                        value={videoCard.image}
                         />
                 </Form.Item>
 
@@ -103,22 +115,21 @@ function FormOfModal({setCountry, image, setImage, description, setDescription, 
                         { 
                             required: true, 
                             message: validateMessages.required,
-                            pattern: description.trim() ? null : regExp
+                            pattern: videoCard.description.trim() ? null : regExp
                         }]}
                     >
                     <Input 
                         placeholder='описание'
                         addonAfter=' '
-                        onChange={(e) => setDescription(e.target.value)}
-                        value={description}
+                        onChange={(e) => handleInput(e.target.value, 'description')}
+                        value={videoCard.description}
                     />
                     
                 </Form.Item>
             </div>
-
-            
+           
             {                        
-                records.map((el) => (
+                videoCard.records.map((el, index) => (
                     <div key={el.id}>
                         <Form.Item
                             name='город'  
@@ -131,8 +142,8 @@ function FormOfModal({setCountry, image, setImage, description, setDescription, 
                         >
                             <Input 
                                 placeholder="город" 
-                                onChange={(e) => setCity(e.target.value)}
-                                value={city}
+                                onChange={(e) => handleInputRecords(e.target.value, index, 'city')}
+                                value={el.city}
                             />
                         </Form.Item>
 
@@ -147,13 +158,13 @@ function FormOfModal({setCountry, image, setImage, description, setDescription, 
                         >
                             <Input 
                                 placeholder='видео'
-                                onChange={(e) => setVideoUrl(e.target.value)}
-                                value={videoUrl}
+                                onChange={(e) => handleInputRecords(e.target.value, index, 'videoUrl')}
+                                value={el.videoUrl}
                             />
                         </Form.Item>
 
                         {
-                            records.length > 1 && (
+                            videoCard.records.length > 1 && (
                                 <Form.Item
                                     style={{
                                         display: 'inline-block',
@@ -175,8 +186,9 @@ function FormOfModal({setCountry, image, setImage, description, setDescription, 
                 }}
             >
                 <Button onClick={() => {
-                    setRecords((prev) => [...prev, {city: city, id: Date.now(), videoUrl: videoUrl}])
-                    // records.map((el) => addVideoBlock(el.id))                
+                    // setRecords((prev) => [...prev, {city: city, id: Date.now(), videoUrl: videoUrl}])
+                    // records.map((el) => addVideoBlock(el.id))     
+                    handleEmptyAddVideoBlock()
                 }}>
                     +
                 </Button>

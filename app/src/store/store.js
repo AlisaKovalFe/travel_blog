@@ -7,7 +7,7 @@ import { mainReducer } from './reducers/mainReducer'
 import { videosReducer } from './reducers/videosReducer'
 import { helpersReducer } from './reducers/helpersReducer' 
 import { countriesForSelectReducer } from './reducers/countriesForSelectReducer'
-import { formVideoRecordsReducer } from './reducers/formVideoRecordsReducer'
+import { formVideoReducer } from './reducers/formVideoReducer'
 
 const reducer = combineReducers({
     greetingStore: greetingReducer,
@@ -18,7 +18,7 @@ const reducer = combineReducers({
     helpersStore: helpersReducer,
     countriesForSelectStore: countriesForSelectReducer,
 
-    formVideoRecordsStore: formVideoRecordsReducer
+    formVideoStore: formVideoReducer
 });
 
 export const store = configureStore({ reducer });

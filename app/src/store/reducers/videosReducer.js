@@ -15,7 +15,7 @@ export function videosReducer(state = initialState, action) {
           return { ...state, videos: {...state.videos, videosInfo: [...state.videos.videosInfo, action.payload ] } }
         }
 
-        case mainTypes.DELETE_VIDEO_CARD: {
+        case mainTypes.DElETE_VIDEO_CARD: {
           const { id } = action.payload
           return { ...state, videos: {...state.videos, videosInfo: state.videos.videosInfo.filter((el) => el.id !== id) } }
         }

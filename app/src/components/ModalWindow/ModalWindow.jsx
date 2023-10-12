@@ -2,26 +2,22 @@ import React, { useState } from 'react';
 import styles from './modalWindow.scss'
 import { Modal } from 'antd';
 import ButtonLink from '../ButtonLink/ButtonLink'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getCountriesForSelectThunk } from '../../store/actions/countriesForSelectActions'
 import FormOfModal from '../FormOfModal/FormOfModal'
-import { addVideoAC } from '../../store/actions/videosActions'
+import { addVideosThunk } from '../../store/actions/videosActions'
 
 
 function ModalWindow({ text, okText, title }) {
     const dispatch = useDispatch();   
     const [ isModalOpen, setIsModalOpen ] = useState(false);
+    const { videoCard } = useSelector((store) => store.formVideoStore);
 
     //для модалки, которая появляется на кнопку редактирование (она на странице Video) 
     // мне нужно для инпутов (image, city, description, videoUrl) взять значения из стора video, но для этого надо найти эл-т по id. 
     // я это делаю на странице Video, сюда пыталась пропсами прокинуть onClick, но в этом компоненте в подкомпоненте ButtonLink он падает, так ка рушит отрытие модалки по ButtonLink - "добавить". 
     // как его в этой модалке вытащить не понимаю
     // а именно этого эл-та (image, city, description, videoUrl) данные мне нужно вставить в initialState usеState (которые ниже)
-    const [ country, setCountry ] = useState('')
-    const [ image, setImage ] = useState('')
-    const [ city, setCity ] = useState('')
-    const [ description, setDescription ] = useState('') 
-    const [ videoUrl, setVideoUrl ] = useState('')
 
 
     //здесь такой initialState позволяет при открытии формы сразу увидеть один отрисованный блок с городои и url
@@ -29,7 +25,6 @@ function ModalWindow({ text, okText, title }) {
     // видео в records уходит первым пустой объект
     // {city: '', id: 1696974119189, videoUrl: ''} 
     // {city: 'ddd', id: 1696974131645, videoUrl: 'https://youtu.be/Muz720S9uVw'}
-    const [ records, setRecords ] = useState([{city: '', id: Date.now(), videoUrl: ''}]); 
 
     const showModal = () => {
         setIsModalOpen(true);
@@ -53,25 +48,18 @@ function ModalWindow({ text, okText, title }) {
     // А сам 2й и последующие блоки так и продолжают тянуть название города, который указала в 1м блоке. 
 
     const handleOk = () => {  
-        dispatch(addVideoAC({
-            id: Date.now(),
-            title: country.trim(),
-            cover: {
-                src: image.trim(),
-                alt: description.trim() || `${country}, ${city}`
-            },
-            records: [
-                records.map((el) => {
-                    return {
-                        key: city.trim(),
-                        label: city.trim(),
-                        src: videoUrl.trim(),
-                        title: city.trim(),
-                    }
-                })
-                
-            ]
-        }))  
+        dispatch(addVideosThunk(
+            {
+                id: Date.now(),
+                title: videoCard.country.trim(),
+                cover: {
+                    src: videoCard.image.trim(),
+                    alt: videoCard.description.trim() || `${videoCard.country}`
+                },
+                records: [
+                    ]
+        }
+        ))  
         setIsModalOpen(false);
     };
     const handleCancel = () => {
@@ -93,7 +81,7 @@ function ModalWindow({ text, okText, title }) {
                 // bodyStyle={styles.modal} не работает
             >
                 
-                <FormOfModal records={records} setRecords={setRecords} country={country} setCountry={setCountry} image={image} setImage={setImage} description={description} setDescription={setDescription} city={city} setCity={setCity} videoUrl={videoUrl} setVideoUrl={setVideoUrl}/>
+                <FormOfModal />
                     
             </Modal>
         </div>

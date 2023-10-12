@@ -18,7 +18,6 @@ function Videos() {
     const { destinations } = useSelector((store) => store.mainStore);
     const [ open, setOpen ] = useState(false);
     const navigate = useNavigate()
-    console.log(videos)
 
     useEffect(() => {   
         dispatch(getVideosThunk())
@@ -94,7 +93,7 @@ function Videos() {
                             </div>
                             
                             <Collapse 
-                                items={el.records.map((el) => {
+                                items={el.records?.map((el) => {
                                     return {
                                         key: el.key,
                                         label: el.label,

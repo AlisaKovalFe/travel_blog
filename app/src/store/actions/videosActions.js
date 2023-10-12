@@ -6,24 +6,26 @@ export const getVideosAC = (data) => ({
     payload: data
   })
 
-export const getVideosThunk = () => (dispatch) => {
-    axios.get('http://localhost:4000/video', {
-        headers: {
-          'Access-Control-Allow-Origin': 'https://www.youtube.com', 
-        }
-        
-      })
-      .then((res) => {
-        dispatch(getVideosAC((res.data)));
-      })
+export const getVideosThunk = () => async (dispatch) => {
+  const response = await axios.get('http://localhost:4000/video')
+  return dispatch(getVideosAC(response.data))
   };
 
-export const addVideoAC = (videoData) => ({
+
+
+export const addVideoAC = (data) => ({
   type: mainTypes.ADD_VIDEO_CARD,
-  payload: videoData
+  payload: data
 })
 
+
+//так ок писать?
+export const addVideosThunk = (data) => async (dispatch) => {
+    const response = await axios.post('http://localhost:4000/video', data)
+    dispatch(addVideoAC(response))              
+}
+
 export const deleteVideoAC = (id) => ({
-  type: mainTypes.DELETE_VIDEO_CARD,
+  type: mainTypes.DElETE_VIDEO_CARD,
   payload: id
 })
