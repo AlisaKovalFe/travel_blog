@@ -11,7 +11,7 @@ import { addVideosThunk } from '../../store/actions/videosActions'
 function ModalWindow({ text, okText, title }) {
     const dispatch = useDispatch();   
     const [ isModalOpen, setIsModalOpen ] = useState(false);
-    const { videoCard } = useSelector((store) => store.formVideoStore);
+    const  videoCard = useSelector((store) => store.formVideoStore);
 
     //для модалки, которая появляется на кнопку редактирование (она на странице Video) 
     // мне нужно для инпутов (image, city, description, videoUrl) взять значения из стора video, но для этого надо найти эл-т по id. 
@@ -56,8 +56,7 @@ function ModalWindow({ text, okText, title }) {
                     src: videoCard.image.trim(),
                     alt: videoCard.description.trim() || `${videoCard.country}`
                 },
-                records: [
-                    ]
+                records: videoCard.records
         }
         ))  
         setIsModalOpen(false);

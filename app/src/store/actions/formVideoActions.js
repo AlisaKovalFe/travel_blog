@@ -12,9 +12,8 @@ export const addVideoInputAC = (data) => ({
   })
 
 
-  export const addEmptyVideoInputAC = (data) => ({
+  export const addEmptyVideoInputAC = () => ({
     type: mainTypes.ADD_EMPTY_VIDEO_BLOCK,
-    payload: data
   })
 
   

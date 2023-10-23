@@ -11,8 +11,6 @@ export const getVideosThunk = () => async (dispatch) => {
   return dispatch(getVideosAC(response.data))
   };
 
-
-
 export const addVideoAC = (data) => ({
   type: mainTypes.ADD_VIDEO_CARD,
   payload: data
@@ -21,8 +19,8 @@ export const addVideoAC = (data) => ({
 
 //так ок писать?
 export const addVideosThunk = (data) => async (dispatch) => {
-    const response = await axios.post('http://localhost:4000/video', {data: data})
-    dispatch(addVideoAC(response.data))              
+    await axios.post('http://localhost:4000/video', {data: data})
+    dispatch(addVideoAC(data))              
 }
 
 export const deleteVideoAC = (id) => ({

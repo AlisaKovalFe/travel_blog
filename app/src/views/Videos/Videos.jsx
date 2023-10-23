@@ -17,6 +17,7 @@ function Videos() {
     const { helpers } = useSelector((store) => store.helpersStore);
     const { destinations } = useSelector((store) => store.mainStore);
     const [ open, setOpen ] = useState(false);
+    const [ cardId, setCardId ] = useState(null);
     const navigate = useNavigate()
 
     useEffect(() => {   
@@ -35,6 +36,20 @@ function Videos() {
     function toTravelling(id) {
         const currentWorldRegionID = destinations?.find((item) => item.countries?.find((el) => el.id === +id))
         navigate(`/world-regions/countries/${currentWorldRegionID.id}/country-information/${id}`)
+    }
+
+    function chooseCardForPopup(id) {
+        setCardId(id)
+    }
+
+    function handleOpenChange(id) {
+        videos.videosInfo.map((el) => {
+            if (el.id === cardId) {
+                console.log(el.id, cardId)
+                setOpen(true)
+            }
+        })
+        
     }
 
     function handlerEdit(id) {
@@ -63,8 +78,6 @@ function Videos() {
                     <Popover 
                         key={el.id} 
                         trigger="click"
-
-                        //открываются сразу у всех эл-в, а не у того, который нужен
                         content={(
                             <div className={styles.popover} >
                                 <ModalWindow text='Edit' okText='Save' title='Редактировать ...' onClick={() => handlerEdit(el.id)}/>
@@ -72,7 +85,10 @@ function Videos() {
                             </div>
                         )} 
                         open={open}
-                        onOpenChange={(newOpen) => setOpen(newOpen)}
+                        onOpenChange={() => {
+                            chooseCardForPopup(el.id)
+                            handleOpenChange()
+                        }}
                         >                      
 
                         <Card
@@ -80,6 +96,7 @@ function Videos() {
                             hoverable
                             className={styles.video}                 
                             cover={<img alt={el.cover?.alt} src={el.cover?.src} className={styles.video__image}/>}
+                            // onClick={() => chooseCardForPopup(el.id)}
                         >
                             
                             <div className={styles.video__heading}>
