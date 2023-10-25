@@ -2,9 +2,10 @@ import React from 'react';
 import styles from './selection.module.scss'
 import { Select } from 'antd';
 
-function Selection({countries, onChange}) {
+function Selection({countries, onChange, status}) {
     return (
             <Select
+                status={status}
                 showSearch
                 className={styles.wrapper}
                 placeholder="Выберите страны"

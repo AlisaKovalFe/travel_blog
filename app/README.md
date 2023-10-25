@@ -49,3 +49,54 @@ HTML5, CSS3, JavaScript (ECMAScript 2022), React18
 4. WorldRegions - карточки мировых регионов и соответствующие вкладки. При нажатии на карточку или вкладку пользователь переходит на страницу Countries с карточками и вкладами стран.
 5. Countries - карточки стран и соответствующие вкладки. При нажатии на карточку или вкладку пользователь может перейти на страницу CountiesInformation и посмотреть информацию о конкретной стране. Также поиск страны возможен через компонент Selection. В случае если запрашиваемой страны не будет на данном сайте для пользователя будет выведено соответствующее уведомление.
 6. CountiesInformation - информация о стране, предоставляется при переходе из страницы Countries. Страница содержит факты о стране, рекомендации по проживанию, кухне и местам, которые стоит посетить.
+
+
+
+
+// в диспаче вроде данные летят нормальные, но при отрисовке на странице Video в видеокарточке отрисован только один блок, хотя
+// добавляю несколько
+// отдельная пролблема с урлами видео. Если испольльзую тег video, то возникают cors и ничего не отрисовывается. Если iframe и
+// url с emded, то рисует, но потом консоль отправляет ошибки, а если со странным урл youtu.be, то консоль пишет
+// Refused to display 'https://www.youtube.com/' in a frame because it set 'X-Frame-Options' to 'sameorigin'. Пробовала добалять
+// заголовки, но, видимо, не имею на это прав
+
+    // при добавление 2го и последующего блоков с видео и url в форме, затягивается то название города и url,
+    // который указала в 1й раз.
+    // Пробовала писать по кнопке "+" на странице FormOfModal setCity(''), однако чистится имеено значение, которое пустым уходит
+    // в стейт через диспатч, вот так
+    // {key: '', label: '', src: 'https://youtu.be/Muz720S9uVw', title: ''}
+    // {key: '', label: '', src: 'https://youtu.be/Muz720S9uVw', title: ''}
+    // А сам 2й и последующие блоки так и продолжают тянуть название города, который указала в 1м блоке.
+
+
+ {/* <input 
+                            style={{
+                                width: '45%',
+                                height: '1.7rem',
+                                borderRadius: '0.3rem',
+                                borderColor: '#d3d3d3',
+                                borderWidth: '1px',
+                                boxShadow: 'none',
+                                marginRight: '1rem'
+                            }}
+                            type='text'
+                            placeholder='видео'
+                            onChange={(e) => handleInputRecords(e.target.value, el.id, 'videoUrl')}
+                            value={el.videoUrl}
+                        /> 
+                        <input 
+                            style={{
+                                width: '45%',
+                                height: '1.7rem',
+                                borderRadius: '0.3rem',
+                                borderColor: '#d3d3d3',
+                                borderWidth: '1px',
+                                boxShadow: 'none',
+                                marginRight: '1rem'
+                            }}
+                            type='text'
+                            placeholder="город" 
+                            onChange={(e) => handleInputRecords(e.target.value, el.id, 'city')}
+                            value={el.city}
+                        />  */}
+                    

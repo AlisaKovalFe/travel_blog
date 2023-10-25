@@ -1,6 +1,7 @@
 import { mainTypes } from './actionTypes';
 import axios from 'axios'
 
+//получение видеокарточек с сервера
 export const getVideosAC = (data) => ({
     type: mainTypes.GET_VIDEOS,
     payload: data
@@ -11,19 +12,24 @@ export const getVideosThunk = () => async (dispatch) => {
   return dispatch(getVideosAC(response.data))
   };
 
+//добавление видеокарточки на фронт и бэк
 export const addVideoAC = (data) => ({
   type: mainTypes.ADD_VIDEO_CARD,
   payload: data
 })
 
-
-//так ок писать?
 export const addVideosThunk = (data) => async (dispatch) => {
     await axios.post('http://localhost:4000/video', {data: data})
     dispatch(addVideoAC(data))              
 }
 
-export const deleteVideoAC = (id) => ({
+//удаление видеокарточки на фронте и бэке
+export const deleteVideoAC = (data) => ({
   type: mainTypes.DElETE_VIDEO_CARD,
-  payload: id
+  payload: data
 })
+
+export const deleteVideosThunk = (data) => async (dispatch) => {
+  dispatch(deleteVideoAC(data))    // почему-то если я писала это после delete запроса, то это строка уже не читалась
+  await axios.delete(`http://localhost:4000/video/${data.id}`)          
+}

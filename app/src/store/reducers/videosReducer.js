@@ -17,6 +17,7 @@ export function videosReducer(state = initialState, action) {
 
         case mainTypes.DElETE_VIDEO_CARD: {
           const { id } = action.payload
+          console.log(id)
           return { ...state, videos: {...state.videos, videosInfo: state.videos.videosInfo.filter((el) => el.id !== id) } }
         }
         

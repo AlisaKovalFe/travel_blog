@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getVideosThunk, deleteVideoAC } from '../../store/actions/videosActions'
+import { getVideosThunk, deleteVideosThunk } from '../../store/actions/videosActions'
 import styles from './videos.module.scss'
 import Helper from '../../components/Helper/Helper'
 import ModalWindow from '../../components/ModalWindow/ModalWindow'
@@ -8,7 +8,7 @@ import { Card, Collapse } from 'antd';
 import { getHelpersThunk } from '../../store/actions/helpersActions'
 import ButtonLink from '../../components/ButtonLink/ButtonLink'
 import { useNavigate } from 'react-router-dom'
-import { Popover } from 'antd';
+import { Popover, notification } from 'antd';
 const { Meta } = Card;
 
 function Videos() {
@@ -42,16 +42,6 @@ function Videos() {
         setCardId(id)
     }
 
-    function handleOpenChange(id) {
-        videos.videosInfo.map((el) => {
-            if (el.id === cardId) {
-                console.log(el.id, cardId)
-                setOpen(true)
-            }
-        })
-        
-    }
-
     function handlerEdit(id) {
         const currentVideocard = videos.videosInfo?.find((el) => el.id === +id)
         console.log(currentVideocard)
@@ -59,10 +49,18 @@ function Videos() {
     }
       
     function handlerDelete(id) {
-        dispatch(deleteVideoAC({
-            id: id
+        dispatch(deleteVideosThunk({
+            id: +id
         }))
+
+        //это надо делать при респонс 200, но не писать же мне это в actions, где находися респонс
+        notification.open({
+            message: 'Отлично!',
+            description: 'Вы успешно удалили видео'
+        }) 
     }
+
+    
  
 
     return (
@@ -75,28 +73,67 @@ function Videos() {
 
             <div className={styles.videos}>
                 {videos.videosInfo?.map((el) => (
-                    <Popover 
-                        key={el.id} 
-                        trigger="click"
-                        content={(
-                            <div className={styles.popover} >
-                                <ModalWindow text='Edit' okText='Save' title='Редактировать ...' onClick={() => handlerEdit(el.id)}/>
-                                <ButtonLink text='Delete' onClick={() => handlerDelete(el.id)}/>
-                            </div>
-                        )} 
-                        open={open}
-                        onOpenChange={() => {
-                            chooseCardForPopup(el.id)
-                            handleOpenChange()
-                        }}
-                        >                      
 
+                    el.id === cardId ? (                       
+                        <Popover 
+                            key={el.id} 
+                            trigger="click"
+                            //сделала модалку в div, чтобы в компоненет модалка не добавлять онклик (иначе пришлось был локал стейты по открытию модалки и стягианию стран для селекта переносить на эту стараницу)
+                            content={(
+                                <div className={styles.popover} >
+                                    <div onClick={() => handlerEdit(el.id)}>
+                                        <ModalWindow text='Edit' okText='Save' title='Редактировать ...' />
+                                    </div>
+                                    
+                                    <ButtonLink text='Delete' onClick={() => handlerDelete(el.id)}/>
+                                </div>
+                            )} 
+                            open={open}
+                            onOpenChange={(newOpen) => setOpen(newOpen)}                          
+                        >     
+                                        
+                            <Card
+                                key={el.id}
+                                hoverable
+                                className={styles.video}                 
+                                cover={<img alt={el.cover?.alt} src={el.cover?.src} className={styles.video__image}/>}
+                                onClick={() => chooseCardForPopup(el.id)}
+                            >
+                                
+                                <div className={styles.video__heading}>
+                                    <Meta className={styles.video__title} title={el.title}  /> 
+                                    {
+                                        travelling.includes(el.title) ? (
+                                            <ButtonLink onClick={() => toTravelling(el.id)} text='В путешествие'/>
+                                        ) : ''
+                                    }
+                                    
+                                </div>
+                                
+                                <Collapse 
+                                    items={el.records?.map((el) => {
+                                        return {
+                                            key: el.key,
+                                            label: el.label,
+                                            children: <iframe credentialless='true' referrerPolicy='origin-when-cross-origin' className="video_styles" src={el?.src} title={el?.title} frameBorder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+                                            // <video src={el?.src} crossOrigin='use-credentials'></video>
+                                            // <iframe credentialless='true' referrerPolicy='origin-when-cross-origin' className="video_styles" src={el?.src} title={el?.title} frameBorder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+
+                                            // https://youtu.be/Muz720S9uVw
+                                            // <iframe width="853" height="480" src="https://www.youtube.com/embed/Muz720S9uVw" title="Пьемонт, горы, фиат и нутелла. Италия" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                            // https://www.youtube.com/watch?v=Muz720S9uVw&t=5s
+                                        }
+                                })}                                    
+                                />
+                            </Card>
+                        </Popover>
+                    ) : (
                         <Card
                             key={el.id}
                             hoverable
                             className={styles.video}                 
                             cover={<img alt={el.cover?.alt} src={el.cover?.src} className={styles.video__image}/>}
-                            // onClick={() => chooseCardForPopup(el.id)}
+                            onClick={() => chooseCardForPopup(el.id)}
                         >
                             
                             <div className={styles.video__heading}>
@@ -126,7 +163,8 @@ function Videos() {
                                 
                             />
                         </Card>
-                    </Popover>
+                    )
+                    
                     )
                 )}           
             </div>

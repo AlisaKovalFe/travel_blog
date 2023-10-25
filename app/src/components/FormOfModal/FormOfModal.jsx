@@ -1,339 +1,175 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './formOfModal.scss'
-import { Button, Form, Input } from 'antd';
+import { Button, Input, notification } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import Selection from '../Selection/Selection'
 import ButtonLink from '../ButtonLink/ButtonLink'
-import { deleteVideoRecordAC } from '../../store/actions/formVideoActions'
-import { addVideoInputAC, addEmptyVideoInputAC, addVideoRecordsInputAC } from '../../store/actions/formVideoActions'
+import { addDataFromInputInFormAC, addEmptyVideoBlockInFormAC, addVideoRecordsFromInputsInFormAC, deleteVideoRecordInFormAC } from '../../store/actions/formVideoActions'
+import { getCountriesForSelectThunk } from '../../store/actions/countriesForSelectActions'
 
-function FormOfModal() {
-    // const [ form ] = Form.useForm();
+
+function FormOfModal({status}) {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getCountriesForSelectThunk())
+    }, [])
+
     const { countries } = useSelector((store) => store.countriesForSelectStore);
     const videoCard = useSelector((store) => store.formVideoStore);
-    const dispatch = useDispatch();
-
-    const validateMessages = {
-        required: "Укажите ${name}",
-    }
+    const [ statusOfError, setStatusOfError ] = useState(false)
+    
     const regExp = /^[?!,.а-яА-ЯёЁ0-9\S\w]/
-    const regExpForUrl = /^(http|https|ftp):\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)/i
-
-    const handleInput = (value, params) => {      
-        dispatch(addVideoInputAC({
-            value, 
-            params
-        }))
+    
+    const handleInput = (value, params) => {   
+        
+        if (!regExp.test(value)) {
+            setStatusOfError(!statusOfError)
+        } else {
+            console.log(value)
+            dispatch(addDataFromInputInFormAC({
+                value, 
+                params
+            }))
+            setStatusOfError(false)
+            
+        }
     }
 
-    const handleInputRecords = (value, index, params) => {
-        dispatch(addVideoRecordsInputAC({
+    const handleInputRecords = (value, id, params) => {
+        dispatch(addVideoRecordsFromInputsInFormAC({
             value, 
             params,
-            index
-        }))
-    }
-
-    function handleEmptyAddVideoBlock() {
-        dispatch(addEmptyVideoInputAC())
-    }
-
-    function deleteVideoBlock(id) {
-        dispatch(deleteVideoRecordAC({
             id
         }))
     }
 
-    console.log(videoCard)
+    function handleEmptyAddVideoBlock() {
+        dispatch(addEmptyVideoBlockInFormAC())
+    }
+
+    function deleteVideoBlock(id) {
+        dispatch(deleteVideoRecordInFormAC({
+            id
+        }))
+    }
+
+    function statusChange(params) {
+        return statusOfError ? (
+            <div style={{color: 'red'}}>Укажите {params}</div>
+        ) : ''
+    }
 
     return (
         <form>
-            <Selection countries={countries} onChange={(e) => handleInput(e, 'country')} />
-            <div className={styles.formItem}
+            <div>
+                <Selection countries={countries} onChange={(e) => handleInput(e, 'country')} status={statusOfError ? 'error' : ''}/>
+                {
+                    statusChange('страну') 
+                }
+            </div>
+
+            <div 
                 style={{
                     display:'flex',
                     justifyContent: 'space-between',
                     marginTop: '1rem',
-                    width: '90%'
+                    marginBottom: '2rem',
+                    width: '100%'
                 }}>
 
-                <Input 
-                    addonAfter='*'
-                    style={{
-                        display: 'inline-block',
-                        width: '49%',
-                        marginBottom: '1rem'
-                    }}
-                    placeholder="url фото" 
-                    onChange={(e) => handleInput(e.target.value, 'image')}
-                    value={videoCard.image}
-                    />
-                <Input 
-                    style={{
-                        display: 'inline-block',
-                        width: '49%',
-                        marginBottom: '1rem'
-                    }}
-                    placeholder='описание'
-                    addonAfter=' '
-                    onChange={(e) => handleInput(e.target.value, 'description')}
-                    value={videoCard.description}
-                />
+                    <div
+                        style={{
+                            display: 'inline-block',
+                            width: '48%',
+                    }}>
+
+                        <Input 
+                            defaultValue='url'
+                            addonAfter='*'                     
+                            placeholder="url фото" 
+                            onChange={(e) => handleInput(e.target.value, 'image')}
+                            value={videoCard.image}
+                            status={statusOfError ? 'error' : ''}
+                        />
+                        {
+                            statusChange('url')
+                        }
+                    </div>
+                    
+
+                    <div
+                        style={{
+                            display: 'inline-block',
+                            width: '48%',
+                        }}
+                    >
+                        <Input 
+                            placeholder='описание'
+                            onChange={(e) => handleInput(e.target.value, 'description')}
+                            value={videoCard.description}
+                        />
+                    </div>
+                
+                    
+                    
             </div>
 
             {                        
-                videoCard.records.map((el, index) => (
-                    <div key={el.id} className={styles.records}
+                videoCard.records?.map((el) => (
+                    <div key={el.id} 
                         style={{
                             display: 'flex',
                             justifyContent: 'space-between',
-                            alignItems: 'center',
+                            marginTop: '1rem',
                             marginBottom: '1rem',
                             width: '100%'
                         }}>
-                        <input 
-                            style={{
-                                width: '45%',
-                                height: '1.7rem',
-                                borderRadius: '0.3rem',
-                                borderColor: '#d3d3d3',
-                                borderWidth: '1px',
-                                boxShadow: 'none',
-                                marginRight: '1rem'
-                            }}
-                            type='text'
-                            placeholder="город" 
-                            onChange={(e) => handleInputRecords(e.target.value, index, 'city')}
-                            value={el.city}
-                        /> 
 
-                        <input 
+                        <Input 
                             style={{
-                                width: '45%',
-                                height: '1.7rem',
-                                borderRadius: '0.3rem',
-                                borderColor: '#d3d3d3',
-                                borderWidth: '1px',
-                                boxShadow: 'none',
-                                marginRight: '1rem'
+                                display: 'inline-block',
+                                width: '48%',
                             }}
-                            type='text'
+                            addonAfter='*'  
+                            placeholder="город" 
+                            onChange={(e) => handleInputRecords(e.target.value, el.id, 'city')}
+                            value={el.city}
+                        />
+                        <Input 
+                            style={{
+                                display: 'inline-block',
+                                width: '48%',
+                            }}
+                            addonAfter='*'  
                             placeholder='видео'
-                            onChange={(e) => handleInputRecords(e.target.value, index, 'videoUrl')}
+                            onChange={(e) => handleInputRecords(e.target.value, el.id, 'videoUrl')}
                             value={el.videoUrl}
-                        /> 
-                    
+                        />
+                        
                         {
                             videoCard.records.length > 1 && (
-                                <button
+                                <ButtonLink 
                                     style={{
-                                        width: '6%',
-                                        height: '1.8rem',
-                                        borderRadius: '0.3rem',
-                                        borderColor: '#d3d3d3',
-                                        borderWidth: '1px',
-                                        boxShadow: 'none'
+                                        display: 'inline-block',
+                                        width: '4%',
                                     }}
-                                    onClick={() => deleteVideoBlock(el.id)}>
-                                    -
-                                </button>
+                                    text='-' 
+                                    onClick={() => deleteVideoBlock(el.id)}/>
                             )
                         }
                     </div>
                 ))
             }
-            {/* {                        
-                videoCard.records.map((el, index) => (
-                    <div key={el.id}>
-                        <Input 
-                            style={{
-                                display: 'inline-block',
-                                width: '30%',
-                                marginRight: '1rem',
-                                marginBottom: '1rem'
-                            }}
-                            placeholder="город" 
-                            onChange={(e) => handleInputRecords(e.target.value, index, 'city')}
-                            value={el.city}
-                        />
-                        <Input 
-                            style={{
-                                display: 'inline-block',
-                                width: '30%',
-                                marginRight: '1rem',
-                                marginBottom: '1rem'
-                            }}
-                            placeholder='видео'
-                            onChange={(e) => handleInputRecords(e.target.value, index, 'videoUrl')}
-                            value={el.videoUrl}
-                        />
-
-                        {
-                            videoCard.records.length > 1 && (
-                                    <ButtonLink 
-                                        style={{
-                                            display: 'inline-block',
-                                            width: '4%',
-                                        }}
-                                        text='-' 
-                                        onClick={() => deleteVideoBlock(el.id)}/>
-                            )
-                        }
-                    </div>
-                ))
-            } */}
 
             <Button onClick={() => handleEmptyAddVideoBlock()}>
                 +
             </Button>
 
         </form>
-        // <Form 
-        //     form={form}                   
-        //     wrapperCol={{span: 23}}
-        //     style={{display: 'flex', flexDirection: 'column'}}
-        //     initialValues={{
-        //         remember: true,
-        //     }}
-        //     autoComplete="on"        
-        // >
-
-        //     <Form.Item
-        //         name="select"
-        //         hasFeedback
-        //         rules={[
-        //             {
-        //             required: true,
-        //             message: 'Необходимо выбрать страну!',
-        //             },
-        //         ]}
-        //         >
-        //         <Selection countries={countries} onChange={(e) => handleInput(e, 'country')}/>
-        //     </Form.Item>
-
-        //     <div >
-        //         <Form.Item
-        //             style={{
-        //                 display: 'inline-block',
-        //                 width: '49%',
-        //             }}
-        //             rules={[
-        //                 {
-        //                     required: true,
-        //                     message: validateMessages.required,
-        //                 },
-        //                 {
-        //                     type: 'url',
-        //                     warningOnly: true,
-        //                 },
-        //                 {
-        //                     type: 'string',
-        //                     min: 6,
-        //                 },
-        //             ]}
-        //             name="URL фото"
-        //             hasFeedback
-                    
-        //         >
-        //             <Input 
-        //                 addonAfter='*'
-        //                 placeholder="url фото" 
-        //                 onChange={(e) => handleInput(e.target.value, 'image')}
-        //                 value={videoCard.image}
-        //                 />
-        //         </Form.Item>
-
-        //         <Form.Item
-        //             name="описание"
-        //             style={{
-        //                 display: 'inline-block',
-        //                 width: '49%',
-        //             }}
-        //             hasFeedback                   
-        //             rules={[
-        //                 { 
-        //                     required: true, 
-        //                     message: validateMessages.required,
-        //                     pattern: videoCard.description.trim() ? null : regExp
-        //                 }]}
-        //             >
-        //             <Input 
-        //                 placeholder='описание'
-        //                 addonAfter=' '
-        //                 onChange={(e) => handleInput(e.target.value, 'description')}
-        //                 value={videoCard.description}
-        //             />
-                    
-        //         </Form.Item>
-        //     </div>
-           
-        //     {                        
-        //         videoCard.records.map((el, index) => (
-        //             <div key={el.id}>
-        //                 <Form.Item
-        //                     name='город'  
-        //                     style={{
-        //                         display: 'inline-block',
-        //                         width: '48%',
-        //                     }} 
-        //                     hasFeedback              
-                            
-        //                 >
-        //                     <Input 
-        //                         placeholder="город" 
-        //                         onChange={(e) => handleInputRecords(e.target.value, index, 'city')}
-        //                         value={el.city}
-        //                     />
-        //                 </Form.Item>
-
-        //                 <Form.Item
-        //                     name="Видео"
-        //                     style={{
-        //                         display: 'inline-block',
-        //                         width: '48%',
-        //                     }}
-        //                     hasFeedback
-                            
-        //                 >
-        //                     <Input 
-        //                         placeholder='видео'
-        //                         onChange={(e) => handleInputRecords(e.target.value, index, 'videoUrl')}
-        //                         value={el.videoUrl}
-        //                     />
-        //                 </Form.Item>
-
-        //                 {
-        //                     videoCard.records.length > 1 && (
-        //                         <Form.Item
-        //                             style={{
-        //                                 display: 'inline-block',
-        //                                 width: '4%',
-        //                             }}
-        //                         >
-        //                             <ButtonLink text='-' onClick={() => deleteVideoBlock(el.id)}/>
-        //                         </Form.Item>
-        //                     )
-        //                 }
-        //             </div>
-        //         ))
-        //     }
-            
-        //     <Form.Item
-        //         wrapperCol={{
-        //             offset: 11,
-        //             span: 16,
-        //         }}
-        //     >
-        //         <Button onClick={() => {
-        //             // setRecords((prev) => [...prev, {city: city, id: Date.now(), videoUrl: videoUrl}])
-        //             // records.map((el) => addVideoBlock(el.id))     
-        //             handleEmptyAddVideoBlock()
-        //         }}>
-        //             +
-        //         </Button>
-        //     </Form.Item>
-        // </Form>
     );
 }
 
 export default FormOfModal;
+
+
+
