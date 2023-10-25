@@ -8,11 +8,22 @@ router.get('/', (req, res) => {
 
 router.post('/', async (req, res) => {
   const {data} = req.body
-  console.log(data)
   videos.videosInfo.push(data)
-  console.log(videos)
+  console.log(videos.videosInfo)
 
   res.status(200).end()
 });
+
+router.delete('/:id', async function(req, res) {
+  const { id } = req.params
+
+  videos.videosInfo.forEach((el, index) => {
+    if (el.id === +id) {
+      videos.videosInfo.splice(index, 1)
+    }
+  })
+
+  res.status(200).end()
+})
 
 module.exports = router;
