@@ -11,13 +11,11 @@ export function videosReducer(state = initialState, action) {
         }
 
         case mainTypes.ADD_VIDEO_CARD: {
-          console.log(action.payload)
           return { ...state, videos: {...state.videos, videosInfo: [...state.videos.videosInfo, action.payload ] } }
         }
 
         case mainTypes.DElETE_VIDEO_CARD: {
           const { id } = action.payload
-          console.log(id)
           return { ...state, videos: {...state.videos, videosInfo: state.videos.videosInfo.filter((el) => el.id !== id) } }
         }
         

@@ -18,7 +18,7 @@ const reducer = combineReducers({
     helpersStore: helpersReducer,
     countriesForSelectStore: countriesForSelectReducer,
 
-    formVideoStore: formVideoReducer
+    formVideoStore: formVideoReducer,
 });
 
 export const store = configureStore({ reducer });

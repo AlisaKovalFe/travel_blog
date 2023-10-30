@@ -2,14 +2,14 @@ import { mainTypes } from '../actions/actionTypes';
 
 const initialState = {
     id: Date.now(),
-    country: null,
+    country: '',
     image: '',
     description: '',
     records: [
             {
               id: Date.now(),
-              city: null,
-              videoUrl: null,
+              city: '',
+              videoUrl: '',
             }
     ]
 };
@@ -46,15 +46,15 @@ export function formVideoReducer(state = initialState, action) {
 
         case mainTypes.CLEAR_FORM: {
           return {
-            id: null,
-            country: null,
-            image: null,
+            id: Date.now(),
+            country: '',
+            image: '',
             description: '',
             records: [
                     {
-                      id: null,
-                      city: null,
-                      videoUrl: null
+                      id: '',
+                      city: '',
+                      videoUrl: ''
                     }
             ]
           };

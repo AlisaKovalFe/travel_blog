@@ -13,32 +13,34 @@ const { Meta } = Card;
 
 function Videos() {
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getVideosThunk())
+        dispatch(getHelpersThunk())
+    }, [])
+
     const { videos } = useSelector((store) => store.videosStore);
     const { helpers } = useSelector((store) => store.helpersStore);
     const { destinations } = useSelector((store) => store.mainStore);
-    const [ open, setOpen ] = useState(false);
-    const [ cardId, setCardId ] = useState(null);
+    const [open, setOpen] = useState(false);
+    const [cardId, setCardId] = useState(null);
     const navigate = useNavigate()
 
-    useEffect(() => {   
-        dispatch(getVideosThunk())
-        dispatch(getHelpersThunk())
-    }, [])  
 
     let videosCountries = []
     let destinationCounty = []
-    videos.videosInfo?.map((el) => videosCountries.push(el.title))
-    destinations.map((el) => el.countries?.map((el) => destinationCounty.push(el.title)))
+    videos.videosInfo?.map((el) => videosCountries.push(el?.title))
+    destinations.map((el) => el.countries?.map((el) => destinationCounty.push(el?.title)))
 
     const travelling = videosCountries.filter((el) => destinationCounty.includes(el))
-    // const travelling = videos.videosInfo?.filter((el) => destinations.every((item) => item.countries?.includes(el.title)))
-    
+
     function toTravelling(id) {
         const currentWorldRegionID = destinations?.find((item) => item.countries?.find((el) => el.id === +id))
         navigate(`/world-regions/countries/${currentWorldRegionID.id}/country-information/${id}`)
     }
 
     function chooseCardForPopup(id) {
+        console.log(cardId, id)
         setCardId(id)
     }
 
@@ -47,7 +49,7 @@ function Videos() {
         console.log(currentVideocard)
         setOpen(false);
     }
-      
+
     function handlerDelete(id) {
         dispatch(deleteVideosThunk({
             id: +id
@@ -57,60 +59,58 @@ function Videos() {
         notification.open({
             message: 'Отлично!',
             description: 'Вы успешно удалили видео'
-        }) 
+        })
     }
 
-    
- 
 
     return (
         <section className={styles.wrapper}>
             <div className={styles.button}  >
-                <ModalWindow text='Добавить' okText='Save' title='Добавить новое место'/>
+                <ModalWindow text='Добавить' okText='Save' title='Добавить новое место' />
             </div>
             <h2 className={styles.heading}>{videos.heading}</h2>
-            <p className={styles.description}>{videos.description}</p>     
+            <p className={styles.description}>{videos.description}</p>
 
             <div className={styles.videos}>
-                {videos.videosInfo?.map((el) => (
+                {videos?.videosInfo?.map((el, index) => (
 
-                    el.id === cardId ? (                       
-                        <Popover 
-                            key={el.id} 
+                    el?.id === cardId ? (
+                        <Popover
+                            key={el.id}
                             trigger="click"
-                            //сделала модалку в div, чтобы в компоненет модалка не добавлять онклик (иначе пришлось был локал стейты по открытию модалки и стягианию стран для селекта переносить на эту стараницу)
+                            //сделала модалку в div, чтобы в компоненет модалка не добавлять онклик (иначе пришлось был локал стейты по открытию модалки и стягианию стран для селекта переносить на эту страницу)
                             content={(
                                 <div className={styles.popover} >
                                     <div onClick={() => handlerEdit(el.id)}>
                                         <ModalWindow text='Edit' okText='Save' title='Редактировать ...' />
                                     </div>
-                                    
-                                    <ButtonLink text='Delete' onClick={() => handlerDelete(el.id)}/>
+
+                                    <ButtonLink text='Delete' onClick={() => handlerDelete(el.id)} />
                                 </div>
-                            )} 
+                            )}
                             open={open}
-                            onOpenChange={(newOpen) => setOpen(newOpen)}                          
-                        >     
-                                        
+                            onOpenChange={(newOpen) => setOpen(newOpen)}
+                        >
+
                             <Card
                                 key={el.id}
                                 hoverable
-                                className={styles.video}                 
-                                cover={<img alt={el.cover?.alt} src={el.cover?.src} className={styles.video__image}/>}
+                                className={styles.video}
+                                cover={<img alt={el?.cover?.alt} src={el?.cover?.src} className={styles.video__image} />}
                                 onClick={() => chooseCardForPopup(el.id)}
                             >
-                                
+
                                 <div className={styles.video__heading}>
-                                    <Meta className={styles.video__title} title={el.title}  /> 
+                                    <Meta className={styles.video__title} title={el?.title} />
                                     {
                                         travelling.includes(el.title) ? (
-                                            <ButtonLink onClick={() => toTravelling(el.id)} text='В путешествие'/>
+                                            <ButtonLink onClick={() => toTravelling(el.id)} text='В путешествие' />
                                         ) : ''
                                     }
-                                    
+
                                 </div>
-                                
-                                <Collapse 
+
+                                <Collapse
                                     items={el.records?.map((el) => {
                                         return {
                                             key: el.key,
@@ -123,7 +123,7 @@ function Videos() {
                                             // <iframe width="853" height="480" src="https://www.youtube.com/embed/Muz720S9uVw" title="Пьемонт, горы, фиат и нутелла. Италия" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                                             // https://www.youtube.com/watch?v=Muz720S9uVw&t=5s
                                         }
-                                })}                                    
+                                    })}
                                 />
                             </Card>
                         </Popover>
@@ -131,22 +131,23 @@ function Videos() {
                         <Card
                             key={el.id}
                             hoverable
-                            className={styles.video}                 
-                            cover={<img alt={el.cover?.alt} src={el.cover?.src} className={styles.video__image}/>}
+                            className={styles.video}
+                            cover={<img alt={el?.cover?.alt} src={el?.cover?.src} className={styles.video__image} />}
                             onClick={() => chooseCardForPopup(el.id)}
                         >
-                            
+
                             <div className={styles.video__heading}>
-                                <Meta className={styles.video__title} title={el.title}  /> 
+                                <Meta className={styles.video__title} title={el?.title} />
                                 {
                                     travelling.includes(el.title) ? (
-                                        <ButtonLink onClick={() => toTravelling(el.id)} text='В путешествие'/>
+                                        <ButtonLink onClick={() => toTravelling(el.id)} text='В путешествие' />
                                     ) : ''
                                 }
-                                
+                                 
+
                             </div>
-                            
-                            <Collapse 
+
+                            <Collapse
                                 items={el.records?.map((el) => {
                                     return {
                                         key: el.key,
@@ -159,18 +160,18 @@ function Videos() {
                                         // <iframe width="853" height="480" src="https://www.youtube.com/embed/Muz720S9uVw" title="Пьемонт, горы, фиат и нутелла. Италия" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                                         // https://www.youtube.com/watch?v=Muz720S9uVw&t=5s
                                     }
-                            })} 
-                                
+                                })}
+
                             />
                         </Card>
                     )
-                    
-                    )
-                )}           
+
+                )
+                )}
             </div>
 
             <div className={styles.helper}>
-                <Helper src={helpers.videos?.src} text={helpers.videos?.text} link={helpers.videos?.link}/>
+                <Helper src={helpers.videos?.src} text={helpers.videos?.text} link={helpers.videos?.link} />
             </div>
         </section>
     );

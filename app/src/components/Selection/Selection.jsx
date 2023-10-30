@@ -5,10 +5,13 @@ import { Select } from 'antd';
 function Selection({countries, onChange, status}) {
     return (
             <Select
+                // defaultValue='' //не работает
+                // defaultActiveFirstOption='false' //не работает
+                notFoundContent='такой страны нет в списке'
                 status={status}
                 showSearch
                 className={styles.wrapper}
-                placeholder="Выберите страны"
+                placeholder="Выберите страну"
                 optionFilterProp="children"
                 onChange={onChange}
                 filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())}

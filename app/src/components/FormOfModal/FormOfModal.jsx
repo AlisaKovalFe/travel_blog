@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import styles from './formOfModal.scss'
-import { Button, Input, notification } from 'antd';
+import React, { useEffect } from 'react';
+import { Button, Input } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import Selection from '../Selection/Selection'
 import ButtonLink from '../ButtonLink/ButtonLink'
 import { addDataFromInputInFormAC, addEmptyVideoBlockInFormAC, addVideoRecordsFromInputsInFormAC, deleteVideoRecordInFormAC } from '../../store/actions/formVideoActions'
 import { getCountriesForSelectThunk } from '../../store/actions/countriesForSelectActions'
 
-
-function FormOfModal({status}) {
+function FormOfModal({ errorsOnSave, setErrorsOnSave, errorOnChange, setErrorOnChange }) {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getCountriesForSelectThunk())
@@ -16,35 +14,62 @@ function FormOfModal({status}) {
 
     const { countries } = useSelector((store) => store.countriesForSelectStore);
     const videoCard = useSelector((store) => store.formVideoStore);
-    const [ statusOfError, setStatusOfError ] = useState(false)
     
-    const regExp = /^[?!,.а-яА-ЯёЁ0-9\S\w]/
-    
-    const handleInput = (value, params) => {   
-        
-        if (!regExp.test(value)) {
-            setStatusOfError(!statusOfError)
+    const handleInput = (value, params) => {  
+        dispatch(addDataFromInputInFormAC({
+            value, 
+            params
+        }))
+        if (value.trim() === '') {
+            setErrorOnChange({...errorOnChange, [params]: value}) 
         } else {
-            console.log(value)
-            dispatch(addDataFromInputInFormAC({
-                value, 
-                params
-            }))
-            setStatusOfError(false)
-            
+            setErrorOnChange({...errorOnChange, [params]: value}) 
+            setErrorsOnSave({...errorsOnSave, [params]: value})
         }
     }
 
-    const handleInputRecords = (value, id, params) => {
+    const handleInputRecords = (value, id, params, index) => {
         dispatch(addVideoRecordsFromInputsInFormAC({
             value, 
             params,
             id
         }))
+        if (value.trim() === '') {
+            setErrorOnChange({...errorOnChange, records: errorOnChange.records.map((el, i) => {
+                if (i === index) {
+                    return {
+                        ...el,
+                    [params]: value
+                    }
+                } 
+                return el
+            })})
+        } else {
+            setErrorOnChange({...errorOnChange, records: errorOnChange.records.map((el, i) => {
+                if (i === index) {
+                    return {
+                        ...el,
+                    [params]: value
+                    }
+                } 
+                return el
+            })})
+            setErrorsOnSave({...errorsOnSave, records: errorsOnSave.records.map((el, i) => {
+                if (i === index) {
+                    return {
+                        ...el,
+                    [params]: value
+                    }
+                } 
+                return el
+            })}) 
+        }
     }
 
     function handleEmptyAddVideoBlock() {
         dispatch(addEmptyVideoBlockInFormAC())
+        setErrorOnChange({...errorOnChange, records: [...errorOnChange.records, {id: Date.now(), city: 'no error', videoUrl: 'no error'}]})
+        setErrorsOnSave({...errorsOnSave, records: [...errorsOnSave.records, {id: Date.now(), city: 'no error', videoUrl: 'no error'}]})
     }
 
     function deleteVideoBlock(id) {
@@ -54,7 +79,13 @@ function FormOfModal({status}) {
     }
 
     function statusChange(params) {
-        return statusOfError ? (
+        return !errorOnChange[params] ? (
+            <div style={{color: 'red'}}>Укажите {params}</div>
+        ) : ''
+    }
+
+    function statusChangeForVideoRecords(params, index) {
+        return !errorOnChange.records[index][params] ? (
             <div style={{color: 'red'}}>Укажите {params}</div>
         ) : ''
     }
@@ -62,9 +93,9 @@ function FormOfModal({status}) {
     return (
         <form>
             <div>
-                <Selection countries={countries} onChange={(e) => handleInput(e, 'country')} status={statusOfError ? 'error' : ''}/>
+                <Selection countries={countries} onChange={(e) => handleInput(e, 'country')} status={!errorOnChange.country || !errorsOnSave.country ? 'error' : ''} />
                 {
-                    statusChange('страну') 
+                    statusChange('country')
                 }
             </div>
 
@@ -74,25 +105,24 @@ function FormOfModal({status}) {
                     justifyContent: 'space-between',
                     marginTop: '1rem',
                     marginBottom: '2rem',
-                    width: '100%'
+                    width: '95%'
                 }}>
 
                     <div
                         style={{
                             display: 'inline-block',
-                            width: '48%',
+                            width: '49%',
                     }}>
 
                         <Input 
-                            defaultValue='url'
                             addonAfter='*'                     
                             placeholder="url фото" 
                             onChange={(e) => handleInput(e.target.value, 'image')}
                             value={videoCard.image}
-                            status={statusOfError ? 'error' : ''}
+                            status={!errorOnChange.image || !errorsOnSave.image ? 'error' : ''}
                         />
                         {
-                            statusChange('url')
+                            statusChange('image')
                         }
                     </div>
                     
@@ -100,7 +130,7 @@ function FormOfModal({status}) {
                     <div
                         style={{
                             display: 'inline-block',
-                            width: '48%',
+                            width: '49%',
                         }}
                     >
                         <Input 
@@ -108,43 +138,58 @@ function FormOfModal({status}) {
                             onChange={(e) => handleInput(e.target.value, 'description')}
                             value={videoCard.description}
                         />
-                    </div>
-                
-                    
-                    
+                    </div>                 
             </div>
 
             {                        
-                videoCard.records?.map((el) => (
+                videoCard.records?.map((el, index) => (
                     <div key={el.id} 
                         style={{
                             display: 'flex',
                             justifyContent: 'space-between',
                             marginTop: '1rem',
                             marginBottom: '1rem',
-                            width: '100%'
+                            width: videoCard.records.length === 1 ? '95%' : '100%'
                         }}>
 
-                        <Input 
+                        <div
                             style={{
                                 display: 'inline-block',
-                                width: '48%',
-                            }}
-                            addonAfter='*'  
-                            placeholder="город" 
-                            onChange={(e) => handleInputRecords(e.target.value, el.id, 'city')}
-                            value={el.city}
-                        />
-                        <Input 
+                                width:  videoCard.records.length === 1 ? '49%' : '47%',
+                                }}>
+
+                            <Input 
+                                addonAfter={index === 0 ? '*' : ' '}    
+                                placeholder="город" 
+                                onChange={(e) => handleInputRecords(e.target.value, el.id, 'city', index)}
+                                value={el.city}
+                                status={(!errorOnChange.records[index].city || !errorsOnSave.records[index].city ) ? 'error' : ''}
+                            />
+
+                            {
+                                statusChangeForVideoRecords('city', index)
+                            }
+                        </div>
+
+                        <div
                             style={{
                                 display: 'inline-block',
-                                width: '48%',
-                            }}
-                            addonAfter='*'  
-                            placeholder='видео'
-                            onChange={(e) => handleInputRecords(e.target.value, el.id, 'videoUrl')}
-                            value={el.videoUrl}
-                        />
+                                width:  videoCard.records.length === 1 ? '49%' : '47%',
+                                }}>
+
+                            <Input 
+                                addonAfter={index === 0 ? '*' : '  '}  
+                                placeholder='видео'
+                                onChange={(e) => handleInputRecords(e.target.value, el.id, 'videoUrl', index)}
+                                value={el.videoUrl}
+                                status={(!errorOnChange.records[index].videoUrl || !errorsOnSave.records[index].videoUrl)  ? 'error' : ''}
+                            />
+
+                            {
+                                statusChangeForVideoRecords('videoUrl', index) 
+                            }
+                        </div>
+
                         
                         {
                             videoCard.records.length > 1 && (

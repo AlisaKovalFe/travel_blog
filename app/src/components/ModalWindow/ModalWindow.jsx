@@ -8,27 +8,48 @@ import { addVideosThunk } from '../../store/actions/videosActions'
 import { clearFormAC } from '../../store/actions/formVideoActions'
 
 function ModalWindow({ text, okText, title }) {
+    const videoCard = useSelector((store) => store.formVideoStore);
     const dispatch = useDispatch();   
     const [ isModalOpen, setIsModalOpen ] = useState(false);
-    const  videoCard = useSelector((store) => store.formVideoStore);
-    const [ status, setStatus ] = useState('')
-    const regExp = /^[?!,.а-яА-ЯёЁ0-9\S\w]/
+    const [ errorsOnSave, setErrorsOnSave ] = useState({
+        country: 'no error',
+        image: 'no error',
+        records: [
+            {
+                city: 'no error',
+                videoUrl:  'no error',
+            }
+        ] 
+    });
+    const [ errorOnChange, setErrorOnChange ] = useState({
+        country: 'no error',
+        image: 'no error',
+        records: [
+            {
+                city: 'no error',
+                videoUrl:  'no error',
+            }
+        ] 
+    })
 
     const showModal = () => {
         setIsModalOpen(true);
     };
 
+    const errors = ['страну', 'url фото', 'город', 'url видео']
+    const inputs = [videoCard.country, videoCard.image.trim(), videoCard.records[0].city.trim(), videoCard.records[0].videoUrl.trim()]
+
+    const filteredErrors = errors.filter((el, i) => !inputs[i])
+
     const handleOk = () => { 
-        console.log(regExp.test(videoCard.country), regExp.test(videoCard.image), videoCard.image, regExp.test(videoCard.description))
-        
-        if (regExp.test(videoCard.country) && regExp.test(videoCard.image) && regExp.test(videoCard.description)) {
+        if (videoCard.country && videoCard.image.trim() && videoCard.records.every((el) => el.city && el.videoUrl)) {
             dispatch(addVideosThunk(
                 {
                     id: videoCard.id,
-                    title: videoCard.country.trim(),
+                    title: videoCard.country,
                     cover: {
-                        src: videoCard.image.trim(),
-                        alt: videoCard.description.trim() || `${videoCard.country}`
+                        src: videoCard.image,
+                        alt: videoCard.description || `${videoCard.country}`
                     },
                     records: videoCard.records.map((el) => {
                         return {
@@ -39,18 +60,56 @@ function ModalWindow({ text, okText, title }) {
                         }
                     })
             }
-            ))  
-            dispatch(clearFormAC())
+            )) 
+            notification.open({
+                message: 'Отлично',
+                description: 'Вы добавили видеокарточку!'
+            }) 
             setIsModalOpen(false);
-        }  else {
-            setStatus('error')
+            dispatch(clearFormAC())
+        } else {     
+            setErrorsOnSave({
+                country: videoCard.country,
+                image: videoCard.image.trim(),
+                records: videoCard.records.map((el) => {
+                    return {
+                        city: el.city,
+                        videoUrl: el.videoUrl,
+                    }
+                })
+            })  
+
             notification.open({
                 message: 'Упс!',
-                description: `Заполните`
+                description: `Укажите непустые ${filteredErrors.join(', ')}`
             }) 
         }
+        
+        
     };
+
     const handleCancel = () => {
+        setErrorsOnSave({
+            country: 'no error',
+            image: 'no error',
+            records: videoCard.records.map((el) => {
+                return {
+                    city: 'no error',
+                    videoUrl: 'no error',
+                }
+            })
+        }) 
+        setErrorOnChange({
+            country: 'no error',
+            image: 'no error',
+            records: videoCard.records.map((el) => {
+                return {
+                    city: 'no error',
+                    videoUrl: 'no error',
+                }
+            })
+        })
+        dispatch(clearFormAC())
         setIsModalOpen(false);
     };
 
@@ -68,7 +127,7 @@ function ModalWindow({ text, okText, title }) {
                 bodyStyle={{backgroundColor: '#f8f1ea', padding: '2rem'}}
             >
                 
-                <FormOfModal status={status}/>                    
+                <FormOfModal errorsOnSave={errorsOnSave} setErrorsOnSave={setErrorsOnSave} errorOnChange={errorOnChange} setErrorOnChange={setErrorOnChange}/>                    
             </Modal>
         </div>
     );
