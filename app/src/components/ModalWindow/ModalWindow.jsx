@@ -7,7 +7,7 @@ import FormOfModal from '../FormOfModal/FormOfModal'
 import { addVideosThunk } from '../../store/actions/videosActions'
 import { clearFormAC } from '../../store/actions/formVideoActions'
 
-function ModalWindow({ text, okText, title }) {
+function ModalWindow({ text, okText, title, videoCardFromVideosView }) {
     const videoCard = useSelector((store) => store.formVideoStore);
     const dispatch = useDispatch();   
     const [ isModalOpen, setIsModalOpen ] = useState(false);
@@ -17,7 +17,7 @@ function ModalWindow({ text, okText, title }) {
         records: [
             {
                 city: 'no error',
-                videoUrl:  'no error',
+                videoUrl: 'no error',
             }
         ] 
     });
@@ -27,7 +27,7 @@ function ModalWindow({ text, okText, title }) {
         records: [
             {
                 city: 'no error',
-                videoUrl:  'no error',
+                videoUrl: 'no error',
             }
         ] 
     })
@@ -127,7 +127,7 @@ function ModalWindow({ text, okText, title }) {
                 bodyStyle={{backgroundColor: '#f8f1ea', padding: '2rem'}}
             >
                 
-                <FormOfModal errorsOnSave={errorsOnSave} setErrorsOnSave={setErrorsOnSave} errorOnChange={errorOnChange} setErrorOnChange={setErrorOnChange}/>                    
+                <FormOfModal errorsOnSave={errorsOnSave} setErrorsOnSave={setErrorsOnSave} errorOnChange={errorOnChange} setErrorOnChange={setErrorOnChange} videoCardFromVideosView={videoCardFromVideosView}/>                    
             </Modal>
         </div>
     );

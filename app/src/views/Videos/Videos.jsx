@@ -26,13 +26,14 @@ function Videos() {
     const [cardId, setCardId] = useState(null);
     const navigate = useNavigate()
 
+    function findCountry(title, index, id) {
+        const currentWorldRegion = destinations?.find((region) => region.countries?.find((el) => el.title === title))
+        const currentCountry = currentWorldRegion?.countries?.find((el) => el.title === title) 
 
-    let videosCountries = []
-    let destinationCounty = []
-    videos.videosInfo?.map((el) => videosCountries.push(el?.title))
-    destinations.map((el) => el.countries?.map((el) => destinationCounty.push(el?.title)))
-
-    const travelling = videosCountries.filter((el) => destinationCounty.includes(el))
+        return videos.videosInfo[index].title === currentCountry?.title && (
+            <ButtonLink onClick={() => toTravelling(id)} text='В путешествие' />
+        )   
+    }
 
     function toTravelling(id) {
         const currentWorldRegionID = destinations?.find((item) => item.countries?.find((el) => el.id === +id))
@@ -58,7 +59,7 @@ function Videos() {
         //это надо делать при респонс 200, но не писать же мне это в actions, где находися респонс
         notification.open({
             message: 'Отлично!',
-            description: 'Вы успешно удалили видео'
+            description: 'Вы успешно удалили видеокарточу'
         })
     }
 
@@ -82,7 +83,7 @@ function Videos() {
                             content={(
                                 <div className={styles.popover} >
                                     <div onClick={() => handlerEdit(el.id)}>
-                                        <ModalWindow text='Edit' okText='Save' title='Редактировать ...' />
+                                        <ModalWindow text='Edit' okText='Save' title={`Редактировать страну ${el.title}`} videoCardFromVideosView={el}/>
                                     </div>
 
                                     <ButtonLink text='Delete' onClick={() => handlerDelete(el.id)} />
@@ -103,9 +104,7 @@ function Videos() {
                                 <div className={styles.video__heading}>
                                     <Meta className={styles.video__title} title={el?.title} />
                                     {
-                                        travelling.includes(el.title) ? (
-                                            <ButtonLink onClick={() => toTravelling(el.id)} text='В путешествие' />
-                                        ) : ''
+                                        findCountry(el?.title, index, el.id)
                                     }
 
                                 </div>
@@ -139,11 +138,8 @@ function Videos() {
                             <div className={styles.video__heading}>
                                 <Meta className={styles.video__title} title={el?.title} />
                                 {
-                                    travelling.includes(el.title) ? (
-                                        <ButtonLink onClick={() => toTravelling(el.id)} text='В путешествие' />
-                                    ) : ''
-                                }
-                                 
+                                    findCountry(el?.title, index, el.id)
+                                }                             
 
                             </div>
 

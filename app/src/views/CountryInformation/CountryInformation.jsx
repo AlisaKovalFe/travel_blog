@@ -21,9 +21,7 @@ function CountryInformation() {
     }, [])
 
     const currentWorldRegion = destinations?.find((item) => item.countries?.find((el) => el.id === +id))
-    console.log(currentWorldRegion)
     const currentCountry = currentWorldRegion?.countries?.find((el) => el.id === +id)   
-    console.log(currentCountry)
 
     return (
             <article className={styles.wrapper}>

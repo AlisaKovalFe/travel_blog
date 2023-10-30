@@ -6,7 +6,8 @@ import ButtonLink from '../ButtonLink/ButtonLink'
 import { addDataFromInputInFormAC, addEmptyVideoBlockInFormAC, addVideoRecordsFromInputsInFormAC, deleteVideoRecordInFormAC } from '../../store/actions/formVideoActions'
 import { getCountriesForSelectThunk } from '../../store/actions/countriesForSelectActions'
 
-function FormOfModal({ errorsOnSave, setErrorsOnSave, errorOnChange, setErrorOnChange }) {
+function FormOfModal({ errorsOnSave, setErrorsOnSave, errorOnChange, setErrorOnChange, videoCardFromVideosView }) {
+
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getCountriesForSelectThunk())
@@ -14,8 +15,10 @@ function FormOfModal({ errorsOnSave, setErrorsOnSave, errorOnChange, setErrorOnC
 
     const { countries } = useSelector((store) => store.countriesForSelectStore);
     const videoCard = useSelector((store) => store.formVideoStore);
+    console.log(videoCardFromVideosView)
     
     const handleInput = (value, params) => {  
+        console.log(value)
         dispatch(addDataFromInputInFormAC({
             value, 
             params
@@ -79,13 +82,13 @@ function FormOfModal({ errorsOnSave, setErrorsOnSave, errorOnChange, setErrorOnC
     }
 
     function statusChange(params) {
-        return !errorOnChange[params] ? (
+        return !errorOnChange[params] || !errorsOnSave[params] ? (
             <div style={{color: 'red'}}>Укажите {params}</div>
         ) : ''
     }
 
     function statusChangeForVideoRecords(params, index) {
-        return !errorOnChange.records[index][params] ? (
+        return !errorOnChange.records[index][params] || !errorsOnSave.records[index][params] ? (
             <div style={{color: 'red'}}>Укажите {params}</div>
         ) : ''
     }
@@ -93,7 +96,13 @@ function FormOfModal({ errorsOnSave, setErrorsOnSave, errorOnChange, setErrorOnC
     return (
         <form>
             <div>
-                <Selection countries={countries} onChange={(e) => handleInput(e, 'country')} status={!errorOnChange.country || !errorsOnSave.country ? 'error' : ''} />
+                <Selection 
+                    countries={countries} 
+                    onChange={(e) => handleInput(e, 'country')} 
+                    status={!errorOnChange.country || !errorsOnSave.country ? 'error' : ''} 
+                    value={videoCardFromVideosView?.title}
+                    disabled={videoCardFromVideosView?.title ? true : false}
+                    />
                 {
                     statusChange('country')
                 }
@@ -118,7 +127,8 @@ function FormOfModal({ errorsOnSave, setErrorsOnSave, errorOnChange, setErrorOnC
                             addonAfter='*'                     
                             placeholder="url фото" 
                             onChange={(e) => handleInput(e.target.value, 'image')}
-                            value={videoCard.image}
+                            // defaultValue={videoCardFromVideosView?.cover.src}
+                            value={videoCard.image || videoCardFromVideosView?.cover?.src}
                             status={!errorOnChange.image || !errorsOnSave.image ? 'error' : ''}
                         />
                         {

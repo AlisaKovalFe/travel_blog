@@ -2,11 +2,13 @@ import React from 'react';
 import styles from './selection.module.scss'
 import { Select } from 'antd';
 
-function Selection({countries, onChange, status}) {
+function Selection({countries, onChange, status, value, disabled}) {
     return (
             <Select
                 // defaultValue='' //не работает
                 // defaultActiveFirstOption='false' //не работает
+                disabled={disabled}
+                value={value}
                 notFoundContent='такой страны нет в списке'
                 status={status}
                 showSearch
