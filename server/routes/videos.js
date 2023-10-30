@@ -7,12 +7,12 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  const {data} = req.body
-  videos.videosInfo.push(data)
-  console.log(videos.videosInfo)
+  const { videoCard } = req.body
+  videos.videosInfo.push(videoCard)
 
   res.status(200).end()
 });
+
 
 router.delete('/:id', async function(req, res) {
   const { id } = req.params
