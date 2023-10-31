@@ -18,8 +18,8 @@ const { Meta } = Card;
 function Countries() {
     const { id } = useParams()
     const dispatch = useDispatch();
-    const { destinations } = useSelector((store) => store.mainStore);
-    const { helpers } = useSelector((store) => store.helpersStore);
+    const destinations = useSelector((store) => store.mainStore);
+    const helpers = useSelector((store) => store.helpersStore);
 
     useEffect(() => {   
         dispatch(getDestinationsThunk())

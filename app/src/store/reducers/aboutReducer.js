@@ -1,13 +1,11 @@
 import { mainTypes } from '../actions/actionTypes';
 
-const initialState = {
-  about: [],
-};
+const initialState = [];
 
 export function aboutReducer(state = initialState, action) {
     switch (action.type) {
         case mainTypes.GET_ABOUT: {
-          return { ...state, about: action.payload };
+          return [ ...action.payload ];
         }
         
         default: {

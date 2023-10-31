@@ -1,13 +1,11 @@
 import { mainTypes } from '../actions/actionTypes';
 
-const initialState = {
-  greeting: {},
-};
+const initialState = {};
 
 export function greetingReducer(state = initialState, action) {
     switch (action.type) {
         case mainTypes.GET_GREETING: {
-          return { ...state, greeting: action.payload };
+          return { ...action.payload };
         }
         
         default: {

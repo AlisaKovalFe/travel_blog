@@ -14,9 +14,9 @@ const { Title, Paragraph } = Typography;
 
 function Greeting() {
     const dispatch = useDispatch();
-    const { greeting } = useSelector((store) => store.greetingStore);
-    const { helpers } = useSelector((store) => store.helpersStore);
-    const { photoGallery } = useSelector((store) => store.photoGalleryStore);
+    const greeting = useSelector((store) => store.greetingStore);
+    const helpers = useSelector((store) => store.helpersStore);
+    const photoGallery = useSelector((store) => store.photoGalleryStore);
 
     useEffect(() => {   
         dispatch(getGreetingThunk())

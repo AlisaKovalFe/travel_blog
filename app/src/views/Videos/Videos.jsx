@@ -8,7 +8,7 @@ import { Card, Collapse } from 'antd';
 import { getHelpersThunk } from '../../store/actions/helpersActions'
 import ButtonLink from '../../components/ButtonLink/ButtonLink'
 import { useNavigate } from 'react-router-dom'
-import { Popover, notification } from 'antd';
+import { Popover, notification, Popconfirm, Button } from 'antd';
 const { Meta } = Card;
 
 function Videos() {
@@ -19,12 +19,23 @@ function Videos() {
         dispatch(getHelpersThunk())
     }, [])
 
-    const { videos } = useSelector((store) => store.videosStore);
-    const { helpers } = useSelector((store) => store.helpersStore);
-    const { destinations } = useSelector((store) => store.mainStore);
+    const videos = useSelector((store) => store.videosStore);
+    const helpers = useSelector((store) => store.helpersStore);
+    const destinations = useSelector((store) => store.mainStore);
     const [open, setOpen] = useState(false);
-    const [cardId, setCardId] = useState(null);
+    const [ cardId, setCardId ] = useState(null);
     const navigate = useNavigate()
+
+    function confirm(id) {
+        dispatch(deleteVideosThunk({
+            id: +id
+        }))
+
+        notification.open({
+            message: 'Отлично!',
+            description: 'Вы успешно удалили видеокарточу'
+        })
+    }
 
     function findCountry(title, index, id) {
         const currentWorldRegion = destinations?.find((region) => region.countries?.find((el) => el.title === title))
@@ -40,9 +51,9 @@ function Videos() {
         navigate(`/world-regions/countries/${currentWorldRegionID.id}/country-information/${id}`)
     }
 
-    function chooseCardForPopup(id) {
-        console.log(cardId, id)
+    function chooseCardForPopup(event, id) {
         setCardId(id)
+        event.stopPropagation()
     }
 
     function handlerEdit(id) {
@@ -50,19 +61,6 @@ function Videos() {
         console.log(currentVideocard)
         setOpen(false);
     }
-
-    function handlerDelete(id) {
-        dispatch(deleteVideosThunk({
-            id: +id
-        }))
-
-        //это надо делать при респонс 200, но не писать же мне это в actions, где находися респонс
-        notification.open({
-            message: 'Отлично!',
-            description: 'Вы успешно удалили видеокарточу'
-        })
-    }
-
 
     return (
         <section className={styles.wrapper}>
@@ -74,8 +72,7 @@ function Videos() {
 
             <div className={styles.videos}>
                 {videos?.videosInfo?.map((el, index) => (
-
-                    el?.id === cardId ? (
+              
                         <Popover
                             key={el.id}
                             trigger="click"
@@ -86,11 +83,19 @@ function Videos() {
                                         <ModalWindow text='Edit' okText='Save' title={`Редактировать страну ${el.title}`} videoCardFromVideosView={el}/>
                                     </div>
 
-                                    <ButtonLink text='Delete' onClick={() => handlerDelete(el.id)} />
+                                    <Popconfirm
+                                        description={`Вы дейсвительно хотите удалить ${el.title}`} 
+                                        onConfirm={() => confirm(el.id)}
+                                        okText="Да"
+                                        cancelText="Нет"
+                                    >
+                                        <Button size='large'>Delete</Button>
+                                    </Popconfirm>
+                                   
                                 </div>
                             )}
-                            open={open}
-                            onOpenChange={(newOpen) => setOpen(newOpen)}
+                            open={el?.id === cardId}
+                            onOpenChange={() => setCardId(null)}
                         >
 
                             <Card
@@ -98,7 +103,7 @@ function Videos() {
                                 hoverable
                                 className={styles.video}
                                 cover={<img alt={el?.cover?.alt} src={el?.cover?.src} className={styles.video__image} />}
-                                onClick={() => chooseCardForPopup(el.id)}
+                                onClickCapture={(event) => chooseCardForPopup(event, el.id)}
                             >
 
                                 <div className={styles.video__heading}>
@@ -126,42 +131,6 @@ function Videos() {
                                 />
                             </Card>
                         </Popover>
-                    ) : (
-                        <Card
-                            key={el.id}
-                            hoverable
-                            className={styles.video}
-                            cover={<img alt={el?.cover?.alt} src={el?.cover?.src} className={styles.video__image} />}
-                            onClick={() => chooseCardForPopup(el.id)}
-                        >
-
-                            <div className={styles.video__heading}>
-                                <Meta className={styles.video__title} title={el?.title} />
-                                {
-                                    findCountry(el?.title, index, el.id)
-                                }                             
-
-                            </div>
-
-                            <Collapse
-                                items={el.records?.map((el) => {
-                                    return {
-                                        key: el.key,
-                                        label: el.label,
-                                        children: <iframe credentialless='true' referrerPolicy='origin-when-cross-origin' className="video_styles" src={el?.src} title={el?.title} frameBorder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-                                        // <video src={el?.src} crossOrigin='use-credentials'></video>
-                                        // <iframe credentialless='true' referrerPolicy='origin-when-cross-origin' className="video_styles" src={el?.src} title={el?.title} frameBorder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-
-                                        // https://youtu.be/Muz720S9uVw
-                                        // <iframe width="853" height="480" src="https://www.youtube.com/embed/Muz720S9uVw" title="Пьемонт, горы, фиат и нутелла. Италия" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                                        // https://www.youtube.com/watch?v=Muz720S9uVw&t=5s
-                                    }
-                                })}
-
-                            />
-                        </Card>
-                    )
-
                 )
                 )}
             </div>

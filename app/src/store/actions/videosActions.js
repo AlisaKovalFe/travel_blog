@@ -25,6 +25,7 @@ export const getErrorsOfVideoAC = (data) => ({
 })
 
 export const addVideosThunk = (data) => async (dispatch) => {
+  console.log(data)
   await axios.post('http://localhost:4000/video', { videoCard: data })
     .then((response) => {
       if (response.status === 200) {

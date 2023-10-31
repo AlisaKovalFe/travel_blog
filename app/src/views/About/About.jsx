@@ -8,8 +8,8 @@ import { getHelpersThunk } from '../../store/actions/helpersActions'
 
 function About() {
     const dispatch = useDispatch();
-    const { about } = useSelector((store) => store.aboutStore);
-    const { helpers } = useSelector((store) => store.helpersStore);
+    const about = useSelector((store) => store.aboutStore);
+    const helpers = useSelector((store) => store.helpersStore);
 
     useEffect(() => {   
         dispatch(getAboutThunk())

@@ -116,7 +116,7 @@ function ModalWindow({ text, okText, title, videoCardFromVideosView }) {
 
     return (
         <div className={styles.wrapper}>
-            <ButtonLink onClick={showModal} text={text}/>
+            <ButtonLink onClick={showModal} text={text} />
             <Modal 
                 title={title}
                 open={isModalOpen} 

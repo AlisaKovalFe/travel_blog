@@ -1,13 +1,11 @@
 import { mainTypes } from '../actions/actionTypes';
 
-const initialState = {
-  destinations: [],
-};
+const initialState = []
 
 export function mainReducer(state = initialState, action) {
     switch (action.type) {
         case mainTypes.GET_DESTINATIONS: {
-          return { ...state, destinations: action.payload };
+          return [ ...action.payload ];
         }
         
         default: {

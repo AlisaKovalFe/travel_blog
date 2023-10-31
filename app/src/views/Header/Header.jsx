@@ -8,7 +8,7 @@ import { getDestinationsThunk } from '../../store/actions/mainActions'
 
 function Header() {
 	const dispatch = useDispatch();
-	const { destinations } = useSelector((store) => store.mainStore);
+	const destinations = useSelector((store) => store.mainStore);
 
     useEffect(() => {   
         dispatch(getDestinationsThunk())

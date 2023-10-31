@@ -1,13 +1,12 @@
 import { mainTypes } from '../actions/actionTypes';
 
-const initialState = {
-    photoGallery: [],
-};
+const initialState = [];
 
 export function photoGalleryReducer(state = initialState, action) {
     switch (action.type) {
         case mainTypes.GET_PHOTO_GALLERY: {
-          return { ...state, photoGallery: action.payload };
+          console.log(action.payload)
+          return [ ...action.payload ];
         }
         
         default: {
