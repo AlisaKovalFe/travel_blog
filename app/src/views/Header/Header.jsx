@@ -12,7 +12,7 @@ function Header() {
 
     useEffect(() => {   
         dispatch(getDestinationsThunk())
-    }, [])
+    }, [dispatch])
 	const menu = [
 		{
 			label: <Link to='/'><HomeOutlined/></Link>,

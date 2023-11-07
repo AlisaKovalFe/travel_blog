@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styles from './countriesInformayion.module.scss'
 import Helper from '../../components/Helper/Helper'
 import { useParams } from 'react-router-dom';
@@ -18,7 +18,7 @@ function CountryInformation() {
     useEffect(() => {   
         dispatch(getDestinationsThunk())
         dispatch(getHelpersThunk())
-    }, [])
+    }, [dispatch])
 
     const currentWorldRegion = destinations?.find((item) => item.countries?.find((el) => el.id === +id))
     const currentCountry = currentWorldRegion?.countries?.find((el) => el.id === +id)   

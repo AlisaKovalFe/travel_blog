@@ -17,4 +17,8 @@ export const mainTypes = {
     //работа со страницей Video
     ADD_VIDEO_CARD: 'ADD_VIDEO_CARD',
     DElETE_VIDEO_CARD: 'DElETE_VIDEO_CARD',
+    EDIT_VIDEO_CARD: 'EDIT_VIDEO_CARD',
+
+    //редактирование карточки
+    SEND_VIDEO_FOR_EDIT: 'SEND_VIDEO_FOR_EDIT'
 };

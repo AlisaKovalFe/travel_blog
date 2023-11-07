@@ -22,7 +22,7 @@ function Greeting() {
         dispatch(getGreetingThunk())
         dispatch(getPhotoGalleryThunk())
         dispatch(getHelpersThunk())
-    }, [])
+    }, [dispatch])
 
     return (
         <section className={styles.wrapper}>

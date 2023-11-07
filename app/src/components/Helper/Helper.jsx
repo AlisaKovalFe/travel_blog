@@ -3,8 +3,6 @@ import styles from './helper.module.scss'
 import { Button, Tooltip } from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
 
-
-
 function Helper({src, text, link, alt}) {
     return (
         <div className={styles.wrapper}>

@@ -16,7 +16,7 @@ function ToMap() {
     useEffect(() => {   
         dispatch(getDestinationsThunk())
         dispatch(getHelpersThunk())
-    }, [])
+    }, [dispatch])
 
 
     let features = []

@@ -1,33 +1,30 @@
 import React, { useEffect } from 'react';
-import { Button, Input } from 'antd';
+import { Button, Input, Form } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import Selection from '../Selection/Selection'
 import ButtonLink from '../ButtonLink/ButtonLink'
 import { addDataFromInputInFormAC, addEmptyVideoBlockInFormAC, addVideoRecordsFromInputsInFormAC, deleteVideoRecordInFormAC } from '../../store/actions/formVideoActions'
 import { getCountriesForSelectThunk } from '../../store/actions/countriesForSelectActions'
 
-function FormOfModal({ errorsOnSave, setErrorsOnSave, errorOnChange, setErrorOnChange, videoCardFromVideosView }) {
-
+function FormOfModal({ errors, setErrors, form, editOption }) {
+    
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getCountriesForSelectThunk())
-    }, [])
+    }, [dispatch])
 
     const { countries } = useSelector((store) => store.countriesForSelectStore);
     const videoCard = useSelector((store) => store.formVideoStore);
-    console.log(videoCardFromVideosView)
     
     const handleInput = (value, params) => {  
-        console.log(value)
         dispatch(addDataFromInputInFormAC({
             value, 
             params
         }))
         if (value.trim() === '') {
-            setErrorOnChange({...errorOnChange, [params]: value}) 
+            setErrors({...errors, [params]: value}) 
         } else {
-            setErrorOnChange({...errorOnChange, [params]: value}) 
-            setErrorsOnSave({...errorsOnSave, [params]: value})
+            setErrors({...errors, [params]: value})
         }
     }
 
@@ -38,7 +35,7 @@ function FormOfModal({ errorsOnSave, setErrorsOnSave, errorOnChange, setErrorOnC
             id
         }))
         if (value.trim() === '') {
-            setErrorOnChange({...errorOnChange, records: errorOnChange.records.map((el, i) => {
+            setErrors({...errors, records: errors.records.map((el, i) => {
                 if (i === index) {
                     return {
                         ...el,
@@ -46,18 +43,9 @@ function FormOfModal({ errorsOnSave, setErrorsOnSave, errorOnChange, setErrorOnC
                     }
                 } 
                 return el
-            })})
+            })}) 
         } else {
-            setErrorOnChange({...errorOnChange, records: errorOnChange.records.map((el, i) => {
-                if (i === index) {
-                    return {
-                        ...el,
-                    [params]: value
-                    }
-                } 
-                return el
-            })})
-            setErrorsOnSave({...errorsOnSave, records: errorsOnSave.records.map((el, i) => {
+            setErrors({...errors, records: errors.records.map((el, i) => {
                 if (i === index) {
                     return {
                         ...el,
@@ -71,8 +59,7 @@ function FormOfModal({ errorsOnSave, setErrorsOnSave, errorOnChange, setErrorOnC
 
     function handleEmptyAddVideoBlock() {
         dispatch(addEmptyVideoBlockInFormAC())
-        setErrorOnChange({...errorOnChange, records: [...errorOnChange.records, {id: Date.now(), city: 'no error', videoUrl: 'no error'}]})
-        setErrorsOnSave({...errorsOnSave, records: [...errorsOnSave.records, {id: Date.now(), city: 'no error', videoUrl: 'no error'}]})
+        setErrors({...errors, records: [...errors.records, {id: Date.now(), city: 'no error', videoUrl: 'no error'}]})
     }
 
     function deleteVideoBlock(id) {
@@ -82,27 +69,35 @@ function FormOfModal({ errorsOnSave, setErrorsOnSave, errorOnChange, setErrorOnC
     }
 
     function statusChange(params) {
-        return !errorOnChange[params] || !errorsOnSave[params] ? (
+        return  !errors[params] ? (
             <div style={{color: 'red'}}>Укажите {params}</div>
         ) : ''
     }
 
     function statusChangeForVideoRecords(params, index) {
-        return !errorOnChange.records[index][params] || !errorsOnSave.records[index][params] ? (
+        return !errors?.records[index]?.[params] ? (
             <div style={{color: 'red'}}>Укажите {params}</div>
         ) : ''
     }
 
     return (
-        <form>
-            <div>
-                <Selection 
-                    countries={countries} 
-                    onChange={(e) => handleInput(e, 'country')} 
-                    status={!errorOnChange.country || !errorsOnSave.country ? 'error' : ''} 
-                    value={videoCardFromVideosView?.title}
-                    disabled={videoCardFromVideosView?.title ? true : false}
-                    />
+        <Form 
+            form={form}
+            >
+                <div>
+                    <Form.Item
+                        name='country'   
+                        initialValue={editOption ? videoCard?.country : null}                  
+                    >
+                        <Selection 
+                            countries={countries} 
+                            onChange={(e) => handleInput(e, 'country')} 
+                            status={!errors.country ? 'error' : ''} 
+                            value={videoCard?.country}
+                            disabled={editOption ? true : false}
+                            placeholder="Выберите страну"
+                        />
+                    </Form.Item>
                 {
                     statusChange('country')
                 }
@@ -127,9 +122,8 @@ function FormOfModal({ errorsOnSave, setErrorsOnSave, errorOnChange, setErrorOnC
                             addonAfter='*'                     
                             placeholder="url фото" 
                             onChange={(e) => handleInput(e.target.value, 'image')}
-                            // defaultValue={videoCardFromVideosView?.cover.src}
-                            value={videoCard.image || videoCardFromVideosView?.cover?.src}
-                            status={!errorOnChange.image || !errorsOnSave.image ? 'error' : ''}
+                            value={videoCard.image}
+                            status={!errors.image ? 'error' : ''}
                         />
                         {
                             statusChange('image')
@@ -173,7 +167,7 @@ function FormOfModal({ errorsOnSave, setErrorsOnSave, errorOnChange, setErrorOnC
                                 placeholder="город" 
                                 onChange={(e) => handleInputRecords(e.target.value, el.id, 'city', index)}
                                 value={el.city}
-                                status={(!errorOnChange.records[index].city || !errorsOnSave.records[index].city ) ? 'error' : ''}
+                                status={(!errors?.records[index]?.city ) ? 'error' : ''}
                             />
 
                             {
@@ -192,7 +186,7 @@ function FormOfModal({ errorsOnSave, setErrorsOnSave, errorOnChange, setErrorOnC
                                 placeholder='видео'
                                 onChange={(e) => handleInputRecords(e.target.value, el.id, 'videoUrl', index)}
                                 value={el.videoUrl}
-                                status={(!errorOnChange.records[index].videoUrl || !errorsOnSave.records[index].videoUrl)  ? 'error' : ''}
+                                status={(!errors?.records[index]?.videoUrl)  ? 'error' : ''}
                             />
 
                             {
@@ -220,7 +214,7 @@ function FormOfModal({ errorsOnSave, setErrorsOnSave, errorOnChange, setErrorOnC
                 +
             </Button>
 
-        </form>
+        </Form>
     );
 }
 

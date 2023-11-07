@@ -1,18 +1,16 @@
 import React, { useEffect } from 'react';
-import { Typography } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { getDestinationsThunk } from '../../store/actions/mainActions'
 import styles from './countries.module.scss'
 import Helper from '../../components/Helper/Helper'
-import Selection from '../../components/Selection/Selection'
-import Loader from '../../components/Loader/Loader'
-import ResultOfSearch from '../../components/ResultOfSearch/ResultOfSearch'
+// import Selection from '../../components/Selection/Selection'
+// import Loader from '../../components/Loader/Loader'
+// import ResultOfSearch from '../../components/ResultOfSearch/ResultOfSearch'
 import { Link } from 'react-router-dom'
 import { Card } from 'antd';
 import { Tabs } from 'antd';
 import { useParams } from 'react-router-dom';
 import { getHelpersThunk } from '../../store/actions/helpersActions'
-const { Title } = Typography;
 const { Meta } = Card;
 
 function Countries() {
@@ -24,9 +22,9 @@ function Countries() {
     useEffect(() => {   
         dispatch(getDestinationsThunk())
         dispatch(getHelpersThunk())
-    }, [])
+    }, [dispatch])
 
-    const countries = destinations.map((el) => [...el.countries]).flat() // 'это легче, чем пуш?
+    // const countries = destinations.map((el) => [...el.countries]).flat() 
     const currentCountries = destinations.find((el) => el.id === +id)
 
     return (

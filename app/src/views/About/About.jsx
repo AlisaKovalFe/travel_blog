@@ -14,7 +14,7 @@ function About() {
     useEffect(() => {   
         dispatch(getAboutThunk())
         dispatch(getHelpersThunk())
-    }, [])
+    }, [dispatch])
 
     return (     
         <section className={styles.wrapper}>

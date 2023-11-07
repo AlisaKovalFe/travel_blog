@@ -19,7 +19,7 @@ function WorldRegions() {
     useEffect(() => {   
         dispatch(getDestinationsThunk())
         dispatch(getHelpersThunk())
-    }, [])
+    }, [dispatch])
 
     return (
         <section className={styles.wrapper}>

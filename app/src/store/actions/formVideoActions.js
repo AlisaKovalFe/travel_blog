@@ -23,4 +23,9 @@ export const clearFormAC = () => ({
   type: mainTypes.CLEAR_FORM,
   })
 
+//отправка видеокарточки на редактирование
+export const sendVideoForEditAC = (data) => ({
+    type: mainTypes.SEND_VIDEO_FOR_EDIT,
+    payload: data
+  })
 

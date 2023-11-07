@@ -5,7 +5,6 @@ const initialState = [];
 export function photoGalleryReducer(state = initialState, action) {
     switch (action.type) {
         case mainTypes.GET_PHOTO_GALLERY: {
-          console.log(action.payload)
           return [ ...action.payload ];
         }
         

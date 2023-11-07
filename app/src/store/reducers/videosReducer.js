@@ -12,6 +12,23 @@ export function videosReducer(state = initialState, action) {
           return {...state, videosInfo: [...state.videosInfo, action.payload ] } 
         }
 
+        case mainTypes.EDIT_VIDEO_CARD: {
+          const { id, image, description, records } = action.payload
+          return {...state, videosInfo: state.videosInfo.map((el) => {
+            if (el.id === id) {
+              return {
+                ...el,
+                cover: {
+                  src: image,
+                  alt: description
+              },
+              records: records
+              }
+            }
+            return el
+          })} 
+        }
+
         case mainTypes.DElETE_VIDEO_CARD: {
           const { id } = action.payload
           return {...state, videosInfo: state.videosInfo.filter((el) => el.id !== id) } 

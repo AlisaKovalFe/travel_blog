@@ -59,6 +59,17 @@ export function formVideoReducer(state = initialState, action) {
             ]
           };
         }
+
+        case mainTypes.SEND_VIDEO_FOR_EDIT: {
+          const { id, country, image, description, records} = action.payload
+          return {
+            id: id,
+            country: country,
+            image: image,
+            description: description,
+            records: records
+          };
+        }
         
         default: {
           return state;

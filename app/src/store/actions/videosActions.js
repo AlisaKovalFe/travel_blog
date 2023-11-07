@@ -8,7 +8,9 @@ export const getVideosAC = (data) => ({
 })
 
 export const getVideosThunk = () => async (dispatch) => {
-  const response = await axios.get('http://localhost:4000/video')
+  const response = await axios.get('http://localhost:4000/video', {
+    'Sec-CH-UA': '" Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"'
+  })
   return dispatch(getVideosAC(response.data))
 };
 
@@ -18,18 +20,26 @@ export const addVideoAC = (data) => ({
   payload: data
 })
 
-
-export const getErrorsOfVideoAC = (data) => ({
-  type: mainTypes.GET_ERRORS_OF_VIDEO_RESPONSE_FROM_SERVER,
-  payload: data
-})
-
 export const addVideosThunk = (data) => async (dispatch) => {
-  console.log(data)
   await axios.post('http://localhost:4000/video', { videoCard: data })
     .then((response) => {
       if (response.status === 200) {
       dispatch(addVideoAC(data))
+  }})
+}
+
+//редактирование видеокарточки
+
+export const editVideoAC = (data) => ({
+  type: mainTypes.EDIT_VIDEO_CARD,
+  payload: data
+})
+
+export const editVideosThunk = (data) => async (dispatch) => {
+  await axios.put('http://localhost:4000/video', { videoCard: data })
+    .then((response) => {
+      if (response.status === 200) {
+      dispatch(editVideoAC(data))
   }})
 }
 

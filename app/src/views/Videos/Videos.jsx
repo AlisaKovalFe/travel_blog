@@ -1,30 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getVideosThunk, deleteVideosThunk } from '../../store/actions/videosActions'
+import React, { useEffect, useState, useRef } from 'react';
 import styles from './videos.module.scss'
-import Helper from '../../components/Helper/Helper'
-import ModalWindow from '../../components/ModalWindow/ModalWindow'
-import { Card, Collapse } from 'antd';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom'
+import ReactPlayer from 'react-player/youtube'
+import { Popover, notification, Popconfirm, Button, Card, Collapse } from 'antd';
+import { getVideosThunk, deleteVideosThunk } from '../../store/actions/videosActions'
 import { getHelpersThunk } from '../../store/actions/helpersActions'
 import ButtonLink from '../../components/ButtonLink/ButtonLink'
-import { useNavigate } from 'react-router-dom'
-import { Popover, notification, Popconfirm, Button } from 'antd';
+import Helper from '../../components/Helper/Helper'
+import ModalWindow from '../../components/ModalWindow/ModalWindow'
+
+import { sendVideoForEditAC } from '../../store/actions/formVideoActions'
 const { Meta } = Card;
 
 function Videos() {
     const dispatch = useDispatch();
+    const navigate = useNavigate()
 
     useEffect(() => {
         dispatch(getVideosThunk())
         dispatch(getHelpersThunk())
-    }, [])
+    }, [dispatch])
 
     const videos = useSelector((store) => store.videosStore);
     const helpers = useSelector((store) => store.helpersStore);
     const destinations = useSelector((store) => store.mainStore);
-    const [open, setOpen] = useState(false);
     const [ cardId, setCardId ] = useState(null);
-    const navigate = useNavigate()
+    const editOption = useRef(true)
 
     function confirm(id) {
         dispatch(deleteVideosThunk({
@@ -51,47 +53,71 @@ function Videos() {
         navigate(`/world-regions/countries/${currentWorldRegionID.id}/country-information/${id}`)
     }
 
-    function chooseCardForPopup(event, id) {
+    function chooseCardForPopup(id) {
         setCardId(id)
+    }
+
+    function stopEvent(event) {
         event.stopPropagation()
     }
 
     function handlerEdit(id) {
         const currentVideocard = videos.videosInfo?.find((el) => el.id === +id)
-        console.log(currentVideocard)
-        setOpen(false);
+        
+        dispatch(sendVideoForEditAC({
+            id: currentVideocard.id,
+            country: currentVideocard.title,
+            image: currentVideocard.cover.src,
+            description: currentVideocard.cover.alt,
+            records: currentVideocard.records.map((el) => {
+                return {
+                        id: el.key,
+                        city: el.city,
+                        videoUrl: el.videoUrl,
+                        }
+            })
+        }))
     }
 
     return (
         <section className={styles.wrapper}>
             <div className={styles.button}  >
-                <ModalWindow text='Добавить' okText='Save' title='Добавить новое место' />
+                <ModalWindow 
+                    text='Добавить' 
+                    okText='Save' 
+                    title='Добавить новое место' 
+                    />
             </div>
             <h2 className={styles.heading}>{videos.heading}</h2>
             <p className={styles.description}>{videos.description}</p>
 
             <div className={styles.videos}>
                 {videos?.videosInfo?.map((el, index) => (
-              
+            
                         <Popover
                             key={el.id}
                             trigger="click"
-                            //сделала модалку в div, чтобы в компоненет модалка не добавлять онклик (иначе пришлось был локал стейты по открытию модалки и стягианию стран для селекта переносить на эту страницу)
                             content={(
-                                <div className={styles.popover} >
-                                    <div onClick={() => handlerEdit(el.id)}>
-                                        <ModalWindow text='Edit' okText='Save' title={`Редактировать страну ${el.title}`} videoCardFromVideosView={el}/>
-                                    </div>
+                                <div className={styles.popover} onClick={() => setCardId(null)}>
 
+                                    <ModalWindow 
+                                        handler={() => handlerEdit(el.id)} 
+                                        text='Edit' 
+                                        okText='Save' 
+                                        title={`Редактировать страну ${el.title}`} 
+                                        editOption={editOption.current}
+                                        
+                                        />
+                                        
                                     <Popconfirm
-                                        description={`Вы дейсвительно хотите удалить ${el.title}`} 
+                                        description={`Вы действительно хотите удалить ${el.title}?`} 
                                         onConfirm={() => confirm(el.id)}
                                         okText="Да"
                                         cancelText="Нет"
                                     >
                                         <Button size='large'>Delete</Button>
                                     </Popconfirm>
-                                   
+                                
                                 </div>
                             )}
                             open={el?.id === cardId}
@@ -103,7 +129,7 @@ function Videos() {
                                 hoverable
                                 className={styles.video}
                                 cover={<img alt={el?.cover?.alt} src={el?.cover?.src} className={styles.video__image} />}
-                                onClickCapture={(event) => chooseCardForPopup(event, el.id)}
+                                onClick={() => chooseCardForPopup(el.id)}
                             >
 
                                 <div className={styles.video__heading}>
@@ -114,21 +140,26 @@ function Videos() {
 
                                 </div>
 
-                                <Collapse
-                                    items={el.records?.map((el) => {
-                                        return {
-                                            key: el.key,
-                                            label: el.label,
-                                            children: <iframe credentialless='true' referrerPolicy='origin-when-cross-origin' className="video_styles" src={el?.src} title={el?.title} frameBorder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-                                            // <video src={el?.src} crossOrigin='use-credentials'></video>
-                                            // <iframe credentialless='true' referrerPolicy='origin-when-cross-origin' className="video_styles" src={el?.src} title={el?.title} frameBorder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+                                <div onClick={(event) => stopEvent(event)}>
+                                    <Collapse
+                                        accordion
+                                        items={el.records?.map((el) => {
+                                            return {
+                                                key: el.key,
+                                                label: el.city,
+                                                children: <ReactPlayer
+                                                                url={el.videoUrl} 
+                                                                width='100%'
+                                                                height='100%'
+                                                                controls={true}
+                                                            />,
+                                            }
+                                        })}
+                                    />
+                                </div>
 
-                                            // https://youtu.be/Muz720S9uVw
-                                            // <iframe width="853" height="480" src="https://www.youtube.com/embed/Muz720S9uVw" title="Пьемонт, горы, фиат и нутелла. Италия" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                                            // https://www.youtube.com/watch?v=Muz720S9uVw&t=5s
-                                        }
-                                    })}
-                                />
+                                
+                                
                             </Card>
                         </Popover>
                 )
@@ -143,3 +174,20 @@ function Videos() {
 }
 
 export default Videos;
+
+
+// return {
+//     key: el.key,
+//     label: el.key,
+//     children: <ReactPlayer
+//                 url={el.videoUrl} 
+//                 width='100%'
+//                 height='100%'
+//                 config={{
+//                     youtube: {
+//                     playerVars: { showinfo: 1 },
+//                     },
+//                 }}
+//                 />,
+// }
+// }

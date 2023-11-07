@@ -2,18 +2,16 @@ import React from 'react';
 import styles from './selection.module.scss'
 import { Select } from 'antd';
 
-function Selection({countries, onChange, status, value, disabled}) {
+function Selection({countries, onChange, status, value, disabled, placeholder}) {
     return (
             <Select
-                // defaultValue='' //не работает
-                // defaultActiveFirstOption='false' //не работает
                 disabled={disabled}
                 value={value}
                 notFoundContent='такой страны нет в списке'
                 status={status}
                 showSearch
                 className={styles.wrapper}
-                placeholder="Выберите страну"
+                placeholder={placeholder}
                 optionFilterProp="children"
                 onChange={onChange}
                 filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())}
