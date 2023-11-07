@@ -12,20 +12,21 @@ module.exports = {
             records: [
                 {
                     key: 'Пьемонт',
-                    label: 'Пьемонт',
-                    src: "https://youtu.be/Muz720S9uVw",
+                    city: 'Пьемонт',
+                    videoUrl: "https://youtu.be/Muz720S9uVw",
                     title: "Пьемонт, горы, фиат и нутелла. Италия"
                 },
                 {
                     key: 'Тоскана',
-                    label: 'Тоскана',
-                    src: "https://youtu.be/Muz720S9uVw",
+                    city: 'Тоскана',
+                    videoUrl: "https://youtu.be/ChgwxHJTqXc",
                     title: "Топ самых красивых мест в Тоскане",
                 },
                 {
                     key: 'Венето',
-                    label: 'Венето',
-                    src: "https://youtu.be/Muz720S9uVw",
+                    city: 'Венето',
+                    videoUrl: "https://youtu.be/Muz720S9uVw",
+                    // https://youtu.be/xfqcUSaCRTk
                     title: "Veneto - Northern Italy",
                 }
             ]
@@ -40,20 +41,20 @@ module.exports = {
             records: [
                 {
                     key: 'Бретань',
-                    label: 'Бретань',
-                    src: "https://youtu.be/Muz720S9uVw",
+                    city: 'Бретань',
+                    videoUrl: "https://youtu.be/Muz720S9uVw",
                     title: "Бретань с высоты птичьего полета | Видео с дрона | Франция, Бретань с воздуха"
                 },
                 {
                     key: 'Нормандия',
-                    label: 'Нормандия',
-                    src: "https://youtu.be/Muz720S9uVw",
+                    city: 'Нормандия',
+                    videoUrl: "https://youtu.be/Muz720S9uVw",
                     title: "Берега Нормандии в регионе Этрета"
                 },
                 {
                     key: 'О-де-Франс',
-                    label: 'О-де-Франс',
-                    src: "https://youtu.be/Muz720S9uVw",
+                    city: 'О-де-Франс',
+                    videoUrl: "https://youtu.be/Muz720S9uVw",
                     title: "О-де-Франс с высоты птичьего полета | Видео с дрона в 4к | Франция, О-де-Франс с воздуха"
                 }
             ]   
@@ -68,20 +69,20 @@ module.exports = {
             records: [
                 {
                     key: 'Фландрия',
-                    label: 'Фландрия',
-                    src: "https://youtu.be/Muz720S9uVw",
+                    city: 'Фландрия',
+                    videoUrl: "https://youtu.be/Muz720S9uVw",
                     title: "Провинция Восточная Фландрия с высоты | Видео с дрона в 4к | Бельгия с воздуха"
                 },
                 {
                     key: 'Валлония',
-                    label: 'Валлония',
-                    src: "https://youtu.be/Muz720S9uVw",
+                    city: 'Валлония',
+                    videoUrl: "https://youtu.be/Muz720S9uVw",
                     title: "Бельгия. Часть 2. Валлония"
                 },
                 {
                     key: 'Брюссельский столичный регион',
-                    label: 'Брюссельский столичный регион',
-                    src: "https://youtu.be/Muz720S9uVw",
+                    city: 'Брюссельский столичный регион',
+                    videoUrl: "https://youtu.be/Muz720S9uVw",
                     title: "Brussels in 2 minutes | Брюссель за 2 минуты | Бельгия"
                 }
             ]

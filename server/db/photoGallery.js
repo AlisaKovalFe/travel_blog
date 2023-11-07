@@ -19,7 +19,7 @@ module.exports = [
         id: 3,
         title: 'Австрия',
         image: {
-            src: 'https://www.wienmuseum.at/fileadmin/_processed_/3/f/csm_Startbild_Ausgrabungen_Michaelerplatz_dcbcc51e4f.jpg',
+            src: 'https://immigrantinvest.com/wp-content/uploads/2017/03/vienna-is-the-city-with-the-best-quality-of-life.jpeg',
             alt: 'Австрия'
         }
     },
