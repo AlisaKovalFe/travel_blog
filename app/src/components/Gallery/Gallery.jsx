@@ -1,7 +1,7 @@
 import React from 'react';
+import { Carousel, Typography } from 'antd';
 import styles from './gallery.module.scss'
-import { Carousel } from 'antd';
-import { Typography } from 'antd';
+
 const { Title, Paragraph } = Typography;
 
 function Gallery({ gallery }) {

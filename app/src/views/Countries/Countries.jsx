@@ -1,16 +1,15 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getDestinationsThunk } from '../../store/actions/mainActions'
-import styles from './countries.module.scss'
-import Helper from '../../components/Helper/Helper'
 // import Selection from '../../components/Selection/Selection'
 // import Loader from '../../components/Loader/Loader'
 // import ResultOfSearch from '../../components/ResultOfSearch/ResultOfSearch'
-import { Link } from 'react-router-dom'
-import { Card } from 'antd';
-import { Tabs } from 'antd';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom'
+import { Card, Tabs } from 'antd';
+import { getDestinationsThunk } from '../../store/actions/mainActions'
+import styles from './countries.module.scss'
+import Helper from '../../components/Helper/Helper'
 import { getHelpersThunk } from '../../store/actions/helpersActions'
+
 const { Meta } = Card;
 
 function Countries() {

@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom'
+import { Card, Typography } from 'antd';
+import { useSelector, useDispatch } from 'react-redux';
 import styles from './worldRegions.module.scss'
 import Helper from '../../components/Helper/Helper'
-import { Link } from 'react-router-dom'
-import { Card } from 'antd';
-import { Typography } from 'antd';
-import { useSelector, useDispatch } from 'react-redux';
 import { getDestinationsThunk } from '../../store/actions/mainActions'
 import { getHelpersThunk } from '../../store/actions/helpersActions'
 

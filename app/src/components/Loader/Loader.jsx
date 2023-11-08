@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './loader.module.scss'
 import { Space, Spin } from 'antd';
+import styles from './loader.module.scss'
 
 
 // при выборе страны в компоненте selection будет имитироваться задержка в 5 секунд, в это время на экране будет показан Loader, после окончания паузы на экран будет выводиться инфо о выбранной стране

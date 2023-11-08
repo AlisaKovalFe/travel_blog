@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-import styles from './tomap.module.scss'
-import Helper from '../../components/Helper/Helper'
 import { YMaps, Map, ObjectManager, GeolocationControl} from '@pbe/react-yandex-maps';
 import { Typography } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { getDestinationsThunk } from '../../store/actions/mainActions'
 import { getHelpersThunk } from '../../store/actions/helpersActions'
+import styles from './tomap.module.scss'
+import Helper from '../../components/Helper/Helper'
+
 const { Title } = Typography;
 
 function ToMap() {

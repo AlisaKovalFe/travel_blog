@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-import styles from './countriesInformayion.module.scss'
-import Helper from '../../components/Helper/Helper'
 import { useParams } from 'react-router-dom';
 import { Typography, Tabs } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
+import styles from './countriesInformayion.module.scss'
+import Helper from '../../components/Helper/Helper'
 import { getDestinationsThunk } from '../../store/actions/mainActions'
 import { getHelpersThunk } from '../../store/actions/helpersActions'
+
 const { Paragraph, Title } = Typography;
 
 function CountryInformation() {

@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './buttonLink.module.scss'
 import { Button, Space } from 'antd';
+import styles from './buttonLink.module.scss'
 
 function ButtonLink({ text, type, onClick } ) {
     return (

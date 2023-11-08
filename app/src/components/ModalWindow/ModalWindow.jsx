@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, notification, Form } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
+import { Modal, notification, Form } from 'antd';
 import FormOfModal from '../FormOfModal/FormOfModal'
 import ButtonLink from '../ButtonLink/ButtonLink'
 import { addVideosThunk, editVideosThunk } from '../../store/actions/videosActions'
@@ -14,7 +14,7 @@ function ModalWindow({ text, okText, title, editOption, handler }) {
     const [ errors, setErrors ] = useState({
         country: 'no error',
         image: 'no error',
-        records: new Array(videoCard.records.length).fill('').map((el) => {
+        records: new Array(videoCard.records.length).fill('').map(() => {
             return {
                     city: 'no error',
                     videoUrl: 'no error',
@@ -26,7 +26,7 @@ function ModalWindow({ text, okText, title, editOption, handler }) {
         setErrors({
             country: 'no error',
             image: 'no error',
-            records: new Array(videoCard.records.length).fill('').map((el) => {
+            records: new Array(videoCard.records.length).fill('').map(() => {
                 return {
                         city: 'no error',
                         videoUrl: 'no error',
@@ -94,7 +94,7 @@ function ModalWindow({ text, okText, title, editOption, handler }) {
                 }) 
             }
 
-        } else {
+        } else if (!editOption) {
             if (videoCard.country && videoCard.image.trim() && videoCard.records.every((el) => el.city && el.videoUrl)) {
                 dispatch(addVideosThunk(
                     {
@@ -147,7 +147,7 @@ function ModalWindow({ text, okText, title, editOption, handler }) {
         setErrors({
             country: 'no error',
             image: 'no error',
-            records: new Array(videoCard.records.length).fill('').map((el) => {
+            records: new Array(videoCard.records.length).fill('').map(() => {
                 return {
                         city: 'no error',
                         videoUrl: 'no error',

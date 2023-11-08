@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Button, Input, Form } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
+import { Button, Input, Form } from 'antd';
 import Selection from '../Selection/Selection'
 import ButtonLink from '../ButtonLink/ButtonLink'
 import { addDataFromInputInFormAC, addEmptyVideoBlockInFormAC, addVideoRecordsFromInputsInFormAC, deleteVideoRecordInFormAC } from '../../store/actions/formVideoActions'

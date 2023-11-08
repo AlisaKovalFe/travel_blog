@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import styles from './greeting.module.scss'
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'
+import { Typography } from 'antd';
+import styles from './greeting.module.scss'
 import ButtonLink from '../../components/ButtonLink/ButtonLink'
 import Helper from '../../components/Helper/Helper'
 import Gallery from '../../components/Gallery/Gallery';
-import { Typography } from 'antd';
-import { useSelector, useDispatch } from 'react-redux';
 import { getGreetingThunk } from '../../store/actions/greeingActions'
 import { getPhotoGalleryThunk } from '../../store/actions/photoGalleryActions'
 import { getHelpersThunk } from '../../store/actions/helpersActions'

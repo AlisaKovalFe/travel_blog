@@ -8,20 +8,18 @@ import WorldRegions from '../WorldRegions/WorldRegions';
 import Countries from '../Countries/Countries';
 import CountryInformation from '../CountryInformation/CountryInformation'
 import ToMap from '../ToMap/ToMap';
-import FormTry from '../FormTry/FormTry'
 
 function Main() {
     return (
         <div className={styles.wrapper}>
             <Routes>
-                <Route path='/' element={<Greeting />}></Route>
-                <Route path='/about' element={<About/>}></Route>
-                <Route path='/video' element={<Videos />}></Route>
-                <Route path='/tomap' element={<ToMap />}></Route>
-                <Route path='/world-regions' element={<WorldRegions />}></Route>
-                <Route path='/world-regions/countries/:id' element={<Countries />}></Route>
-                <Route path='/world-regions/countries/:id/country-information/:id' element={<CountryInformation />}></Route>
-                <Route path='formtry' element={<FormTry/>}></Route>
+                <Route path='/' element={<Greeting />}/>
+                <Route path='/about' element={<About/>}/>
+                <Route path='/video' element={<Videos />}/>
+                <Route path='/tomap' element={<ToMap />}/>
+                <Route path='/world-regions' element={<WorldRegions />}/>
+                <Route path='/world-regions/countries/:id' element={<Countries />}/>
+                <Route path='/world-regions/countries/:id/country-information/:id' element={<CountryInformation />}/>
             </Routes>
             
         </div>

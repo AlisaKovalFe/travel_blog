@@ -1,5 +1,5 @@
-import { mainTypes } from './actionTypes';
 import axios from 'axios'
+import { mainTypes } from './actionTypes';
 
 export const getPhotoGalleryAC = (data) => ({
     type: mainTypes.GET_PHOTO_GALLERY,

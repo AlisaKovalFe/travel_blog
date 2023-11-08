@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './selection.module.scss'
 import { Select } from 'antd';
+import styles from './selection.module.scss'
 
 function Selection({countries, onChange, status, value, disabled, placeholder}) {
     return (

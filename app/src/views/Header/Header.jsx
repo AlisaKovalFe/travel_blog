@@ -1,9 +1,9 @@
-import React, { useState,  useEffect} from "react";
-import styles from './header.module.scss'
+import React, { useState, useEffect } from "react";
 import { Menu } from "antd";
 import { Link } from 'react-router-dom'
-import { HomeOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
+import { HomeOutlined } from '@ant-design/icons';
+import styles from './header.module.scss'
 import { getDestinationsThunk } from '../../store/actions/mainActions'
 
 function Header() {

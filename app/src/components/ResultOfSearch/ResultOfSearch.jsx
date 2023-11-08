@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './resultOfSearch.module.scss'
-import { MehTwoTone  } from '@ant-design/icons';
 import { Result } from 'antd';
+import { MehTwoTone  } from '@ant-design/icons';
+import styles from './resultOfSearch.module.scss'
 
 // данное компонент - уведомление будет показан на экране в случае, если в компоненте selection не будет страны из моей базы данных
 function ResultOfSearch({ title }) {

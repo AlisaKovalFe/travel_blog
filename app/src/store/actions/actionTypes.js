@@ -7,18 +7,20 @@ export const mainTypes = {
     GET_HELPERS: 'ADD_HELPERS',
     GET_COUNTRIES_FOR_SELECT: 'GET_COUNTRIES_FOR_SELECT',
 
-    //работа с формой
+    // работа с формой
+
     ADD_DATA_FROM_INPUT_IN_FORM: 'ADD_DATA_FROM_INPUT_IN_FORM',
     ADD_EMPTY_VIDEO_BLOCK_IN_FORM: 'ADD_EMPTY_VIDEO_BLOCK_IN_FORM',
     ADD_VIDEO_RECORDS_FROM_INPUTS_IN_FORM: 'ADD_VIDEO_RECORDS_FROM_INPUTS_IN_FORM',
     DELETE_VIDEO_RECORD_IN_FORM: 'DELETE_VIDEO_RECORD_IN_FORM',
     CLEAR_FORM: 'CLEAR_FORM',
 
-    //работа со страницей Video
+    // работа со страницей Video
+
     ADD_VIDEO_CARD: 'ADD_VIDEO_CARD',
     DElETE_VIDEO_CARD: 'DElETE_VIDEO_CARD',
     EDIT_VIDEO_CARD: 'EDIT_VIDEO_CARD',
 
-    //редактирование карточки
+    // редактирование карточки
     SEND_VIDEO_FOR_EDIT: 'SEND_VIDEO_FOR_EDIT'
 };

@@ -1,7 +1,7 @@
-import { mainTypes } from './actionTypes';
 import axios from 'axios'
+import { mainTypes } from './actionTypes';
 
-//получение видеокарточек с сервера
+// получение видеокарточек с сервера
 export const getVideosAC = (data) => ({
   type: mainTypes.GET_VIDEOS,
   payload: data
@@ -14,7 +14,7 @@ export const getVideosThunk = () => async (dispatch) => {
   return dispatch(getVideosAC(response.data))
 };
 
-//добавление видеокарточки на фронт и бэк
+// добавление видеокарточки на фронт и бэк
 export const addVideoAC = (data) => ({
   type: mainTypes.ADD_VIDEO_CARD,
   payload: data
@@ -28,7 +28,7 @@ export const addVideosThunk = (data) => async (dispatch) => {
   }})
 }
 
-//редактирование видеокарточки
+// редактирование видеокарточки
 
 export const editVideoAC = (data) => ({
   type: mainTypes.EDIT_VIDEO_CARD,
@@ -43,7 +43,7 @@ export const editVideosThunk = (data) => async (dispatch) => {
   }})
 }
 
-//удаление видеокарточки на фронте и бэке
+// удаление видеокарточки на фронте и бэке
 export const deleteVideoAC = (data) => ({
   type: mainTypes.DElETE_VIDEO_CARD,
   payload: data

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styles from './about.module.scss'
 import Helper from '../../components/Helper/Helper'
-import { useSelector, useDispatch } from 'react-redux';
 import { getAboutThunk } from '../../store/actions/aboutActions'
 import Gallery from '../../components/Gallery/Gallery';
 import { getHelpersThunk } from '../../store/actions/helpersActions'
