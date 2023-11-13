@@ -25,8 +25,7 @@ module.exports = {
                 {
                     key: 'Венето',
                     city: 'Венето',
-                    videoUrl: "https://youtu.be/Muz720S9uVw",
-                    // https://youtu.be/xfqcUSaCRTk
+                    videoUrl: "https://youtu.be/X90w67ZYvCk",
                     title: "Veneto - Northern Italy",
                 }
             ]
@@ -42,19 +41,19 @@ module.exports = {
                 {
                     key: 'Бретань',
                     city: 'Бретань',
-                    videoUrl: "https://youtu.be/Muz720S9uVw",
+                    videoUrl: "https://youtu.be/2IEuDbhq0Gw",
                     title: "Бретань с высоты птичьего полета | Видео с дрона | Франция, Бретань с воздуха"
                 },
                 {
                     key: 'Нормандия',
                     city: 'Нормандия',
-                    videoUrl: "https://youtu.be/Muz720S9uVw",
+                    videoUrl: "https://youtu.be/w40C8G97sdA",
                     title: "Берега Нормандии в регионе Этрета"
                 },
                 {
                     key: 'О-де-Франс',
                     city: 'О-де-Франс',
-                    videoUrl: "https://youtu.be/Muz720S9uVw",
+                    videoUrl: "https://youtu.be/qt-bAXVcSlA",
                     title: "О-де-Франс с высоты птичьего полета | Видео с дрона в 4к | Франция, О-де-Франс с воздуха"
                 }
             ]   
@@ -70,19 +69,19 @@ module.exports = {
                 {
                     key: 'Фландрия',
                     city: 'Фландрия',
-                    videoUrl: "https://youtu.be/Muz720S9uVw",
+                    videoUrl: "https://youtu.be/j9_GsJfsXPk",
                     title: "Провинция Восточная Фландрия с высоты | Видео с дрона в 4к | Бельгия с воздуха"
                 },
                 {
                     key: 'Валлония',
                     city: 'Валлония',
-                    videoUrl: "https://youtu.be/Muz720S9uVw",
+                    videoUrl: "https://youtu.be/X0SgVUPvGaM",
                     title: "Бельгия. Часть 2. Валлония"
                 },
                 {
                     key: 'Брюссельский столичный регион',
                     city: 'Брюссельский столичный регион',
-                    videoUrl: "https://youtu.be/Muz720S9uVw",
+                    videoUrl: "https://youtu.be/vjT7c-GK3yw",
                     title: "Brussels in 2 minutes | Брюссель за 2 минуты | Бельгия"
                 }
             ]

@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
 
 router.post('/', async (req, res) => {
   const { videoCard } = req.body
-  videos.videosInfo.push(videoCard)
+  videos.videosInfo.unshift(videoCard)
 
   res.status(200).end()
 });
