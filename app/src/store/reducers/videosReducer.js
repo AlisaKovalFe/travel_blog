@@ -9,7 +9,7 @@ export function videosReducer(state = initialState, action) {
         }
 
         case mainTypes.ADD_VIDEO_CARD: {
-          return {...state, videosInfo: [...state.videosInfo, action.payload ] } 
+          return {...state, videosInfo: [action.payload, ...state.videosInfo ] } 
         }
 
         case mainTypes.EDIT_VIDEO_CARD: {
@@ -33,6 +33,13 @@ export function videosReducer(state = initialState, action) {
           const { id } = action.payload
           return {...state, videosInfo: state.videosInfo.filter((el) => el.id !== id) } 
         }
+
+        // case mainTypes.FILTER_VIDEOS_OF_VIDEO_CARDS: {
+        //   const { title } = action.payload
+        //   console.log(state.videosInfo)
+
+        //   return {...state, videosInfo: state.videosInfo.filter((el) => el.title === title)} 
+        // }
         
         default: {
           return state;

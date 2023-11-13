@@ -18,6 +18,7 @@ function ModalWindow({ text, okText, title, editOption, handler }) {
             return {
                     city: 'no error',
                     videoUrl: 'no error',
+                    title: 'no error'
                 }
         })
     });
@@ -30,6 +31,7 @@ function ModalWindow({ text, okText, title, editOption, handler }) {
                 return {
                         city: 'no error',
                         videoUrl: 'no error',
+                        title: 'no error'
                     }
             })
         })
@@ -43,8 +45,8 @@ function ModalWindow({ text, okText, title, editOption, handler }) {
         }
     };
 
-    const errorsItems = ['страну', 'url фото', 'город', 'url видео']
-    const inputs = [videoCard.country, videoCard.image.trim(), videoCard.records[0].city.trim(), videoCard.records[0].videoUrl.trim()]
+    const errorsItems = ['страну', 'url фото', 'город', 'название видео', 'url видео']
+    const inputs = [videoCard.country, videoCard.image.trim(), videoCard.records[0].city.trim(), videoCard.records[0].title.trim(), videoCard.records[0].videoUrl.trim()]
 
     const filteredErrors = errorsItems.filter((el, i) => !inputs[i])
 
@@ -52,7 +54,7 @@ function ModalWindow({ text, okText, title, editOption, handler }) {
 
         if (editOption) {
 
-            if (videoCard.image.trim() && videoCard.records.every((el) => el.city && el.videoUrl)) {
+            if (videoCard.image.trim() && videoCard.records.every((el) => el.city && el.videoUrl && el.title)) {
                 dispatch(editVideosThunk(
                     {
                         id: videoCard.id,
@@ -63,7 +65,7 @@ function ModalWindow({ text, okText, title, editOption, handler }) {
                                 key: el.id,
                                 city: el.city,
                                 videoUrl:  el.videoUrl,
-                                title: el.city
+                                title: el.title
                             }
                         })
                 }
@@ -95,7 +97,7 @@ function ModalWindow({ text, okText, title, editOption, handler }) {
             }
 
         } else if (!editOption) {
-            if (videoCard.country && videoCard.image.trim() && videoCard.records.every((el) => el.city && el.videoUrl)) {
+            if (videoCard.country && videoCard.image.trim() && videoCard.records.every((el) => el.city && el.videoUrl && el.title)) {
                 dispatch(addVideosThunk(
                     {
                         id: videoCard.id,
@@ -109,7 +111,7 @@ function ModalWindow({ text, okText, title, editOption, handler }) {
                                 key: el.id,
                                 city: el.city,
                                 videoUrl:  el.videoUrl,
-                                title: el.city
+                                title: el.title
                             }
                         })
                 }
@@ -151,6 +153,7 @@ function ModalWindow({ text, okText, title, editOption, handler }) {
                 return {
                         city: 'no error',
                         videoUrl: 'no error',
+                        title: 'no error'
                     }
             })
         }) 

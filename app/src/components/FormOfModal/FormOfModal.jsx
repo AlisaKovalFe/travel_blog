@@ -59,7 +59,7 @@ function FormOfModal({ errors, setErrors, form, editOption }) {
 
     function handleEmptyAddVideoBlock() {
         dispatch(addEmptyVideoBlockInFormAC())
-        setErrors({...errors, records: [...errors.records, {id: Date.now(), city: 'no error', videoUrl: 'no error'}]})
+        setErrors({...errors, records: [...errors.records, {id: Date.now(), city: 'no error', videoUrl: 'no error', title: 'no error'}]})
     }
 
     function deleteVideoBlock(id) {
@@ -159,7 +159,7 @@ function FormOfModal({ errors, setErrors, form, editOption }) {
                         <div
                             style={{
                                 display: 'inline-block',
-                                width:  videoCard.records.length === 1 ? '49%' : '47%',
+                                width:  videoCard.records.length === 1 ? '33%' : '32%',
                                 }}>
 
                             <Input 
@@ -178,12 +178,31 @@ function FormOfModal({ errors, setErrors, form, editOption }) {
                         <div
                             style={{
                                 display: 'inline-block',
-                                width:  videoCard.records.length === 1 ? '49%' : '47%',
+                                width:  videoCard.records.length === 1 ? '33%' : '32%',
                                 }}>
 
                             <Input 
                                 addonAfter={index === 0 ? '*' : '  '}  
-                                placeholder='видео'
+                                placeholder='название видео'
+                                onChange={(e) => handleInputRecords(e.target.value, el.id, 'title', index)}
+                                value={el.title}
+                                status={(!errors?.records[index]?.title)  ? 'error' : ''}
+                            />
+
+                            {
+                                statusChangeForVideoRecords('title', index) 
+                            }
+                        </div>
+
+                        <div
+                            style={{
+                                display: 'inline-block',
+                                width:  videoCard.records.length === 1 ? '33%' : '32%',
+                                }}>
+
+                            <Input 
+                                addonAfter={index === 0 ? '*' : '  '}  
+                                placeholder='ссылка на видео'
                                 onChange={(e) => handleInputRecords(e.target.value, el.id, 'videoUrl', index)}
                                 value={el.videoUrl}
                                 status={(!errors?.records[index]?.videoUrl)  ? 'error' : ''}

@@ -10,6 +10,7 @@ const initialState = {
               id: Date.now(),
               city: '',
               videoUrl: '',
+              title: ''
             }
     ]
 };
@@ -22,7 +23,7 @@ export function formVideoReducer(state = initialState, action) {
         }
 
         case mainTypes.ADD_EMPTY_VIDEO_BLOCK_IN_FORM: {
-          return { ...state, records: [...state.records, {id: Date.now(), city: '', videoUrl: ''}]}
+          return { ...state, records: [...state.records, {id: Date.now(), city: '', videoUrl: '', title: ''}]}
         }
 
         case mainTypes.ADD_VIDEO_RECORDS_FROM_INPUTS_IN_FORM: {
@@ -54,14 +55,15 @@ export function formVideoReducer(state = initialState, action) {
                     {
                       id: '',
                       city: '',
-                      videoUrl: ''
+                      videoUrl: '',
+                      title: ''
                     }
             ]
           };
         }
 
         case mainTypes.SEND_VIDEO_FOR_EDIT: {
-          const { id, country, image, description, records} = action.payload
+          const { id, country, image, description, records } = action.payload
           return {
             id: id,
             country: country,

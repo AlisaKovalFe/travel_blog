@@ -1,0 +1,34 @@
+import { mainTypes } from '../actions/actionTypes';
+
+const initialState = {
+    // id: Date.now(),
+    country: '',
+    city: '',
+    videoTitle: '',
+    date: '',
+    isRecentlyAdded: false,
+};
+
+export function searchPanelReducer(state = initialState, action) {
+    switch (action.type) {
+        case mainTypes.ADD_DATA_FROM_INPUT_TO_SEARCH_PANEL: {
+          const { value, params } = action.payload
+
+          return { ...state, [params]: value, flag: params}
+        }
+
+        case mainTypes.CLEAR_SEARCH_PANEL: {
+          return {
+            country: '',
+            city: '',
+            videoTitle: '',
+            date: '',
+            idRecentlyAdded: false,
+          };
+        }
+        
+        default: {
+          return state;
+        }
+      }
+  }

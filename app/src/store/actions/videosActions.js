@@ -53,3 +53,9 @@ export const deleteVideosThunk = (data) => async (dispatch) => {
   dispatch(deleteVideoAC(data))    // почему-то если я писала это после delete запроса, то это строка уже не читалась
   await axios.delete(`http://localhost:4000/video/${data.id}`)
 }
+
+
+export const filterVideosOfVieoCardsAC = (data) => ({
+  type: mainTypes.FILTER_VIDEOS_OF_VIDEO_CARDS,
+  payload: data
+})
