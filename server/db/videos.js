@@ -17,21 +17,21 @@ module.exports = {
                     city: 'Пьемонт',
                     videoUrl: "https://youtu.be/Muz720S9uVw",
                     title: "Пьемонт, горы, фиат и нутелла. Италия",
-                    dateStamp: dayjs("2023-11-01 19:18").unix()
+                    dateStamp: dayjs("2023-11-01").unix()
                 },
                 {
                     key: 'Тоскана',
                     city: 'Тоскана',
                     videoUrl: "https://youtu.be/ChgwxHJTqXc",
                     title: "Топ самых красивых мест в Тоскане",
-                    dateStamp: dayjs("2023-11-02 19:18").unix()
+                    dateStamp: dayjs("2023-11-02").unix()
                 },
                 {
                     key: 'Венето',
-                    city: 'Венето',
+                    city: 'Пьемонт',     //повтор!!! для проверки!!!
                     videoUrl: "https://youtu.be/X90w67ZYvCk",
                     title: "Veneto - Northern Italy",
-                    dateStamp: dayjs("2023-11-14 19:18").unix()
+                    dateStamp: dayjs("2023-11-11").unix()
                 }
             ]
         },
@@ -86,7 +86,7 @@ module.exports = {
                     city: 'Валлония',
                     videoUrl: "https://youtu.be/X0SgVUPvGaM",
                     title: "Бельгия. Часть 2. Валлония",
-                    dateStamp: dayjs("2023-11-09 19:18").unix()
+                    dateStamp: dayjs("2023-11-09 11:18").unix()
                 },
                 {
                     key: 'Брюссельский столичный регион',
