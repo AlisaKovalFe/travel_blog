@@ -1,3 +1,5 @@
+const dayjs = require('dayjs')
+
 module.exports = {
     heading: 'Видео из моих любимых мест',
     description: 'Здесь я собрала видео из моих любимых регионов Европы, чтобы воспоминания были всегда рядом.',
@@ -14,19 +16,22 @@ module.exports = {
                     key: 'Пьемонт',
                     city: 'Пьемонт',
                     videoUrl: "https://youtu.be/Muz720S9uVw",
-                    title: "Пьемонт, горы, фиат и нутелла. Италия"
+                    title: "Пьемонт, горы, фиат и нутелла. Италия",
+                    dateStamp: dayjs("2023-11-01 19:18").unix()
                 },
                 {
                     key: 'Тоскана',
                     city: 'Тоскана',
                     videoUrl: "https://youtu.be/ChgwxHJTqXc",
                     title: "Топ самых красивых мест в Тоскане",
+                    dateStamp: dayjs("2023-11-02 19:18").unix()
                 },
                 {
                     key: 'Венето',
                     city: 'Венето',
                     videoUrl: "https://youtu.be/X90w67ZYvCk",
                     title: "Veneto - Northern Italy",
+                    dateStamp: dayjs("2023-11-14 19:18").unix()
                 }
             ]
         },
@@ -42,19 +47,22 @@ module.exports = {
                     key: 'Бретань',
                     city: 'Бретань',
                     videoUrl: "https://youtu.be/2IEuDbhq0Gw",
-                    title: "Бретань с высоты птичьего полета | Видео с дрона | Франция, Бретань с воздуха"
+                    title: "Бретань с высоты птичьего полета | Видео с дрона | Франция, Бретань с воздуха",
+                    dateStamp: dayjs("2023-11-03 19:18").unix()
                 },
                 {
                     key: 'Нормандия',
                     city: 'Нормандия',
                     videoUrl: "https://youtu.be/w40C8G97sdA",
-                    title: "Берега Нормандии в регионе Этрета"
+                    title: "Берега Нормандии в регионе Этрета",
+                    dateStamp: dayjs("2023-11-13 19:18").unix()
                 },
                 {
                     key: 'О-де-Франс',
                     city: 'О-де-Франс',
                     videoUrl: "https://youtu.be/qt-bAXVcSlA",
-                    title: "О-де-Франс с высоты птичьего полета | Видео с дрона в 4к | Франция, О-де-Франс с воздуха"
+                    title: "О-де-Франс с высоты птичьего полета | Видео с дрона в 4к | Франция, О-де-Франс с воздуха",
+                    dateStamp: dayjs("2023-11-03 19:18").unix()
                 }
             ]   
         },
@@ -70,19 +78,22 @@ module.exports = {
                     key: 'Фландрия',
                     city: 'Фландрия',
                     videoUrl: "https://youtu.be/j9_GsJfsXPk",
-                    title: "Провинция Восточная Фландрия с высоты | Видео с дрона в 4к | Бельгия с воздуха"
+                    title: "Провинция Восточная Фландрия с высоты | Видео с дрона в 4к | Бельгия с воздуха",
+                    dateStamp: dayjs("2023-11-10 19:18").unix()
                 },
                 {
                     key: 'Валлония',
                     city: 'Валлония',
                     videoUrl: "https://youtu.be/X0SgVUPvGaM",
-                    title: "Бельгия. Часть 2. Валлония"
+                    title: "Бельгия. Часть 2. Валлония",
+                    dateStamp: dayjs("2023-11-09 19:18").unix()
                 },
                 {
                     key: 'Брюссельский столичный регион',
                     city: 'Брюссельский столичный регион',
                     videoUrl: "https://youtu.be/vjT7c-GK3yw",
-                    title: "Brussels in 2 minutes | Брюссель за 2 минуты | Бельгия"
+                    title: "Brussels in 2 minutes | Брюссель за 2 минуты | Бельгия",
+                    dateStamp: dayjs("2023-11-01 19:18").unix()
                 }
             ]
         },
