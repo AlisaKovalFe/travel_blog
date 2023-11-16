@@ -79,8 +79,6 @@ function FormOfModal({ errors, setErrors, form, editOption }) {
             <div style={{color: 'red'}}>Укажите {params}</div>
         ) : ''
     }
-
-    console.log(errors)
     
     return (
         <Form 

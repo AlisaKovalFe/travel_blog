@@ -23,8 +23,6 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    // "allowInParentheses": false,
-    // "arrow-body-style": ["error", "as-needed", { "requireReturnForObjectLiteral": true }]
     "arrow-body-style": "off",
     "prefer-arrow-callback": "off",
     "import/prefer-default-export": "off",
@@ -35,10 +33,6 @@ module.exports = {
     "no-unneeded-ternary": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/no-static-element-interactions": "off",
-    
-
-   
+    "no-nested-ternary": "off",
   },
-
-  
 };

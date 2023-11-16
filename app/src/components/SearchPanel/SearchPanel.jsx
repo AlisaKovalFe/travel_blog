@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Input, Form, Checkbox, DatePicker, Typography } from 'antd';
+import { Input, Form, Checkbox, DatePicker, Typography, AutoComplete } from 'antd';
 import dayjs from 'dayjs'
 import styles from './searchPanel.module.scss'
 import Selection from '../Selection/Selection'
@@ -15,6 +15,7 @@ function SearchPanel() {
     const dispatch = useDispatch();
     const { countries } = useSelector((store) => store.countriesForSelectStore);
     const searchPanel = useSelector((store) => store.searchPanelStore);
+    const videos = useSelector((store) => store.videosStore);
     const [ form ] = Form.useForm();
 
     useEffect(() => {
@@ -23,55 +24,56 @@ function SearchPanel() {
         }))
     }, [dispatch])
     
+    let videoOptions = []
+
+    videos?.videosInfo?.forEach((el) => {
+        el.records.forEach((item) => {
+            videoOptions.push({value: item.title})
+        })
+    })
+
     function handleInput(value, params) {
-        if (params === 'timeStamp') {
-            dispatch(addDataFromInputInSearchPanelAC({
-                value: value.map((el) => el.unix()),
-                params
-            }))
-        } else {
-            dispatch(addDataFromInputInSearchPanelAC({
-                value,
-                params
-            }))
-        }  
+        dispatch(addDataFromInputInSearchPanelAC({
+            value: params === 'timeStamp' ? value.map((el, i) => i === 0 ? el.startOf('date').unix() : el.endOf('date').unix()) : value,
+            params
+        }))
 
         if (params === 'videoTitle') {
             dispatch(addDataFromSearchPanelAC({
                 videoTitle: value, 
-                flag: 'videoTitle' 
+                flag: value ? 'videoTitle' : 'default' 
             }))
         }
-
-        if (!value) {
-            dispatch(addDataFromSearchPanelAC({
-                flag: 'default' 
-            }))
-        }
-
     }
 
     function handleSubmit() {
-        if (searchPanel.country || (searchPanel.country && searchPanel.isRecentlyAdded)) {
-            dispatch(addDataFromSearchPanelAC({
-                title: searchPanel.country,
-                flag: 'country',
-                isRecentlyAdded: searchPanel.isRecentlyAdded
-            }))
-        } else if (searchPanel.city) {
-            dispatch(addDataFromSearchPanelAC({
-                city: searchPanel.city,
-                flag: 'city'
-            }))
-        } else if (searchPanel.timeStamp) {
-            dispatch(addDataFromSearchPanelAC({
-                timeStamp: searchPanel.timeStamp,
-                flag: 'timeStamp'
-            }))
+
+        let flag = ''
+
+        if (searchPanel.timeStamp) {
+            flag ='timeStamp'
         }
+        if (searchPanel.country) {
+            flag ='country'
+        } 
+        if (searchPanel.city) {
+            flag = 'city'
+        } 
+        if (searchPanel.videoTitle) {
+            flag = 'videoTitle'
+        }     
+
+        dispatch(addDataFromSearchPanelAC({
+            title: searchPanel.country,
+            city: searchPanel.city,
+            videoTitle: searchPanel.videoTitle, 
+            timeStamp: searchPanel.timeStamp,
+            isRecentlyAdded: searchPanel.isRecentlyAdded,
+            flag: flag
+        }))
 
         dispatch(clearSearchPanelAC())
-        form.resetFields(['country', 'isRecentlyAdded'])
+        form.resetFields(['country', 'isRecentlyAdded', "range-picker", 'autocomplete'])
     }
 
     return (
@@ -84,6 +86,7 @@ function SearchPanel() {
                         flexDirection: 'column',
                         marginTop: '2rem'
                     }}
+                    autoComplete='on'
                 >
                     <div
                         style={{
@@ -119,11 +122,14 @@ function SearchPanel() {
                                 />  
                             </Form.Item>
                             
-                            <Form.Item>
-                                <Input 
-                                    placeholder='видео'
-                                    onChange={(e) => handleInput(e.target.value, 'videoTitle')}
-                                    value={searchPanel?.videoTitle}
+                            <Form.Item
+                                name='autocomplete' 
+                            >
+                                <AutoComplete       
+                                    options={videoOptions}
+                                    placeholder="введите название видео"
+                                    filterOption={(inputValue, option) => option.value.toLowerCase().startsWith(inputValue)}
+                                    onChange={(e) => handleInput(e, 'videoTitle')}
                                 />
                             </Form.Item>
                             
@@ -147,9 +153,11 @@ function SearchPanel() {
 
                             <Form.Item
                                 name="isRecentlyAdded"
+                                valuePropName="checked"
                             >
                                 <Checkbox 
                                     onChange={(e) => handleInput(e.target.checked, 'isRecentlyAdded')}
+                                    value={searchPanel?.isRecentlyAdded}
                                 >
                                     Недавно добавленные
                                 </Checkbox>

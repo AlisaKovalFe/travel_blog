@@ -10,7 +10,7 @@ import ButtonLink from '../../components/ButtonLink/ButtonLink'
 import SearchPanel from '../../components/SearchPanel/SearchPanel'
 import Helper from '../../components/Helper/Helper'
 import ModalWindow from '../../components/ModalWindow/ModalWindow'
-import Player from '../../components/Player/Player'
+import VideoBlock from '../../components/VideoBlock/VideoBlock'
 import CollapseVideos from '../../components/CollapseVideos/CollapseVideos'
 import { sendVideoForEditAC } from '../../store/actions/formVideoActions'
 import { getCountriesForSelectThunk } from '../../store/actions/countriesForSelectActions'
@@ -39,10 +39,21 @@ function Videos() {
     // Поиск по стране
     const videosFoundedByCountry = videos?.videosInfo?.find((el) => el.title === dataFromSearchPanel.title)
 
-    // Поиск по городу
-    const videosFoundedByCity = videos?.videosInfo?.find((el) => el.records.find((item) => item?.city?.toLowerCase() === dataFromSearchPanel?.city?.toLowerCase()))
-    const videoFoundedByCity = videosFoundedByCity?.records?.find((item) => item?.city?.toLowerCase() === dataFromSearchPanel?.city?.toLowerCase())
-    
+    // Поиск по городу и полному названию видео
+    let filteredVideosByCityAndVideo = []
+
+    videos?.videosInfo?.forEach((el) => {
+        el.records.forEach((item) => {
+            if (dataFromSearchPanel.flag === 'city' && (item?.city?.toLowerCase() === dataFromSearchPanel?.city?.toLowerCase())) {
+                filteredVideosByCityAndVideo.push({...item, country: el.title, id: el.id})
+            } 
+            if (dataFromSearchPanel.flag === 'videoTitle' && (item?.title?.toLowerCase() === dataFromSearchPanel?.videoTitle?.toLowerCase())) {
+                filteredVideosByCityAndVideo.push({...item, country: el.title, id: el.id})
+            }
+            return item
+        })
+    })
+
     // Динамический поиск по названию видео
     const query = dataFromSearchPanel?.videoTitle?.toLowerCase()
     let filteredVideos = []
@@ -51,21 +62,27 @@ function Videos() {
         el.records.forEach((item) => {
             item.title.split(' ').some((word) => {
             if (query && word.toLowerCase().startsWith(query)) {
-                filteredVideos.push({...item, country: el.title})
+                filteredVideos.push({...item, country: el.title, id: el.id})
             }
             return item
         })
     })})
 
-    // Динамический поиск по временному диапазону
+    // Поиск по временному диапазону
+    function findVideoByDates(item) {
+        return item.dateStamp >= dataFromSearchPanel?.timeStamp?.[0] && item.dateStamp <= dataFromSearchPanel?.timeStamp?.[1]
+    }
+
     let filterVideosByDate = []
+
     videos?.videosInfo?.forEach((el) => {
         el?.records?.forEach((item) => {
-            if (item.dateStamp >= dataFromSearchPanel?.timeStamp?.[0] && item.dateStamp <= dataFromSearchPanel?.timeStamp?.[1]) {
+            if (findVideoByDates(item)) {
                 filterVideosByDate.push(item)
             }
         })
     })
+
 
     function confirm(id) {
         dispatch(deleteVideosThunk({
@@ -120,9 +137,6 @@ function Videos() {
         }))
     }
 
-    // const copyOfvideosFoundedByCountry = videosFoundedByCountry ? JSON.parse(JSON.stringify(videosFoundedByCountry?.records)) : []
-    // copyOfvideosFoundedByCountry.sort((a, b) => b.dateStamp - a.dateStamp)
-
     function sortArray(arr) {
         const copyArr = arr ? JSON.parse(JSON.stringify(arr)) : []
         return copyArr.sort((a, b) => b.dateStamp - a.dateStamp)
@@ -148,43 +162,54 @@ function Videos() {
                     <div className={styles.collapseVideo}>
                         <div className={styles.videoHeading}>
                             <Title level={4}>Результаты поиска &quot;{videosFoundedByCountry.title}&quot;</Title>
-                            <ButtonLink onClick={() => toTravelling(videosFoundedByCountry.id)} text='В путешествие' />
+                            <ButtonLink onClick={() => toTravelling(videosFoundedByCountry.id)} text='Перейти к профилю страны' />
                         </div>
                         
-                        <CollapseVideos records={dataFromSearchPanel.isRecentlyAdded ? sortArray(videosFoundedByCountry.records) : videosFoundedByCountry.records} />
+                        <CollapseVideos 
+                            records={
+                                    (dataFromSearchPanel?.timeStamp?.length > 0 && dataFromSearchPanel?.isRecentlyAdded) ? sortArray(videosFoundedByCountry?.records.filter((item) => findVideoByDates(item))) :
+                                    dataFromSearchPanel?.isRecentlyAdded ? sortArray(videosFoundedByCountry.records) : 
+                                    dataFromSearchPanel?.timeStamp?.length > 0 ? videosFoundedByCountry?.records.filter((item) => findVideoByDates(item)) :
+                                    videosFoundedByCountry?.records} 
+                        />
                     </div>
                 ) 
             }
 
-            {/* Поиск по городу */}
+            {/* Поиск по городу и полному названиб видео */}
             {
-                (flag === 'city' )  && videoFoundedByCity && (
-                    <div>
-                        <div className={styles.videoHeading}>
-                            <Title level={4}>Результаты поиска &quot;{videoFoundedByCity?.city}, {videosFoundedByCity?.title}&quot;</Title>
-                            <ButtonLink onClick={() => toTravelling(videosFoundedByCountry.id)} text='В путешествие' />
-                        </div>
-                        <Player url={videoFoundedByCity.videoUrl} width='60%' height='100%'/>
-                    </div>
+                (flag === 'city' || flag === 'videoTitle') && (
+                    <VideoBlock 
+                        videos={
+                            (dataFromSearchPanel?.timeStamp?.length > 0 && dataFromSearchPanel?.isRecentlyAdded) ? sortArray(filteredVideosByCityAndVideo.filter((item) => findVideoByDates(item))) :
+                            dataFromSearchPanel?.timeStamp?.length > 0 ? (filteredVideosByCityAndVideo.filter((item) => findVideoByDates(item))) :
+                            dataFromSearchPanel?.isRecentlyAdded ? sortArray(filteredVideosByCityAndVideo) : 
+                            filteredVideosByCityAndVideo} 
+                        toTravelling={(id) => toTravelling(id)} 
+                        text='Перейти к профилю страны' 
+                        url={filteredVideosByCityAndVideo?.videoUrl}
+                    />
                 ) 
             }
 
-            {/* Поиск видео по буквам */}
+            {/* Динамический поиск по названию видео */}
             {
                 flag === 'videoTitle' && (
-                    filteredVideos?.map((el) => (
-                        <div key={el.key} className={styles.filteredVideos}>
-                            <div className={styles.videoHeading}>
-                                <Title level={4}>Результаты поиска &quot;{el?.city}, {el?.country}&quot;</Title>
-                                <ButtonLink onClick={() => toTravelling(el.id)} text='В путешествие' />
-                            </div>
-                            <Player url={el.videoUrl} width='40%' height='100%'/>
-                    </div>
-                    ))
+                    <VideoBlock 
+                        videos={
+                            (dataFromSearchPanel?.timeStamp?.length > 0 && dataFromSearchPanel?.isRecentlyAdded) ? sortArray(filteredVideos.filter((item) => findVideoByDates(item))) :
+                            dataFromSearchPanel?.timeStamp?.length > 0 ? (filteredVideos.filter((item) => findVideoByDates(item))) :
+                            dataFromSearchPanel?.isRecentlyAdded ? sortArray(filteredVideos) : 
+                            filteredVideos} 
+                        toTravelling={() => toTravelling(filteredVideos?.id)} 
+                        title={filteredVideos?.find((el) => videos?.videosInfo?.map((item) => item?.title === el?.country))?.country} 
+                        text='Перейти к профилю страны' 
+                        url={filteredVideos?.videoUrl}
+                    />
                 ) 
             }
 
-            {/* Поиск по дате */}
+            {/* Поиск по временному диапазону */}
             {
                 (flag === 'timeStamp' && filterVideosByDate.length > 0) && (
                         <div>
@@ -192,20 +217,21 @@ function Videos() {
                                 <Title level={4}>Результаты поиска видео, добавленных в указанный период с {dayjs.unix(dataFromSearchPanel?.timeStamp[0]).format('YYYY-MM-DD')} по {dayjs.unix(dataFromSearchPanel?.timeStamp[1]).format('YYYY-MM-DD')}</Title>
                             </div>
                             
-                            <CollapseVideos records={sortArray(filterVideosByDate)} />
+                            <CollapseVideos records={dataFromSearchPanel?.isRecentlyAdded ? sortArray(filterVideosByDate) : 
+                            filterVideosByDate}/>
                     </div>
                     
                 ) 
             }
 
-            {/* Отрисовка при некорректном запросе */}
+            {/* Отрисовка при отсутствии данных по запросу */}
             {
-                ((flag === 'country' && !videosFoundedByCountry) || (flag === 'city' && !videoFoundedByCity) || (flag === 'videoTitle' &&  filteredVideos.length === 0) || (flag === 'timeStamp' &&  filterVideosByDate.length === 0 )) && (
+                ((flag === 'country' && !videosFoundedByCountry) || ((flag === 'city' || flag === 'videoTitle') && filteredVideosByCityAndVideo.length === 0) || (flag === 'timeStamp' &&  filterVideosByDate.length === 0 )) && (
                     <Title level={4}>Видео по запросу отсутствуют</Title>
                 ) 
             }
 
-            {/* Дефолтное отображение видеокарточек при входе на страницу и при обнулении инпута видео */}
+            {/* Дефолтное отображение видеокарточек при входе на страницу и при динамическом очищение инпута с названием видео */}
             {
                 flag === 'default' && (
                     <div className={styles.videos}>
@@ -264,9 +290,6 @@ function Videos() {
                                     <div onClick={(event) => stopEvent(event)}>
                                         <CollapseVideos records={el?.records}/>
                                     </div>
-
-
-
                                 </Card>
                             </Popover>
                         )
@@ -274,12 +297,6 @@ function Videos() {
                     </div>
                 )
             }
-                    
-                
-            
-
-
-            
 
             <div className={styles.helper}>
                 <Helper src={helpers.videos?.src} text={helpers.videos?.text} link={helpers.videos?.link} />
