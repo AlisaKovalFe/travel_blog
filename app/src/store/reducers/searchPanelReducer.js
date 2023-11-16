@@ -7,13 +7,13 @@ const initialState = {
     videoTitle: '',
     date: '',
     isRecentlyAdded: false,
+    timeStamp: null
 };
 
 export function searchPanelReducer(state = initialState, action) {
     switch (action.type) {
         case mainTypes.ADD_DATA_FROM_INPUT_TO_SEARCH_PANEL: {
           const { value, params } = action.payload
-
           return { ...state, [params]: value, flag: params}
         }
 
@@ -23,7 +23,8 @@ export function searchPanelReducer(state = initialState, action) {
             city: '',
             videoTitle: '',
             date: '',
-            idRecentlyAdded: false,
+            idRecentlyAdded: null,
+            timeStamp: null
           };
         }
         

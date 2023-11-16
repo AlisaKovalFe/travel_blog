@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Modal, notification, Form } from 'antd';
+import dayjs from 'dayjs'
 import FormOfModal from '../FormOfModal/FormOfModal'
 import ButtonLink from '../ButtonLink/ButtonLink'
 import { addVideosThunk, editVideosThunk } from '../../store/actions/videosActions'
@@ -35,7 +36,7 @@ function ModalWindow({ text, okText, title, editOption, handler }) {
                     }
             })
         })
-    }, [videoCard])
+    }, [videoCard.records.length])
 
     const showModal = () => {
         setIsModalOpen(true);
@@ -65,7 +66,8 @@ function ModalWindow({ text, okText, title, editOption, handler }) {
                                 key: el.id,
                                 city: el.city,
                                 videoUrl:  el.videoUrl,
-                                title: el.title
+                                title: el.title,
+                                dateStamp: el.dateStamp
                             }
                         })
                 }
@@ -86,6 +88,7 @@ function ModalWindow({ text, okText, title, editOption, handler }) {
                         return {
                             city: el.city,
                             videoUrl: el.videoUrl,
+                            title: el.title
                         }
                     })
                 })  
@@ -111,7 +114,8 @@ function ModalWindow({ text, okText, title, editOption, handler }) {
                                 key: el.id,
                                 city: el.city,
                                 videoUrl:  el.videoUrl,
-                                title: el.title
+                                title: el.title,
+                                dateStamp: dayjs().unix()
                             }
                         })
                 }
@@ -132,6 +136,7 @@ function ModalWindow({ text, okText, title, editOption, handler }) {
                         return {
                             city: el.city,
                             videoUrl: el.videoUrl,
+                            title: el.title
                         }
                     })
                 })  

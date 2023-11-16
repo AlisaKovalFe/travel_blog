@@ -2,11 +2,11 @@ import React from 'react';
 import { Collapse} from 'antd';
 import Player from '../Player/Player';
 
-function CollapseVideos({ country }) {
+function CollapseVideos({ records }) {
     return (
         <Collapse
             accordion
-            items={country.records?.map((item) => {
+            items={records?.map((item) => {
                 return {
                     key: item.key,
                     label: item.city,

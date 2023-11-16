@@ -34,13 +34,6 @@ export function videosReducer(state = initialState, action) {
           return {...state, videosInfo: state.videosInfo.filter((el) => el.id !== id) } 
         }
 
-        // case mainTypes.FILTER_VIDEOS_OF_VIDEO_CARDS: {
-        //   const { title } = action.payload
-        //   console.log(state.videosInfo)
-
-        //   return {...state, videosInfo: state.videosInfo.filter((el) => el.title === title)} 
-        // }
-        
         default: {
           return state;
         }

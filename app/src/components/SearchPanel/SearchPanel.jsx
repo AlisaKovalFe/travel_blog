@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Input, Form, Checkbox, DatePicker, Typography } from 'antd';
+import dayjs from 'dayjs'
 import styles from './searchPanel.module.scss'
 import Selection from '../Selection/Selection'
 import ButtonLink from '../ButtonLink/ButtonLink'
 import { addDataFromInputInSearchPanelAC, clearSearchPanelAC } from '../../store/actions/searchPanelActions'
-// import { filterVideosOfVieoCardsAC } from '../../store/actions/videosActions'
 import { addDataFromSearchPanelAC } from '../../store/actions/dataFromSearchPanelActions'
 
 const { Title } = Typography;
@@ -23,12 +23,18 @@ function SearchPanel() {
         }))
     }, [dispatch])
     
-
     function handleInput(value, params) {
-        dispatch(addDataFromInputInSearchPanelAC({
-            value,
-            params
-        }))
+        if (params === 'timeStamp') {
+            dispatch(addDataFromInputInSearchPanelAC({
+                value: value.map((el) => el.unix()),
+                params
+            }))
+        } else {
+            dispatch(addDataFromInputInSearchPanelAC({
+                value,
+                params
+            }))
+        }  
 
         if (params === 'videoTitle') {
             dispatch(addDataFromSearchPanelAC({
@@ -46,22 +52,26 @@ function SearchPanel() {
     }
 
     function handleSubmit() {
-        if (searchPanel.country) {
+        if (searchPanel.country || (searchPanel.country && searchPanel.isRecentlyAdded)) {
             dispatch(addDataFromSearchPanelAC({
                 title: searchPanel.country,
-                flag: 'country'
+                flag: 'country',
+                isRecentlyAdded: searchPanel.isRecentlyAdded
             }))
-        }
-
-        if (searchPanel.city) {
+        } else if (searchPanel.city) {
             dispatch(addDataFromSearchPanelAC({
                 city: searchPanel.city,
                 flag: 'city'
             }))
+        } else if (searchPanel.timeStamp) {
+            dispatch(addDataFromSearchPanelAC({
+                timeStamp: searchPanel.timeStamp,
+                flag: 'timeStamp'
+            }))
         }
 
         dispatch(clearSearchPanelAC())
-        form.resetFields(['country'])
+        form.resetFields(['country', 'isRecentlyAdded'])
     }
 
     return (
@@ -96,7 +106,6 @@ function SearchPanel() {
                                 <Selection 
                                     countries={countries} 
                                     onChange={(e) => handleInput(e, 'country')} 
-                                    // status={!errors.country ? 'error' : ''} 
                                     value={searchPanel?.country}
                                     placeholder="Выберите страну"
                                 />
@@ -107,7 +116,6 @@ function SearchPanel() {
                                     placeholder="город" 
                                     onChange={(e) => handleInput(e.target.value, 'city')}
                                     value={searchPanel?.city}
-                                    // status={(!errors?.records[index]?.city ) ? 'error' : ''}
                                 />  
                             </Form.Item>
                             
@@ -116,7 +124,6 @@ function SearchPanel() {
                                     placeholder='видео'
                                     onChange={(e) => handleInput(e.target.value, 'videoTitle')}
                                     value={searchPanel?.videoTitle}
-                                    // status={(!errors?.records[index]?.videoUrl)  ? 'error' : ''}
                                 />
                             </Form.Item>
                             
@@ -133,12 +140,14 @@ function SearchPanel() {
                                 name="range-picker" 
                             >
                                 <RangePicker 
-                                value={['', '']}
-                                onChange={(e) => console.log(e)}
+                                    value={[dayjs().unix(), dayjs().unix()]}
+                                    onChange={(data) => handleInput(data, 'timeStamp')}
                                 />
                             </Form.Item>
 
-                            <Form.Item>
+                            <Form.Item
+                                name="isRecentlyAdded"
+                            >
                                 <Checkbox 
                                     onChange={(e) => handleInput(e.target.checked, 'isRecentlyAdded')}
                                 >

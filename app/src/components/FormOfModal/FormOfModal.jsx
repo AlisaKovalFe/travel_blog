@@ -80,6 +80,8 @@ function FormOfModal({ errors, setErrors, form, editOption }) {
         ) : ''
     }
 
+    console.log(errors)
+    
     return (
         <Form 
             form={form}

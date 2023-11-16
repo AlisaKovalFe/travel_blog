@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import { mainTypes } from '../actions/actionTypes';
 
 const initialState = {
@@ -23,7 +24,7 @@ export function formVideoReducer(state = initialState, action) {
         }
 
         case mainTypes.ADD_EMPTY_VIDEO_BLOCK_IN_FORM: {
-          return { ...state, records: [...state.records, {id: Date.now(), city: '', videoUrl: '', title: ''}]}
+          return { ...state, records: [...state.records, {id: Date.now(), city: '', videoUrl: '', title: '', dateStamp: dayjs().unix()}]}
         }
 
         case mainTypes.ADD_VIDEO_RECORDS_FROM_INPUTS_IN_FORM: {
