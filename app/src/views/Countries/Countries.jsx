@@ -1,8 +1,5 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// import Selection from '../../components/Selection/Selection'
-// import Loader from '../../components/Loader/Loader'
-// import ResultOfSearch from '../../components/ResultOfSearch/ResultOfSearch'
 import { useParams, Link } from 'react-router-dom'
 import { Card, Tabs } from 'antd';
 import { getDestinationsThunk } from '../../store/actions/mainActions'
@@ -23,19 +20,10 @@ function Countries() {
         dispatch(getHelpersThunk())
     }, [dispatch])
 
-    // const countries = destinations.map((el) => [...el.countries]).flat() 
     const currentCountries = destinations.find((el) => el.id === +id)
 
     return (
         <section className={styles.wrapper}>
-            {/* <div className={styles.selection}>
-                <Title level={2}>Выбери страну</Title>
-                <Selection countries={countries}/>
-            </div> */}
-            
-            {/* <Loader/> */}
-            {/* <ResultOfSearch title="в такой стране я еще не была"/> */}
-
             <div  className={styles.countries}>
                 <div className={styles.countries__cards}>
                     {

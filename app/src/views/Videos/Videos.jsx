@@ -176,7 +176,7 @@ function Videos() {
                 ) 
             }
 
-            {/* Поиск по городу и полному названиб видео */}
+            {/* Поиск по городу и полному названию видео */}
             {
                 (flag === 'city' || flag === 'videoTitle') && (
                     <VideoBlock 
@@ -226,7 +226,7 @@ function Videos() {
 
             {/* Отрисовка при отсутствии данных по запросу */}
             {
-                ((flag === 'country' && !videosFoundedByCountry) || ((flag === 'city' || flag === 'videoTitle') && filteredVideosByCityAndVideo.length === 0) || (flag === 'timeStamp' &&  filterVideosByDate.length === 0 )) && (
+                ((flag === 'country' && !videosFoundedByCountry) || (flag === 'city' && filteredVideosByCityAndVideo.length === 0) || (flag === 'videoTitle' && filteredVideos.length === 0) || (flag === 'timeStamp' &&  filterVideosByDate.length === 0 )) && (
                     <Title level={4}>Видео по запросу отсутствуют</Title>
                 ) 
             }

@@ -14,12 +14,10 @@ code {
     monospace;
 }
 
-
 /* App */
 .App {
   height: max-content;
 }
-
 
 /* Header */
 .ant-menu-light.ant-menu-horizontal .ant-menu-submenu::after,
@@ -93,10 +91,6 @@ a:hover,
     width: 6rem;
     height: 6rem;
 }
-
-
-/* Videos */
-
 
 /* Modal */
 
