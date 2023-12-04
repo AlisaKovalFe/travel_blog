@@ -8,7 +8,7 @@ module.exports = {
             id: 1,
             title: 'Италия',
             cover: {
-                src: 'https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/pastel-colored-houses-and-boats-on-canal-burano-venice-veneto-italy-lost-horizon-images.jpg',
+                src: 'https://www.studyitalian.ru/uploads/server/awUBqpEUsGMpgkRW.jpg',
                 alt: 'Италия'
             },
             records: [
