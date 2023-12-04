@@ -1,0 +1,86 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 0rem 5rem 5rem;
+}
+
+.button {
+    align-self: flex-end;
+}
+
+.heading {
+    margin-bottom: 4rem;
+}
+
+.description {
+    margin-bottom: 2rem;
+}
+
+.searchPanel{
+    padding: 0.5rem 2rem;
+    margin-bottom: 2rem;
+    height: max-content;
+    background: #f8f1ea;
+    border-radius: 0.5rem;
+}
+
+.collapseVideo {
+    width: 37rem;
+}
+
+.videoHeading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.videoSeparate {
+    margin-bottom: 2rem;
+}
+
+.filteredVideos {
+    display: flex;
+    flex-direction: column;
+    // flex-wrap: wrap;
+    // justify-content: space-between;
+    // align-items:;
+}
+
+.popover {
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    width: 10rem;
+    height: 5rem;
+    justify-content:space-between;
+}
+
+.videos {
+    display:flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+}
+
+.video {
+    width: 24rem;  
+    margin-bottom: 1rem;
+
+    &__image {
+        height: 15rem;
+    }
+
+    &__heading {
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+}
+
+.helper {
+    align-self: end;
+    margin-top:5rem;
+}
+

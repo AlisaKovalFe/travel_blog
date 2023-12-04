@@ -1,0 +1,114 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0rem 5rem 5rem;
+}
+
+.gallery{
+    background: #f8f1ea;
+    width: 60rem;
+}
+
+.carousel {
+    width: 60rem;
+    margin-bottom: 5rem;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;   
+
+    &__image {
+        width: 100%;
+        height: 30rem;
+    }
+
+    &__text {        
+        margin-top: 2rem;
+        text-align: justify;
+        font-size: 1rem;
+        line-height: 1.9rem;
+    }
+}
+
+
+
+.about {
+    display: flex;
+    margin: 3rem 0rem 3rem;
+    background: #f9f6f3;
+    border-radius: 1rem;
+
+        &__segment {
+            display: flex;
+        }
+
+        &_positioned {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            height: 35rem;
+        }
+
+        &_default {
+            display: flex;
+            align-items: center;
+            height: 20rem;
+        }    
+
+        &__text {
+            padding: 2rem 3rem 2rem;
+            margin: 0;
+            width: 45%;
+            font-size: 1rem;
+            text-align: justify;
+        }
+
+        &__text_position {
+            width: 50%
+        }
+}
+
+.imageMountains {
+    position: relative;
+    top: -2rem;
+    left: 5rem;
+    width: 35%;
+}
+
+.imageLavender {
+    position: relative;
+    top: 2rem;
+    width: 40%;
+    height: 80%;
+    transform: rotate(-10deg);
+    z-index: 1;
+}
+
+.imageMeadow {
+    position: relative;
+    left: -6rem;
+    top: 4rem;
+    width: 25%;
+    height: 65%;
+    transform: rotate(-13deg);
+}
+
+.imageRiceFields {
+    width: 45%;
+    height: 110%;
+    transform: rotate(5deg);
+}
+
+.imageGirl {
+    position: relative;
+    top: -3rem;
+    width: 70%;
+    z-index: 1;
+}
+
+.helper {
+    align-self: end;
+    margin-top:5rem;
+}

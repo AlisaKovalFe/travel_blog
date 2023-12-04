@@ -1,0 +1,25 @@
+.gallery {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    &__heading {
+        text-align: center;
+        color: #646462!important
+    }
+    
+    &__image {
+        height: 40rem;
+    }
+    
+    &__text {        
+        margin-top: 2rem;
+        text-align: justify;
+        font-size: 1rem;
+        line-height: 1.9rem;
+        padding: 1.5rem;
+    }
+}
+
+
+
